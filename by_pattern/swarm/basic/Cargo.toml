@@ -1,0 +1,12 @@
+[package]
+name = "swarm-basic"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+publish = false
+
+[dependencies]
+swink-agent = { version = "0.5", features = ["transfer"] }
+swink-agent-adapters = { version = "0.5", features = ["anthropic"] }
+tokio = { version = "1", features = ["full"] }
+dotenvy = "0.15"
