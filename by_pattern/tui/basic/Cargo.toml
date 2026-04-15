@@ -1,0 +1,13 @@
+[package]
+name = "tui-basic"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+publish = false
+
+[dependencies]
+swink-agent = "0.7.1"
+swink-agent-adapters = { version = "0.7.1", features = ["anthropic"] }
+swink-agent-tui = { version = "0.7.1", features = ["cli"] }
+tokio = { version = "1", features = ["full"] }
+dotenvy = "0.15"
