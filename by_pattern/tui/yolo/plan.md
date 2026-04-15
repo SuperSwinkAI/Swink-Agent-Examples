@@ -1,6 +1,6 @@
-# Plan: by_pattern/tui/yolo
+# ~~Plan~~: by_pattern/tui/yolo — IMPLEMENTED
 
-Blocked on SuperSwinkAI/Swink-Agent#565.
+~~Blocked on SuperSwinkAI/Swink-Agent#565.~~ Fixed in 0.7.2 (#567).
 
 ## What this example will be
 
