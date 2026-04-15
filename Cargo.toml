@@ -1,0 +1,18 @@
+# Workspace root — exists solely to provide [patch.crates-io] so all examples
+# resolve swink-agent crates from the local sibling directory while 0.7.x is
+# not yet published to crates.io.  Remove the [patch] section once published.
+
+[workspace]
+members = [
+    "by_model/*/*/*",
+    "by_pattern/*/basic",
+    "usecases/*/basic",
+]
+resolver = "2"
+
+[patch.crates-io]
+swink-agent          = { path = "../Swink-Agent" }
+swink-agent-adapters = { path = "../Swink-Agent/adapters" }
+swink-agent-tui      = { path = "../Swink-Agent/tui" }
+swink-agent-memory   = { path = "../Swink-Agent/memory" }
+swink-agent-policies = { path = "../Swink-Agent/policies" }
