@@ -1,5 +1,5 @@
 use swink_agent::{Agent, AgentMessage, AgentOptions, ContentBlock, LlmMessage, ModelConnections};
-use swink_agent_adapters::{build_remote_connection, remote_preset_keys};
+use swink_agent_adapters::build_remote_connection_for_model;
 
 const SAMPLE_TEXT: &str = "\
 Rust is a multi-paradigm, general-purpose programming language that emphasizes performance, \
@@ -15,7 +15,7 @@ survey as the most admired programming language every year since 2016.";
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    let connection = build_remote_connection(remote_preset_keys::anthropic::HAIKU_45)?;
+    let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
     let connections = ModelConnections::new(connection, vec![]);
     let options = AgentOptions::from_connections(
         "You are a summarization assistant. Provide concise, one-paragraph summaries.",

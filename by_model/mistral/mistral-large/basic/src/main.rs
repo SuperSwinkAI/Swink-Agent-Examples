@@ -1,11 +1,11 @@
 use swink_agent::{Agent, AgentMessage, AgentOptions, ContentBlock, LlmMessage, ModelConnections};
-use swink_agent_adapters::{build_remote_connection, remote_preset_keys};
+use swink_agent_adapters::build_remote_connection_for_model;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    let connection = build_remote_connection(remote_preset_keys::mistral::MISTRAL_LARGE)?;
+    let connection = build_remote_connection_for_model("mistral-large-latest")?;
     let connections = ModelConnections::new(connection, vec![]);
     let options = AgentOptions::from_connections("You are a helpful assistant.", connections);
 

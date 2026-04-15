@@ -35,8 +35,8 @@ The upstream library lives at `../Swink-Agent` (path dependency) or on crates.io
 
 ```toml
 [dependencies]
-swink-agent = "0.5"
-swink-agent-adapters = { version = "0.5", features = ["anthropic"] }
+swink-agent = "0.7.1"
+swink-agent-adapters = { version = "0.7.1", features = ["anthropic"] }
 tokio = { version = "1", features = ["full"] }
 ```
 
@@ -74,7 +74,8 @@ cd <example-dir> && cargo clippy -- -D warnings
 - **MSRV**: Rust 1.88, edition 2024
 - Each example must be self-contained — no shared lib crate across examples
 - Each example should have a `README.md` explaining what it demonstrates and any required env vars (e.g., `ANTHROPIC_API_KEY`)
-- Prefer `swink-agent-adapters` remote presets (e.g., `remote_preset_keys::anthropic::HAIKU_45`) over hardcoding model strings
+- Prefer `build_remote_connection_for_model(model_id)` over constructing `RemotePresetKey` manually (e.g., `build_remote_connection_for_model("claude-haiku-4-5-20251001")`)
+- Use `OllamaStreamFn::new(base_url)` + `ModelConnection::new(ModelSpec, stream_fn)` directly for Ollama (it is a `local` provider, not in the remote catalog)
 - Use `tokio` as the async runtime (all Swink-Agent crates assume tokio)
 - Examples targeting real providers need API keys via environment variables — never hardcode credentials
 - When adding a new example, ensure it compiles with `cargo check` before committing
