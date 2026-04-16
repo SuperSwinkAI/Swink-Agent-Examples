@@ -18,7 +18,7 @@ Every example is an independent Cargo project with its own `Cargo.toml` that dep
 
 ## Swink-Agent quick reference
 
-The upstream library is on crates.io as `swink-agent` (current version: 0.7.7). Source at [SuperSwinkAI/Swink-Agent](https://github.com/SuperSwinkAI/Swink-Agent).
+The upstream library is on crates.io as `swink-agent`. Source at [SuperSwinkAI/Swink-Agent](https://github.com/SuperSwinkAI/Swink-Agent).
 
 **Key crates and what they provide:**
 
@@ -35,8 +35,8 @@ The upstream library is on crates.io as `swink-agent` (current version: 0.7.7). 
 
 ```toml
 [dependencies]
-swink-agent = "0.7.7"
-swink-agent-adapters = { version = "0.7.7", features = ["anthropic"] }
+swink-agent = "0"
+swink-agent-adapters = { version = "0", features = ["anthropic"] }
 tokio = { version = "1", features = ["full"] }
 ```
 
