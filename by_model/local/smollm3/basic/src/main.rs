@@ -15,7 +15,7 @@
 //! cargo run --features cuda        # NVIDIA GPU
 //! ```
 
-use swink_agent::{AgentOptions, ModelConnections, RunOptions};
+use swink_agent::{Agent, AgentMessage, AgentOptions, ContentBlock, LlmMessage, ModelConnections};
 use swink_agent_local_llm::default_local_connection;
 
 #[tokio::main]
@@ -28,14 +28,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         connections,
     );
 
-    let result = options
-        .run(
-            "In one sentence, what is the capital of France?",
-            RunOptions::default(),
-        )
+    let mut agent = Agent::new(options);
+    let result = agent
+        .prompt_text("In one sentence, what is the capital of France?")
         .await?;
 
-    println!("{}", result.content);
+    for msg in &result.messages {
+        if let AgentMessage::Llm(LlmMessage::Assistant(a)) = msg {
+            println!("{}", ContentBlock::extract_text(&a.content));
+        }
+    }
 
     Ok(())
 }
