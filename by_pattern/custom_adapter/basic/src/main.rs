@@ -87,13 +87,11 @@ async fn main() {
     let options = AgentOptions::new_simple("You are an echo bot.", model, stream_fn);
     let mut agent = Agent::new(options);
 
-    // Step 3: Send a prompt.
-    let result = agent
-        .prompt_text("Hello, world!")
-        .await
-        .expect("prompt failed");
-
-    // Step 4: Print results.
-    println!("Response: {}", result.assistant_text());
-    println!("Token usage: {:?}", result.usage);
+    // Step 3: Send prompts and print results.
+    for prompt in ["Hello, world!", "What is Rust?"] {
+        println!(">>> {prompt}");
+        let result = agent.prompt_text(prompt).await.expect("prompt failed");
+        println!("Response: {}", result.assistant_text());
+        println!("Token usage: {:?}\n", result.usage);
+    }
 }

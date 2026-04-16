@@ -60,6 +60,7 @@ async fn main() {
     // Step 1: Create a mock stream function with a canned response.
     let stream_fn = std::sync::Arc::new(MockStreamFn::new(vec![
         AssistantMessageEvent::text_response("Hello! I'm a mock LLM response."),
+        AssistantMessageEvent::text_response("Sure! Rust is fast, safe, and concurrent."),
     ]));
 
     // Step 2: Define the model specification.
@@ -71,14 +72,12 @@ async fn main() {
     // Step 4: Create the agent.
     let mut agent = Agent::new(options);
 
-    // Step 5: Send a prompt and await the result.
-    let result = agent
-        .prompt_text("What is Rust?")
-        .await
-        .expect("prompt failed");
-
-    // Step 6: Extract and print the response text.
-    println!("Assistant: {}", result.assistant_text());
-    println!("Stop reason: {:?}", result.stop_reason);
-    println!("Usage: {:?}", result.usage);
+    // Step 5: Send prompts and print results.
+    for prompt in ["What is Rust?", "Name 3 key features."] {
+        println!(">>> {prompt}");
+        let result = agent.prompt_text(prompt).await.expect("prompt failed");
+        println!("Assistant: {}", result.assistant_text());
+        println!("Stop reason: {:?}", result.stop_reason);
+        println!("Usage: {:?}\n", result.usage);
+    }
 }

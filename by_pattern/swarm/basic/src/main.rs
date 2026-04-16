@@ -43,37 +43,40 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     registry.register("researcher", Agent::new(researcher_options));
     registry.register("writer", Agent::new(writer_options));
 
-    // Start from the triage agent, following any transfer signal to a specialist.
-    let user_message = "Write me a haiku about Rust programming.";
-    let mut current = "triage".to_string();
-    let mut prompt: Option<String> = Some(user_message.to_string());
+    for user_message in [
+        "Write me a haiku about Rust programming.",
+        "What year was Rust first released?",
+    ] {
+        println!("\n>>> {user_message}");
+        let mut current = "triage".to_string();
+        let mut prompt: Option<String> = Some(user_message.to_string());
 
-    loop {
-        let agent_ref = registry
-            .get(&current)
-            .unwrap_or_else(|| panic!("agent '{current}' not registered"));
-        let mut agent = agent_ref.lock().await;
+        loop {
+            let agent_ref = registry
+                .get(&current)
+                .unwrap_or_else(|| panic!("agent '{current}' not registered"));
+            let mut agent = agent_ref.lock().await;
 
-        let result = agent
-            .prompt_text(prompt.take().unwrap_or_else(|| user_message.to_string()))
-            .await?;
+            let result = agent
+                .prompt_text(prompt.take().unwrap_or_else(|| user_message.to_string()))
+                .await?;
 
-        for msg in &result.messages {
-            if let AgentMessage::Llm(LlmMessage::Assistant(a)) = msg {
-                let text = ContentBlock::extract_text(&a.content);
-                if !text.is_empty() {
-                    println!("[{current}] {text}");
+            for msg in &result.messages {
+                if let AgentMessage::Llm(LlmMessage::Assistant(a)) = msg {
+                    let text = ContentBlock::extract_text(&a.content);
+                    if !text.is_empty() {
+                        println!("[{current}] {text}");
+                    }
                 }
             }
-        }
 
-        match result.transfer_signal {
-            Some(signal) => {
-                current = signal.target_agent().to_string();
-                // Pass the original user message to the specialist.
-                prompt = Some(user_message.to_string());
+            match result.transfer_signal {
+                Some(signal) => {
+                    current = signal.target_agent().to_string();
+                    prompt = Some(user_message.to_string());
+                }
+                None => break,
             }
-            None => break,
         }
     }
 

@@ -4,10 +4,6 @@ Runs a single-turn agent loop using SmolLM3-3B entirely on-device.
 
 No API key required. The model (~1.92 GB, GGUF Q4_K_M quantization) is downloaded from Hugging Face on first run and cached locally. Subsequent runs load from cache.
 
-## Known issue
-
-`swink-agent-local-llm` 0.7.7 depends on `mistralrs` 0.8.1, which does not yet recognise the `smollm3` GGUF architecture. Running this example currently panics after the model downloads. Tracked in SuperSwinkAI/Swink-Agent#586 — update `swink-agent-local-llm` once a fix is released.
-
 ## Run
 
 ```bash

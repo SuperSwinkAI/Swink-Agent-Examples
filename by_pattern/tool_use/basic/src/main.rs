@@ -99,6 +99,9 @@ async fn main() {
         AssistantMessageEvent::text_response(
             "I would use the bash tool to list files, but this is a mock.",
         ),
+        AssistantMessageEvent::text_response(
+            "I would use get_weather to check the weather, but this is a mock.",
+        ),
     ]));
 
     let model = ModelSpec::new("mock", "mock-model-v1");
@@ -135,11 +138,12 @@ async fn main() {
     // Step 4: Create the agent and run a prompt.
     let mut agent = Agent::new(options);
 
-    let result = agent
-        .prompt_text("List the files in the current directory.")
-        .await
-        .expect("prompt failed");
-
-    // Step 5: Print the response.
-    println!("Assistant: {}", result.assistant_text());
+    for prompt in [
+        "List the files in the current directory.",
+        "What is the weather in San Francisco?",
+    ] {
+        println!(">>> {prompt}");
+        let result = agent.prompt_text(prompt).await.expect("prompt failed");
+        println!("Assistant: {}\n", result.assistant_text());
+    }
 }

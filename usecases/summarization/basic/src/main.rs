@@ -23,12 +23,19 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
 
     let mut agent = Agent::new(options);
-    let prompt = format!("Summarize the following text in 2-3 sentences:\n\n{SAMPLE_TEXT}");
-    let result = agent.prompt_text(&prompt).await?;
 
-    for msg in &result.messages {
-        if let AgentMessage::Llm(LlmMessage::Assistant(a)) = msg {
-            println!("{}", ContentBlock::extract_text(&a.content));
+    let prompts = [
+        format!("Summarize the following text in 2-3 sentences:\n\n{SAMPLE_TEXT}"),
+        "Now give me just a single-sentence summary.".to_string(),
+    ];
+
+    for prompt in &prompts {
+        println!(">>> {prompt}\n");
+        let result = agent.prompt_text(prompt).await?;
+        for msg in &result.messages {
+            if let AgentMessage::Llm(LlmMessage::Assistant(a)) = msg {
+                println!("{}\n", ContentBlock::extract_text(&a.content));
+            }
         }
     }
     Ok(())

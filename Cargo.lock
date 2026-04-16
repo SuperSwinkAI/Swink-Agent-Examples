@@ -323,9 +323,9 @@ dependencies = [
 
 [[package]]
 name = "aws-lc-rs"
-version = "1.16.2"
+version = "1.16.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a054912289d18629dc78375ba2c3726a3afe3ff71b4edba9dedfca0e3446d1fc"
+checksum = "0ec6fb3fe69024a75fa7e1bfb48aa6cf59706a101658ea01bfd33b2b248a038f"
 dependencies = [
  "aws-lc-sys",
  "zeroize",
@@ -333,9 +333,9 @@ dependencies = [
 
 [[package]]
 name = "aws-lc-sys"
-version = "0.39.1"
+version = "0.40.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "83a25cf98105baa966497416dbd42565ce3a8cf8dbfd59803ec9ad46f3126399"
+checksum = "f50037ee5e1e41e7b8f9d161680a725bd1626cb6f8c7e901f91f942850852fe7"
 dependencies = [
  "cc",
  "cmake",
@@ -3621,7 +3621,7 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "urlencoding",
- "uuid 1.23.0",
+ "uuid 1.23.1",
  "variantly",
  "vob",
 ]
@@ -3656,7 +3656,7 @@ dependencies = [
  "tokio-tungstenite",
  "tracing",
  "utoipa",
- "uuid 1.23.0",
+ "uuid 1.23.1",
 ]
 
 [[package]]
@@ -4157,7 +4157,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "openai-gpt4o-basic"
+name = "openai-gpt5-basic"
 version = "0.1.0"
 dependencies = [
  "dotenvy",
@@ -4618,9 +4618,9 @@ checksum = "40e24eee682d89fb193496edf918a7f407d30175b2e785fe057e4392dfd182e0"
 
 [[package]]
 name = "pxfm"
-version = "0.1.28"
+version = "0.1.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b5a041e753da8b807c9255f28de81879c78c876392ff2469cde94799b2896b9d"
+checksum = "e0c5ccf5294c6ccd63a74f1565028353830a9c2f5eb0c682c355c471726a6e3f"
 
 [[package]]
 name = "qoi"
@@ -6035,9 +6035,9 @@ dependencies = [
 
 [[package]]
 name = "swink-agent"
-version = "0.7.7"
+version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ff645c75892f850222f7f40a93461d069b0c1c18414e32a6e1fe4dfaf76c8e89"
+checksum = "d989d79d6b8e9fa00495f6a39f23e32b59d0d08efb7ba3b64d80c4a0f0944d97"
 dependencies = [
  "bytes",
  "chrono",
@@ -6055,14 +6055,14 @@ dependencies = [
  "tokio-util",
  "toml",
  "tracing",
- "uuid 1.23.0",
+ "uuid 1.23.1",
 ]
 
 [[package]]
 name = "swink-agent-adapters"
-version = "0.7.7"
+version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c1afb0bfaf3817996d54eabea5d09b96be8ce4418dae48af663754962007acf1"
+checksum = "f2db1d068dceb664b918752495159e230688aad12115757ad76377144e99884d"
 dependencies = [
  "bytes",
  "futures",
@@ -6075,14 +6075,14 @@ dependencies = [
  "tokio",
  "tokio-util",
  "tracing",
- "uuid 1.23.0",
+ "uuid 1.23.1",
 ]
 
 [[package]]
 name = "swink-agent-auth"
-version = "0.7.7"
+version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e978ce346655a773b4a5fa66f279f79e4609e65e41c307233f9237e3fd2a7f64"
+checksum = "8016a7cc14ba6f6f60b9e1eb7f1d6f41cf7fcf313ff4748e29d2fc01aced31c7"
 dependencies = [
  "chrono",
  "futures",
@@ -6093,14 +6093,14 @@ dependencies = [
  "thiserror 2.0.18",
  "tokio",
  "tracing",
- "uuid 1.23.0",
+ "uuid 1.23.1",
 ]
 
 [[package]]
 name = "swink-agent-local-llm"
-version = "0.7.7"
+version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "63f831e718dcb9eac173f23afebd5f8c401ea2d1076e31671ee44efd8f4ab1c2"
+checksum = "deb3376543e84d0e6dc1add8bbb8d810cdf5ac84aaa5721fc798069974083690"
 dependencies = [
  "futures",
  "hf-hub 0.5.0",
@@ -6113,14 +6113,14 @@ dependencies = [
  "tokio-stream",
  "tokio-util",
  "tracing",
- "uuid 1.23.0",
+ "uuid 1.23.1",
 ]
 
 [[package]]
 name = "swink-agent-memory"
-version = "0.7.7"
+version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b3d7edb0914dd1ced1df727b6336ae6ad3a54b31b49849224425904b056cb6d2"
+checksum = "c4b67486da42c397bd2b511869656279cd2b339a0b3476e85e727ef2eac39f1e"
 dependencies = [
  "chrono",
  "dirs",
@@ -6129,14 +6129,14 @@ dependencies = [
  "swink-agent",
  "tokio",
  "tracing",
- "uuid 1.23.0",
+ "uuid 1.23.1",
 ]
 
 [[package]]
 name = "swink-agent-tui"
-version = "0.7.7"
+version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "611775d425250b9e9fe30ebc410f412bdfdc38d70154de753c0d5d4b67658891"
+checksum = "fe62001ed3380c45704f76e88ffca43bb5c7653a7237575c1284653c306a898e"
 dependencies = [
  "arboard",
  "crossterm 0.29.0",
@@ -6699,9 +6699,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.52.0"
+version = "1.52.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a91135f59b1cbf38c91e73cf3386fca9bb77915c45ce2771460c9d92f0f3d776"
+checksum = "b67dee974fe86fd92cc45b7a95fdd2f99a36a6d7b0d431a231178d3d670bbcc6"
 dependencies = [
  "bytes",
  "libc",
@@ -7324,9 +7324,9 @@ dependencies = [
 
 [[package]]
 name = "uuid"
-version = "1.23.0"
+version = "1.23.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ac8b6f42ead25368cf5b098aeb3dc8a1a2c05a3eee8a9a1a68c640edbfc79d9"
+checksum = "ddd74a9687298c6858e9b88ec8935ec45d22e8fd5e6394fa1bd4e99a87789c76"
 dependencies = [
  "atomic",
  "getrandom 0.4.2",
@@ -7342,7 +7342,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23b082222b4f6619906941c17eb2297fff4c2fb96cb60164170522942a200bd8"
 dependencies = [
  "outref",
- "uuid 1.23.0",
+ "uuid 1.23.1",
  "vsimd",
 ]
 
@@ -7605,9 +7605,9 @@ dependencies = [
 
 [[package]]
 name = "webpki-root-certs"
-version = "1.0.6"
+version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "804f18a4ac2676ffb4e8b5b5fa9ae38af06df08162314f96a68d2a363e21a8ca"
+checksum = "f31141ce3fc3e300ae89b78c0dd67f9708061d1d2eda54b8209346fd6be9a92c"
 dependencies = [
  "rustls-pki-types",
 ]
@@ -7656,7 +7656,7 @@ dependencies = [
  "mac_address",
  "sha2 0.10.9",
  "thiserror 1.0.69",
- "uuid 1.23.0",
+ "uuid 1.23.1",
 ]
 
 [[package]]
