@@ -38,9 +38,8 @@ If you spam the tracker with agent-generated issues or PRs, your GitHub account 
   ```bash
   rustup component add clippy rustfmt
   ```
-- Clone [Swink-Agent](https://github.com/SuperSwinkAI/Swink-Agent) as a sibling directory (until 0.7.x is on crates.io):
+- Clone this repo:
   ```bash
-  git clone https://github.com/SuperSwinkAI/Swink-Agent.git   # ../Swink-Agent
   git clone https://github.com/SuperSwinkAI/Swink-Agent-Examples.git
   ```
 - Copy `.env.example` to `.env` and populate the API keys for the providers your example targets.

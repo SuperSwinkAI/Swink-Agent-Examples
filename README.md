@@ -27,22 +27,17 @@ Each example is its own Cargo project — `cd` into the folder and `cargo run`.
 ## Quick start
 
 ```bash
-# 1. Clone this repo and its sibling dependency side-by-side
+# Clone the repo
 git clone https://github.com/SuperSwinkAI/Swink-Agent-Examples.git
-git clone https://github.com/SuperSwinkAI/Swink-Agent.git   # required until 0.7.x is on crates.io
+cd Swink-Agent-Examples
 
-# Both repos must sit in the same parent directory:
-# parent/
-#   Swink-Agent/
-#   Swink-Agent-Examples/
+# Pick an example
+cd by_model/anthropic/haiku/basic
 
-# 2. Pick an example
-cd Swink-Agent-Examples/by_model/anthropic/haiku/basic
-
-# 3. Set your API key
+# Set your API key
 export ANTHROPIC_API_KEY="sk-ant-..."
 
-# 4. Run it
+# Run it
 cargo run
 ```
 
@@ -50,7 +45,6 @@ cargo run
 
 - **Rust 1.88+** (edition 2024)
 - API keys for whichever provider the example targets (see each example's README)
-- A sibling checkout of [Swink-Agent](https://github.com/SuperSwinkAI/Swink-Agent) (until 0.7.x is published to crates.io)
 
 ## Adding an example
 

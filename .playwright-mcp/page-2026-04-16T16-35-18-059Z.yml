@@ -1,0 +1,1112 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e8]:
+        - link "Homepage" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+        - generic [ref=e13]:
+          - navigation "Global" [ref=e16]:
+            - list [ref=e17]:
+              - listitem [ref=e18]:
+                - button "Platform" [ref=e20] [cursor=pointer]:
+                  - text: Platform
+                  - img [ref=e21]
+              - listitem [ref=e23]:
+                - button "Solutions" [ref=e25] [cursor=pointer]:
+                  - text: Solutions
+                  - img [ref=e26]
+              - listitem [ref=e28]:
+                - button "Resources" [ref=e30] [cursor=pointer]:
+                  - text: Resources
+                  - img [ref=e31]
+              - listitem [ref=e33]:
+                - button "Open Source" [ref=e35] [cursor=pointer]:
+                  - text: Open Source
+                  - img [ref=e36]
+              - listitem [ref=e38]:
+                - button "Enterprise" [ref=e40] [cursor=pointer]:
+                  - text: Enterprise
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Pricing" [ref=e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+                  - generic [ref=e45]: Pricing
+          - generic [ref=e46]:
+            - button "Search or jump to…" [ref=e49] [cursor=pointer]:
+              - img [ref=e51]
+            - link "Sign in" [ref=e54] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FSuperSwinkAI%2FSwink-Agent
+            - link "Sign up" [ref=e55] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=SuperSwinkAI%2FSwink-Agent
+            - button "Appearance settings" [disabled] [ref=e58]:
+              - img
+  - main [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - link "SuperSwinkAI" [ref=e70] [cursor=pointer]:
+            - /url: /SuperSwinkAI
+          - generic [ref=e71]: /
+          - strong [ref=e72]:
+            - link "Swink-Agent" [ref=e73] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent
+          - generic [ref=e74]: Public
+        - generic [ref=e75]:
+          - list:
+            - listitem [ref=e76]:
+              - link "You must be signed in to change notification settings" [ref=e77] [cursor=pointer]:
+                - /url: /login?return_to=%2FSuperSwinkAI%2FSwink-Agent
+                - img [ref=e78]
+                - text: Notifications
+            - listitem [ref=e80]:
+              - link "Fork 0" [ref=e81] [cursor=pointer]:
+                - /url: /login?return_to=%2FSuperSwinkAI%2FSwink-Agent
+                - img [ref=e82]
+                - text: Fork
+                - generic "0" [ref=e84]
+            - listitem [ref=e85]:
+              - link "You must be signed in to star a repository" [ref=e87] [cursor=pointer]:
+                - /url: /login?return_to=%2FSuperSwinkAI%2FSwink-Agent
+                - img [ref=e88]
+                - text: Star
+                - generic "0 users starred this repository" [ref=e90]: "0"
+      - navigation "Repository" [ref=e91]:
+        - list [ref=e92]:
+          - listitem [ref=e93]:
+            - link "Code" [ref=e94] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent
+              - img [ref=e95]
+              - generic [ref=e97]: Code
+          - listitem [ref=e98]:
+            - link "Issues" [ref=e99] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/issues
+              - img [ref=e100]
+              - generic [ref=e103]: Issues
+          - listitem [ref=e104]:
+            - link "Pull requests" [ref=e105] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/pulls
+              - img [ref=e106]
+              - generic [ref=e108]: Pull requests
+          - listitem [ref=e109]:
+            - link "Actions" [ref=e110] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/actions
+              - img [ref=e111]
+              - generic [ref=e113]: Actions
+          - listitem [ref=e114]:
+            - link "Security and quality" [ref=e115] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/security
+              - img [ref=e116]
+              - generic [ref=e118]: Security and quality
+          - listitem [ref=e119]:
+            - link "Insights" [ref=e120] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/pulse
+              - img [ref=e121]
+              - generic [ref=e123]: Insights
+    - generic [ref=e136]:
+      - heading "SuperSwinkAI/Swink-Agent" [level=1] [ref=e138]
+      - generic [ref=e139]:
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]:
+              - button "integration branch" [ref=e146] [cursor=pointer]:
+                - generic [ref=e147]:
+                  - generic [ref=e149]:
+                    - img [ref=e151]
+                    - generic [ref=e154]: integration
+                  - generic:
+                    - img
+              - generic [ref=e155]:
+                - link "Go to Branches page" [ref=e156] [cursor=pointer]:
+                  - /url: /SuperSwinkAI/Swink-Agent/branches
+                  - img [ref=e157]
+                - link "Go to Tags page" [ref=e159] [cursor=pointer]:
+                  - /url: /SuperSwinkAI/Swink-Agent/tags
+                  - img [ref=e160]
+            - generic [ref=e162]:
+              - generic [ref=e166]:
+                - img [ref=e168]
+                - combobox "Go to file" [ref=e170]
+              - button "Code" [ref=e171] [cursor=pointer]:
+                - generic [ref=e172]:
+                  - generic:
+                    - img
+                  - generic [ref=e173]: Code
+                  - generic:
+                    - img
+          - generic [ref=e174]:
+            - generic [ref=e175]:
+              - heading "Folders and files" [level=2] [ref=e176]
+              - table "Folders and files" [ref=e177]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message":
+                      - generic "Last commit message"
+                    - columnheader "Last commit date":
+                      - generic "Last commit date"
+                - rowgroup [ref=e178]:
+                  - 'row "Latest commit unseriousAI claude commits by unseriousAI and commits by claude fix: update aws-lc-rs, lru, rand to address Dependabot alerts Open commit details Commit 51497cf · Apr 16, 20262 hours ago History 624 Commits" [ref=e179]':
+                    - 'cell "Latest commit unseriousAI claude commits by unseriousAI and commits by claude fix: update aws-lc-rs, lru, rand to address Dependabot alerts Open commit details Commit 51497cf · Apr 16, 20262 hours ago History 624 Commits" [ref=e180]':
+                      - generic [ref=e181]:
+                        - heading "Latest commit" [level=2] [ref=e182]
+                        - generic [ref=e183]:
+                          - generic [ref=e184]:
+                            - generic [ref=e186]:
+                              - img "unseriousAI" [ref=e187]
+                              - img "claude" [ref=e188]
+                            - link "commits by unseriousAI" [ref=e190] [cursor=pointer]:
+                              - /url: /SuperSwinkAI/Swink-Agent/commits?author=unseriousAI
+                              - text: unseriousAI
+                            - generic [ref=e191]: and
+                            - link "commits by claude" [ref=e193] [cursor=pointer]:
+                              - /url: /SuperSwinkAI/Swink-Agent/commits?author=claude
+                              - text: claude
+                          - generic [ref=e194]:
+                            - 'link "fix: update aws-lc-rs, lru, rand to address Dependabot alerts" [ref=e197] [cursor=pointer]':
+                              - /url: /SuperSwinkAI/Swink-Agent/commit/51497cf489286645542cd5b224d8e9eb7db53ab3
+                            - button "Open commit details" [ref=e198] [cursor=pointer]:
+                              - img [ref=e199]
+                        - generic [ref=e201]:
+                          - generic [ref=e203]:
+                            - link "Commit 51497cf" [ref=e204] [cursor=pointer]:
+                              - /url: /SuperSwinkAI/Swink-Agent/commit/51497cf489286645542cd5b224d8e9eb7db53ab3
+                              - text: 51497cf
+                            - text: ·
+                            - generic "Apr 16, 2026, 9:12 AM CDT" [ref=e205]: Apr 16, 20262 hours ago
+                          - generic [ref=e206]:
+                            - heading "History" [level=2] [ref=e207]
+                            - link "624 Commits" [ref=e208] [cursor=pointer]:
+                              - /url: /SuperSwinkAI/Swink-Agent/commits/integration/
+                              - generic [ref=e209]:
+                                - generic:
+                                  - img
+                                - generic [ref=e210]: 624 Commits
+                  - 'row ".cargo, (Directory) fix: isolate adapters no-default-features sentinel (#564) Apr 15, 202620 hours ago" [ref=e211]':
+                    - cell ".cargo, (Directory)" [ref=e212]:
+                      - generic [ref=e213]:
+                        - img [ref=e214]
+                        - link ".cargo, (Directory)" [ref=e219] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/.cargo
+                          - text: .cargo
+                    - 'cell "fix: isolate adapters no-default-features sentinel (#564)" [ref=e220]':
+                      - generic [ref=e222]:
+                        - 'link "fix: isolate adapters no-default-features sentinel (" [ref=e223] [cursor=pointer]':
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/5ce635cedb489718bc56e527d5754112c12d93df
+                        - link "#564" [ref=e224] [cursor=pointer]:
+                          - /url: https://github.com/SuperSwinkAI/Swink-Agent/pull/564
+                        - link ")" [ref=e225] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/5ce635cedb489718bc56e527d5754112c12d93df
+                    - cell "Apr 15, 202620 hours ago" [ref=e226]:
+                      - generic [ref=e227]: Apr 15, 202620 hours ago
+                  - 'row ".github, (Directory) feat: add crates.io publish job to release workflow Apr 16, 20262 hours ago" [ref=e228]':
+                    - cell ".github, (Directory)" [ref=e229]:
+                      - generic [ref=e230]:
+                        - img [ref=e231]
+                        - link ".github, (Directory)" [ref=e236] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/.github
+                          - text: .github
+                    - 'cell "feat: add crates.io publish job to release workflow" [ref=e237]':
+                      - 'link "feat: add crates.io publish job to release workflow" [ref=e240] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/3a06371fc02f8068946b5442a15cb916e5e1ce02
+                    - cell "Apr 16, 20262 hours ago" [ref=e241]:
+                      - generic [ref=e242]: Apr 16, 20262 hours ago
+                  - 'row "adapters, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e243]':
+                    - cell "adapters, (Directory)" [ref=e244]:
+                      - generic [ref=e245]:
+                        - img [ref=e246]
+                        - link "adapters, (Directory)" [ref=e251] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/adapters
+                          - text: adapters
+                    - 'cell "chore: open-source readiness cleanup" [ref=e252]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e255] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e256]:
+                      - generic [ref=e257]: Apr 16, 20262 hours ago
+                  - 'row "artifacts, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e258]':
+                    - cell "artifacts, (Directory)" [ref=e259]:
+                      - generic [ref=e260]:
+                        - img [ref=e261]
+                        - link "artifacts, (Directory)" [ref=e266] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/artifacts
+                          - text: artifacts
+                    - 'cell "chore: open-source readiness cleanup" [ref=e267]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e270] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e271]:
+                      - generic [ref=e272]: Apr 16, 20262 hours ago
+                  - 'row "auth, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e273]':
+                    - cell "auth, (Directory)" [ref=e274]:
+                      - generic [ref=e275]:
+                        - img [ref=e276]
+                        - link "auth, (Directory)" [ref=e281] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/auth
+                          - text: auth
+                    - 'cell "chore: open-source readiness cleanup" [ref=e282]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e285] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e286]:
+                      - generic [ref=e287]: Apr 16, 20262 hours ago
+                  - 'row "benches, (Directory) refactor!: stabilize public API surface — narrow module visibility (#302 Apr 9, 2026last week" [ref=e288]':
+                    - cell "benches, (Directory)" [ref=e289]:
+                      - generic [ref=e290]:
+                        - img [ref=e291]
+                        - link "benches, (Directory)" [ref=e296] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/benches
+                          - text: benches
+                    - 'cell "refactor!: stabilize public API surface — narrow module visibility (#302" [ref=e297]':
+                      - generic [ref=e299]:
+                        - 'link "refactor!: stabilize public API surface — narrow module visibility (" [ref=e300] [cursor=pointer]':
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/df17ee9b471ef0deebc9105c42eea619fcefae94
+                        - link "#302" [ref=e301] [cursor=pointer]:
+                          - /url: https://github.com/SuperSwinkAI/Swink-Agent/pull/302
+                    - cell "Apr 9, 2026last week" [ref=e302]:
+                      - generic [ref=e303]: Apr 9, 2026last week
+                  - row "docs, (Directory) [codex] Add typed FnTool execute builder (#577) Apr 16, 202610 hours ago" [ref=e304]:
+                    - cell "docs, (Directory)" [ref=e305]:
+                      - generic [ref=e306]:
+                        - img [ref=e307]
+                        - link "docs, (Directory)" [ref=e312] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/docs
+                          - text: docs
+                    - cell "[codex] Add typed FnTool execute builder (#577)" [ref=e313]:
+                      - generic [ref=e315]:
+                        - link "[codex] Add typed FnTool execute builder (" [ref=e316] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/d1a14e9ec6405f142be968a62df4db8ba1423b67
+                        - link "#577" [ref=e317] [cursor=pointer]:
+                          - /url: https://github.com/SuperSwinkAI/Swink-Agent/pull/577
+                        - link ")" [ref=e318] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/d1a14e9ec6405f142be968a62df4db8ba1423b67
+                    - cell "Apr 16, 202610 hours ago" [ref=e319]:
+                      - generic [ref=e320]: Apr 16, 202610 hours ago
+                  - 'row "eval, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e321]':
+                    - cell "eval, (Directory)" [ref=e322]:
+                      - generic [ref=e323]:
+                        - img [ref=e324]
+                        - link "eval, (Directory)" [ref=e329] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/eval
+                          - text: eval
+                    - 'cell "chore: open-source readiness cleanup" [ref=e330]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e333] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e334]:
+                      - generic [ref=e335]: Apr 16, 20262 hours ago
+                  - 'row "local-llm, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e336]':
+                    - cell "local-llm, (Directory)" [ref=e337]:
+                      - generic [ref=e338]:
+                        - img [ref=e339]
+                        - link "local-llm, (Directory)" [ref=e344] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/local-llm
+                          - text: local-llm
+                    - 'cell "chore: open-source readiness cleanup" [ref=e345]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e348] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e349]:
+                      - generic [ref=e350]: Apr 16, 20262 hours ago
+                  - 'row "macros, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e351]':
+                    - cell "macros, (Directory)" [ref=e352]:
+                      - generic [ref=e353]:
+                        - img [ref=e354]
+                        - link "macros, (Directory)" [ref=e359] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/macros
+                          - text: macros
+                    - 'cell "chore: open-source readiness cleanup" [ref=e360]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e363] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e364]:
+                      - generic [ref=e365]: Apr 16, 20262 hours ago
+                  - 'row "mcp, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e366]':
+                    - cell "mcp, (Directory)" [ref=e367]:
+                      - generic [ref=e368]:
+                        - img [ref=e369]
+                        - link "mcp, (Directory)" [ref=e374] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/mcp
+                          - text: mcp
+                    - 'cell "chore: open-source readiness cleanup" [ref=e375]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e378] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e379]:
+                      - generic [ref=e380]: Apr 16, 20262 hours ago
+                  - 'row "memory, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e381]':
+                    - cell "memory, (Directory)" [ref=e382]:
+                      - generic [ref=e383]:
+                        - img [ref=e384]
+                        - link "memory, (Directory)" [ref=e389] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/memory
+                          - text: memory
+                    - 'cell "chore: open-source readiness cleanup" [ref=e390]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e393] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e394]:
+                      - generic [ref=e395]: Apr 16, 20262 hours ago
+                  - 'row "patterns, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e396]':
+                    - cell "patterns, (Directory)" [ref=e397]:
+                      - generic [ref=e398]:
+                        - img [ref=e399]
+                        - link "patterns, (Directory)" [ref=e404] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/patterns
+                          - text: patterns
+                    - 'cell "chore: open-source readiness cleanup" [ref=e405]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e408] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e409]:
+                      - generic [ref=e410]: Apr 16, 20262 hours ago
+                  - 'row "plugins/web, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e411]':
+                    - cell "plugins/web, (Directory)" [ref=e412]:
+                      - generic [ref=e413]:
+                        - img [ref=e414]
+                        - link "plugins/web, (Directory)" [ref=e419] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/plugins/web
+                          - text: plugins/web
+                    - 'cell "chore: open-source readiness cleanup" [ref=e420]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e423] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e424]:
+                      - generic [ref=e425]: Apr 16, 20262 hours ago
+                  - 'row "policies, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e426]':
+                    - cell "policies, (Directory)" [ref=e427]:
+                      - generic [ref=e428]:
+                        - img [ref=e429]
+                        - link "policies, (Directory)" [ref=e434] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/policies
+                          - text: policies
+                    - 'cell "chore: open-source readiness cleanup" [ref=e435]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e438] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e439]:
+                      - generic [ref=e440]: Apr 16, 20262 hours ago
+                  - 'row "specs, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e441]':
+                    - cell "specs, (Directory)" [ref=e442]:
+                      - generic [ref=e443]:
+                        - img [ref=e444]
+                        - link "specs, (Directory)" [ref=e449] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/specs
+                          - text: specs
+                    - 'cell "chore: open-source readiness cleanup" [ref=e450]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e453] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e454]:
+                      - generic [ref=e455]: Apr 16, 20262 hours ago
+                  - 'row "src, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e456]':
+                    - cell "src, (Directory)" [ref=e457]:
+                      - generic [ref=e458]:
+                        - img [ref=e459]
+                        - link "src, (Directory)" [ref=e464] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/src
+                          - text: src
+                    - 'cell "chore: open-source readiness cleanup" [ref=e465]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e468] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e469]:
+                      - generic [ref=e470]: Apr 16, 20262 hours ago
+                  - row "tests, (Directory) [codex] Add typed FnTool execute builder (#577) Apr 16, 202610 hours ago" [ref=e471]:
+                    - cell "tests, (Directory)" [ref=e472]:
+                      - generic [ref=e473]:
+                        - img [ref=e474]
+                        - link "tests, (Directory)" [ref=e479] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/tests
+                          - text: tests
+                    - cell "[codex] Add typed FnTool execute builder (#577)" [ref=e480]:
+                      - generic [ref=e482]:
+                        - link "[codex] Add typed FnTool execute builder (" [ref=e483] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/d1a14e9ec6405f142be968a62df4db8ba1423b67
+                        - link "#577" [ref=e484] [cursor=pointer]:
+                          - /url: https://github.com/SuperSwinkAI/Swink-Agent/pull/577
+                        - link ")" [ref=e485] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/d1a14e9ec6405f142be968a62df4db8ba1423b67
+                    - cell "Apr 16, 202610 hours ago" [ref=e486]:
+                      - generic [ref=e487]: Apr 16, 202610 hours ago
+                  - 'row "tui, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e488]':
+                    - cell "tui, (Directory)" [ref=e489]:
+                      - generic [ref=e490]:
+                        - img [ref=e491]
+                        - link "tui, (Directory)" [ref=e496] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/tui
+                          - text: tui
+                    - 'cell "chore: open-source readiness cleanup" [ref=e497]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e500] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e501]:
+                      - generic [ref=e502]: Apr 16, 20262 hours ago
+                  - 'row "xtask, (Directory) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e503]':
+                    - cell "xtask, (Directory)" [ref=e504]:
+                      - generic [ref=e505]:
+                        - img [ref=e506]
+                        - link "xtask, (Directory)" [ref=e511] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/tree/integration/xtask
+                          - text: xtask
+                    - 'cell "chore: open-source readiness cleanup" [ref=e512]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e515] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e516]:
+                      - generic [ref=e517]: Apr 16, 20262 hours ago
+                  - 'row ".editorconfig, (File) refactor: extract AgentOptions and subscriptions, add project scaffol… Mar 20, 2026last month" [ref=e518]':
+                    - cell ".editorconfig, (File)" [ref=e519]:
+                      - generic [ref=e520]:
+                        - img [ref=e521]
+                        - link ".editorconfig, (File)" [ref=e526] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/.editorconfig
+                          - text: .editorconfig
+                    - 'cell "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e527]':
+                      - 'link "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e530] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/de21e35f16dbdfcd6c96d3fbd37683f429a3e9a6
+                    - cell "Mar 20, 2026last month" [ref=e531]:
+                      - generic [ref=e532]: Mar 20, 2026last month
+                  - 'row ".env.example, (File) fix: correct and complete .env.example Apr 16, 20262 hours ago" [ref=e533]':
+                    - cell ".env.example, (File)" [ref=e534]:
+                      - generic [ref=e535]:
+                        - img [ref=e536]
+                        - link ".env.example, (File)" [ref=e541] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/.env.example
+                          - text: .env.example
+                    - 'cell "fix: correct and complete .env.example" [ref=e542]':
+                      - 'link "fix: correct and complete .env.example" [ref=e545] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/672ad859e3ab8d7c7ca5f4fc4afe8eaef8e57b80
+                    - cell "Apr 16, 20262 hours ago" [ref=e546]:
+                      - generic [ref=e547]: Apr 16, 20262 hours ago
+                  - 'row ".gitattributes, (File) refactor: extract AgentOptions and subscriptions, add project scaffol… Mar 20, 2026last month" [ref=e548]':
+                    - cell ".gitattributes, (File)" [ref=e549]:
+                      - generic [ref=e550]:
+                        - img [ref=e551]
+                        - link ".gitattributes, (File)" [ref=e556] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/.gitattributes
+                          - text: .gitattributes
+                    - 'cell "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e557]':
+                      - 'link "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e560] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/de21e35f16dbdfcd6c96d3fbd37683f429a3e9a6
+                    - cell "Mar 20, 2026last month" [ref=e561]:
+                      - generic [ref=e562]: Mar 20, 2026last month
+                  - 'row ".gitignore, (File) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e563]':
+                    - cell ".gitignore, (File)" [ref=e564]:
+                      - generic [ref=e565]:
+                        - img [ref=e566]
+                        - link ".gitignore, (File)" [ref=e571] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/.gitignore
+                          - text: .gitignore
+                    - 'cell "chore: open-source readiness cleanup" [ref=e572]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e575] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e576]:
+                      - generic [ref=e577]: Apr 16, 20262 hours ago
+                  - row ".pre-commit-config.yaml, (File) Complete QA audit and pre-launch polish Mar 14, 2026last month" [ref=e578]:
+                    - cell ".pre-commit-config.yaml, (File)" [ref=e579]:
+                      - generic [ref=e580]:
+                        - img [ref=e581]
+                        - link ".pre-commit-config.yaml, (File)" [ref=e586] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/.pre-commit-config.yaml
+                          - text: .pre-commit-config.yaml
+                    - cell "Complete QA audit and pre-launch polish" [ref=e587]:
+                      - link "Complete QA audit and pre-launch polish" [ref=e590] [cursor=pointer]:
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/ea7cc2d434d57d3368b51a284299d00779c0cad1
+                    - cell "Mar 14, 2026last month" [ref=e591]:
+                      - generic [ref=e592]: Mar 14, 2026last month
+                  - 'row "AGENTS.md, (File) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e593]':
+                    - cell "AGENTS.md, (File)" [ref=e594]:
+                      - generic [ref=e595]:
+                        - img [ref=e596]
+                        - link "AGENTS.md, (File)" [ref=e601] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/AGENTS.md
+                          - text: AGENTS.md
+                    - 'cell "chore: open-source readiness cleanup" [ref=e602]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e605] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e606]:
+                      - generic [ref=e607]: Apr 16, 20262 hours ago
+                  - 'row "CHANGELOG.md, (File) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e608]':
+                    - cell "CHANGELOG.md, (File)" [ref=e609]:
+                      - generic [ref=e610]:
+                        - img [ref=e611]
+                        - link "CHANGELOG.md, (File)" [ref=e616] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/CHANGELOG.md
+                          - text: CHANGELOG.md
+                    - 'cell "chore: open-source readiness cleanup" [ref=e617]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e620] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e621]:
+                      - generic [ref=e622]: Apr 16, 20262 hours ago
+                  - 'row "CODE_OF_CONDUCT.md, (File) refactor: extract AgentOptions and subscriptions, add project scaffol… Mar 20, 2026last month" [ref=e623]':
+                    - cell "CODE_OF_CONDUCT.md, (File)" [ref=e624]:
+                      - generic [ref=e625]:
+                        - img [ref=e626]
+                        - link "CODE_OF_CONDUCT.md, (File)" [ref=e631] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/CODE_OF_CONDUCT.md
+                          - text: CODE_OF_CONDUCT.md
+                    - 'cell "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e632]':
+                      - 'link "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e635] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/de21e35f16dbdfcd6c96d3fbd37683f429a3e9a6
+                    - cell "Mar 20, 2026last month" [ref=e636]:
+                      - generic [ref=e637]: Mar 20, 2026last month
+                  - 'row "CONTRIBUTING.md, (File) chore: stage remaining unstaged changes Apr 16, 20262 hours ago" [ref=e638]':
+                    - cell "CONTRIBUTING.md, (File)" [ref=e639]:
+                      - generic [ref=e640]:
+                        - img [ref=e641]
+                        - link "CONTRIBUTING.md, (File)" [ref=e646] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/CONTRIBUTING.md
+                          - text: CONTRIBUTING.md
+                    - 'cell "chore: stage remaining unstaged changes" [ref=e647]':
+                      - 'link "chore: stage remaining unstaged changes" [ref=e650] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/78e78d070fd08a2c7a131c49d82f9fc901b2a539
+                    - cell "Apr 16, 20262 hours ago" [ref=e651]:
+                      - generic [ref=e652]: Apr 16, 20262 hours ago
+                  - 'row "Cargo.lock, (File) fix: update aws-lc-rs, lru, rand to address Dependabot alerts Apr 16, 20262 hours ago" [ref=e653]':
+                    - cell "Cargo.lock, (File)" [ref=e654]:
+                      - generic [ref=e655]:
+                        - img [ref=e656]
+                        - link "Cargo.lock, (File)" [ref=e661] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/Cargo.lock
+                          - text: Cargo.lock
+                    - 'cell "fix: update aws-lc-rs, lru, rand to address Dependabot alerts" [ref=e662]':
+                      - 'link "fix: update aws-lc-rs, lru, rand to address Dependabot alerts" [ref=e665] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/51497cf489286645542cd5b224d8e9eb7db53ab3
+                    - cell "Apr 16, 20262 hours ago" [ref=e666]:
+                      - generic [ref=e667]: Apr 16, 20262 hours ago
+                  - 'row "Cargo.toml, (File) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e668]':
+                    - cell "Cargo.toml, (File)" [ref=e669]:
+                      - generic [ref=e670]:
+                        - img [ref=e671]
+                        - link "Cargo.toml, (File)" [ref=e676] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/Cargo.toml
+                          - text: Cargo.toml
+                    - 'cell "chore: open-source readiness cleanup" [ref=e677]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e680] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e681]:
+                      - generic [ref=e682]: Apr 16, 20262 hours ago
+                  - 'row "LICENSE-MIT, (File) release: bump version to 0.7.0 Apr 9, 2026last week" [ref=e683]':
+                    - cell "LICENSE-MIT, (File)" [ref=e684]:
+                      - generic [ref=e685]:
+                        - img [ref=e686]
+                        - link "LICENSE-MIT, (File)" [ref=e691] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/LICENSE-MIT
+                          - text: LICENSE-MIT
+                    - 'cell "release: bump version to 0.7.0" [ref=e692]':
+                      - 'link "release: bump version to 0.7.0" [ref=e695] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/e8111b439f050948e99ad1cb92f6560e754d3a77
+                    - cell "Apr 9, 2026last week" [ref=e696]:
+                      - generic [ref=e697]: Apr 9, 2026last week
+                  - 'row "README.md, (File) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e698]':
+                    - cell "README.md, (File)" [ref=e699]:
+                      - generic [ref=e700]:
+                        - img [ref=e701]
+                        - link "README.md, (File)" [ref=e706] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/README.md
+                          - text: README.md
+                    - 'cell "chore: open-source readiness cleanup" [ref=e707]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e710] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e711]:
+                      - generic [ref=e712]: Apr 16, 20262 hours ago
+                  - 'row "SECURITY.md, (File) refactor: extract AgentOptions and subscriptions, add project scaffol… Mar 20, 2026last month" [ref=e713]':
+                    - cell "SECURITY.md, (File)" [ref=e714]:
+                      - generic [ref=e715]:
+                        - img [ref=e716]
+                        - link "SECURITY.md, (File)" [ref=e721] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/SECURITY.md
+                          - text: SECURITY.md
+                    - 'cell "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e722]':
+                      - 'link "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e725] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/de21e35f16dbdfcd6c96d3fbd37683f429a3e9a6
+                    - cell "Mar 20, 2026last month" [ref=e726]:
+                      - generic [ref=e727]: Mar 20, 2026last month
+                  - 'row "THANKYOU.md, (File) chore: open-source readiness cleanup Apr 16, 20262 hours ago" [ref=e728]':
+                    - cell "THANKYOU.md, (File)" [ref=e729]:
+                      - generic [ref=e730]:
+                        - img [ref=e731]
+                        - link "THANKYOU.md, (File)" [ref=e736] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/THANKYOU.md
+                          - text: THANKYOU.md
+                    - 'cell "chore: open-source readiness cleanup" [ref=e737]':
+                      - 'link "chore: open-source readiness cleanup" [ref=e740] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/b0e5778e15387adce7eb97c2db09b3a6c06d9d92
+                    - cell "Apr 16, 20262 hours ago" [ref=e741]:
+                      - generic [ref=e742]: Apr 16, 20262 hours ago
+                  - row "bacon.toml, (File) Complete QA audit and pre-launch polish Mar 14, 2026last month" [ref=e743]:
+                    - cell "bacon.toml, (File)" [ref=e744]:
+                      - generic [ref=e745]:
+                        - img [ref=e746]
+                        - link "bacon.toml, (File)" [ref=e751] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/bacon.toml
+                          - text: bacon.toml
+                    - cell "Complete QA audit and pre-launch polish" [ref=e752]:
+                      - link "Complete QA audit and pre-launch polish" [ref=e755] [cursor=pointer]:
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/ea7cc2d434d57d3368b51a284299d00779c0cad1
+                    - cell "Mar 14, 2026last month" [ref=e756]:
+                      - generic [ref=e757]: Mar 14, 2026last month
+                  - 'row "cliff.toml, (File) refactor: extract AgentOptions and subscriptions, add project scaffol… Mar 20, 2026last month" [ref=e758]':
+                    - cell "cliff.toml, (File)" [ref=e759]:
+                      - generic [ref=e760]:
+                        - img [ref=e761]
+                        - link "cliff.toml, (File)" [ref=e766] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/cliff.toml
+                          - text: cliff.toml
+                    - 'cell "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e767]':
+                      - 'link "refactor: extract AgentOptions and subscriptions, add project scaffol…" [ref=e770] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/de21e35f16dbdfcd6c96d3fbd37683f429a3e9a6
+                    - cell "Mar 20, 2026last month" [ref=e771]:
+                      - generic [ref=e772]: Mar 20, 2026last month
+                  - row "clippy.toml, (File) Prepare for user testing, fix MSRV and lints Mar 11, 2026last month" [ref=e773]:
+                    - cell "clippy.toml, (File)" [ref=e774]:
+                      - generic [ref=e775]:
+                        - img [ref=e776]
+                        - link "clippy.toml, (File)" [ref=e781] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/clippy.toml
+                          - text: clippy.toml
+                    - cell "Prepare for user testing, fix MSRV and lints" [ref=e782]:
+                      - link "Prepare for user testing, fix MSRV and lints" [ref=e785] [cursor=pointer]:
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/cf93ea16751f9be2d1ae5c846f1f44b8b5bd745d
+                    - cell "Mar 11, 2026last month" [ref=e786]:
+                      - generic [ref=e787]: Mar 11, 2026last month
+                  - 'row "deny.toml, (File) impl(010): add otel_model_fallback_spans integration test (#67) Apr 2, 20262 weeks ago" [ref=e788]':
+                    - cell "deny.toml, (File)" [ref=e789]:
+                      - generic [ref=e790]:
+                        - img [ref=e791]
+                        - link "deny.toml, (File)" [ref=e796] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/deny.toml
+                          - text: deny.toml
+                    - 'cell "impl(010): add otel_model_fallback_spans integration test (#67)" [ref=e797]':
+                      - generic [ref=e799]:
+                        - 'link "impl(010): add otel_model_fallback_spans integration test (" [ref=e800] [cursor=pointer]':
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/4bc507daf0440bca171e1c9279d6ea7939831264
+                        - link "#67" [ref=e801] [cursor=pointer]:
+                          - /url: https://github.com/SuperSwinkAI/Swink-Agent/pull/67
+                        - link ")" [ref=e802] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/commit/4bc507daf0440bca171e1c9279d6ea7939831264
+                    - cell "Apr 2, 20262 weeks ago" [ref=e803]:
+                      - generic [ref=e804]: Apr 2, 20262 weeks ago
+                  - row "justfile, (File) Complete QA audit and pre-launch polish Mar 14, 2026last month" [ref=e805]:
+                    - cell "justfile, (File)" [ref=e806]:
+                      - generic [ref=e807]:
+                        - img [ref=e808]
+                        - link "justfile, (File)" [ref=e813] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/justfile
+                          - text: justfile
+                    - cell "Complete QA audit and pre-launch polish" [ref=e814]:
+                      - link "Complete QA audit and pre-launch polish" [ref=e817] [cursor=pointer]:
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/ea7cc2d434d57d3368b51a284299d00779c0cad1
+                    - cell "Mar 14, 2026last month" [ref=e818]:
+                      - generic [ref=e819]: Mar 14, 2026last month
+                  - row "rust-toolchain.toml, (File) Prepare for user testing, fix MSRV and lints Mar 11, 2026last month" [ref=e820]:
+                    - cell "rust-toolchain.toml, (File)" [ref=e821]:
+                      - generic [ref=e822]:
+                        - img [ref=e823]
+                        - link "rust-toolchain.toml, (File)" [ref=e828] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/rust-toolchain.toml
+                          - text: rust-toolchain.toml
+                    - cell "Prepare for user testing, fix MSRV and lints" [ref=e829]:
+                      - link "Prepare for user testing, fix MSRV and lints" [ref=e832] [cursor=pointer]:
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/cf93ea16751f9be2d1ae5c846f1f44b8b5bd745d
+                    - cell "Mar 11, 2026last month" [ref=e833]:
+                      - generic [ref=e834]: Mar 11, 2026last month
+                  - 'row "rustfmt.toml, (File) Implement Phase 1: foundation types and error enum Mar 10, 2026last month" [ref=e835]':
+                    - cell "rustfmt.toml, (File)" [ref=e836]:
+                      - generic [ref=e837]:
+                        - img [ref=e838]
+                        - link "rustfmt.toml, (File)" [ref=e843] [cursor=pointer]:
+                          - /url: /SuperSwinkAI/Swink-Agent/blob/integration/rustfmt.toml
+                          - text: rustfmt.toml
+                    - 'cell "Implement Phase 1: foundation types and error enum" [ref=e844]':
+                      - 'link "Implement Phase 1: foundation types and error enum" [ref=e847] [cursor=pointer]':
+                        - /url: /SuperSwinkAI/Swink-Agent/commit/7e9983c0bff445e84c1801b77d9eae20eea96bdd
+                    - cell "Mar 10, 2026last month" [ref=e848]:
+                      - generic [ref=e849]: Mar 10, 2026last month
+            - generic [ref=e851]:
+              - generic [ref=e852]:
+                - heading "Repository files navigation" [level=2] [ref=e853]
+                - navigation "Repository files" [ref=e854]:
+                  - list [ref=e855]:
+                    - listitem [ref=e856]:
+                      - link "README" [ref=e857] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e859]
+                        - generic [ref=e861]: README
+                    - listitem [ref=e862]:
+                      - link "Code of conduct" [ref=e863] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e865]
+                        - generic [ref=e867]: Code of conduct
+                    - listitem [ref=e868]:
+                      - link "Contributing" [ref=e869] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e871]
+                        - generic [ref=e873]: Contributing
+                    - listitem [ref=e874]:
+                      - link "MIT license" [ref=e875] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e877]
+                        - generic [ref=e879]: MIT license
+                    - listitem [ref=e880]:
+                      - link "Security" [ref=e881] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e883]
+                        - generic [ref=e885]: Security
+                - button "Outline" [ref=e886] [cursor=pointer]:
+                  - img [ref=e887]
+              - article [ref=e890]:
+                - generic [ref=e891]:
+                  - heading "Swink Agent" [level=1] [ref=e892]
+                  - 'link "Permalink: Swink Agent" [ref=e893] [cursor=pointer]':
+                    - /url: "#swink-agent"
+                    - img [ref=e894]
+                - paragraph [ref=e896]:
+                  - link "CI" [ref=e897] [cursor=pointer]:
+                    - /url: https://github.com/SuperSwinkAI/Swink-Agent/actions/workflows/ci.yml
+                    - img "CI" [ref=e898]
+                  - link "MSRV" [ref=e899] [cursor=pointer]:
+                    - /url: https://blog.rust-lang.org/2025/06/05/Rust-1.88.0/
+                    - img "MSRV" [ref=e900]
+                  - 'link "License: MIT" [ref=e901] [cursor=pointer]':
+                    - /url: /SuperSwinkAI/Swink-Agent/blob/integration/LICENSE
+                    - 'img "License: MIT" [ref=e902]'
+                - paragraph [ref=e903]: A pure-Rust library for building LLM-powered agentic loops. Provider-agnostic core with pluggable streaming, concurrent tool execution, and lifecycle events.
+                - generic [ref=e904]:
+                  - heading "Workspace" [level=2] [ref=e905]
+                  - 'link "Permalink: Workspace" [ref=e906] [cursor=pointer]':
+                    - /url: "#workspace"
+                    - img [ref=e907]
+                - table [ref=e910]:
+                  - rowgroup [ref=e911]:
+                    - row "Crate Type Purpose" [ref=e912]:
+                      - columnheader "Crate" [ref=e913]
+                      - columnheader "Type" [ref=e914]
+                      - columnheader "Purpose" [ref=e915]
+                  - rowgroup [ref=e916]:
+                    - row "swink-agent lib Agent loop, tool system, streaming traits, retry, error types" [ref=e917]:
+                      - cell "swink-agent" [ref=e918]:
+                        - code [ref=e919]: swink-agent
+                      - cell "lib" [ref=e920]
+                      - cell "Agent loop, tool system, streaming traits, retry, error types" [ref=e921]
+                    - row "swink-agent-adapters lib StreamFn adapters — Anthropic, OpenAI, Google Gemini, Ollama, Azure, xAI, Mistral, Bedrock" [ref=e922]:
+                      - cell "swink-agent-adapters" [ref=e923]:
+                        - code [ref=e924]: swink-agent-adapters
+                      - cell "lib" [ref=e925]
+                      - cell "StreamFn adapters — Anthropic, OpenAI, Google Gemini, Ollama, Azure, xAI, Mistral, Bedrock" [ref=e926]:
+                        - code [ref=e927]: StreamFn
+                        - text: adapters — Anthropic, OpenAI, Google Gemini, Ollama, Azure, xAI, Mistral, Bedrock
+                    - row "swink-agent-policies lib 10 feature-gated policy implementations (budget, sandbox, PII, audit, etc.)" [ref=e928]:
+                      - cell "swink-agent-policies" [ref=e929]:
+                        - code [ref=e930]: swink-agent-policies
+                      - cell "lib" [ref=e931]
+                      - cell "10 feature-gated policy implementations (budget, sandbox, PII, audit, etc.)" [ref=e932]
+                    - row "swink-agent-memory lib Session persistence, summarization compaction" [ref=e933]:
+                      - cell "swink-agent-memory" [ref=e934]:
+                        - code [ref=e935]: swink-agent-memory
+                      - cell "lib" [ref=e936]
+                      - cell "Session persistence, summarization compaction" [ref=e937]
+                    - row "swink-agent-local-llm lib On-device inference — SmolLM3-3B (default), Gemma 4 (opt-in gemma4 feature), EmbeddingGemma-300M (embeddings)" [ref=e938]:
+                      - cell "swink-agent-local-llm" [ref=e939]:
+                        - code [ref=e940]: swink-agent-local-llm
+                      - cell "lib" [ref=e941]
+                      - cell "On-device inference — SmolLM3-3B (default), Gemma 4 (opt-in gemma4 feature), EmbeddingGemma-300M (embeddings)" [ref=e942]:
+                        - text: On-device inference — SmolLM3-3B (default), Gemma 4 (opt-in
+                        - code [ref=e943]: gemma4
+                        - text: feature), EmbeddingGemma-300M (embeddings)
+                    - row "swink-agent-eval lib Evaluation harness — efficiency scoring, budget guards, gate checks, audit trails" [ref=e944]:
+                      - cell "swink-agent-eval" [ref=e945]:
+                        - code [ref=e946]: swink-agent-eval
+                      - cell "lib" [ref=e947]
+                      - cell "Evaluation harness — efficiency scoring, budget guards, gate checks, audit trails" [ref=e948]
+                    - row "swink-agent-artifacts lib Versioned artifact storage (filesystem + in-memory backends)" [ref=e949]:
+                      - cell "swink-agent-artifacts" [ref=e950]:
+                        - code [ref=e951]: swink-agent-artifacts
+                      - cell "lib" [ref=e952]
+                      - cell "Versioned artifact storage (filesystem + in-memory backends)" [ref=e953]
+                    - row "swink-agent-auth lib OAuth2 credential management and refresh" [ref=e954]:
+                      - cell "swink-agent-auth" [ref=e955]:
+                        - code [ref=e956]: swink-agent-auth
+                      - cell "lib" [ref=e957]
+                      - cell "OAuth2 credential management and refresh" [ref=e958]
+                    - row "swink-agent-mcp lib Model Context Protocol integration (stdio/SSE)" [ref=e959]:
+                      - cell "swink-agent-mcp" [ref=e960]:
+                        - code [ref=e961]: swink-agent-mcp
+                      - cell "lib" [ref=e962]
+                      - cell "Model Context Protocol integration (stdio/SSE)" [ref=e963]
+                    - row "swink-agent-patterns lib Multi-agent orchestration patterns (pipeline, parallel, loop)" [ref=e964]:
+                      - cell "swink-agent-patterns" [ref=e965]:
+                        - code [ref=e966]: swink-agent-patterns
+                      - cell "lib" [ref=e967]
+                      - cell "Multi-agent orchestration patterns (pipeline, parallel, loop)" [ref=e968]
+                    - row "swink-agent-plugin-web lib Web browsing and search plugin" [ref=e969]:
+                      - cell "swink-agent-plugin-web" [ref=e970]:
+                        - code [ref=e971]: swink-agent-plugin-web
+                      - cell "lib" [ref=e972]
+                      - cell "Web browsing and search plugin" [ref=e973]
+                    - 'row "swink-agent-macros proc-macro #[derive(ToolSchema)] and #[tool] proc macros" [ref=e974]':
+                      - cell "swink-agent-macros" [ref=e975]:
+                        - code [ref=e976]: swink-agent-macros
+                      - cell "proc-macro" [ref=e977]
+                      - 'cell "#[derive(ToolSchema)] and #[tool] proc macros" [ref=e978]':
+                        - code [ref=e979]: "#[derive(ToolSchema)]"
+                        - text: and
+                        - code [ref=e980]: "#[tool]"
+                        - text: proc macros
+                    - row "swink-agent-tui lib + bin Interactive terminal UI with markdown, syntax highlighting, tool panel" [ref=e981]:
+                      - cell "swink-agent-tui" [ref=e982]:
+                        - code [ref=e983]: swink-agent-tui
+                      - cell "lib + bin" [ref=e984]
+                      - cell "Interactive terminal UI with markdown, syntax highlighting, tool panel" [ref=e985]
+                - generic [ref=e986]:
+                  - heading "Key Ideas" [level=2] [ref=e987]
+                  - 'link "Permalink: Key Ideas" [ref=e988] [cursor=pointer]':
+                    - /url: "#key-ideas"
+                    - img [ref=e989]
+                - list [ref=e991]:
+                  - listitem [ref=e992]:
+                    - strong [ref=e993]:
+                      - code [ref=e994]: StreamFn
+                    - text: is the only provider boundary — implement it to add a new LLM backend.
+                  - listitem [ref=e995]:
+                    - strong [ref=e996]:
+                      - code [ref=e997]: AgentTool
+                    - text: trait + JSON Schema validation for tool definitions.
+                  - listitem [ref=e998]: Tools execute concurrently within a turn; steering callbacks can interrupt mid-batch.
+                  - listitem [ref=e999]:
+                    - text: Errors stay in the message log — the loop keeps running. Typed
+                    - code [ref=e1000]: AgentError
+                    - text: variants for callers.
+                  - listitem [ref=e1001]:
+                    - text: Events are push-only (
+                    - code [ref=e1002]: AgentEvent
+                    - text: stream). No inward mutation through events.
+                  - listitem [ref=e1003]:
+                    - text: "No"
+                    - code [ref=e1004]: unsafe
+                    - text: code. No global mutable state.
+                - generic [ref=e1005]:
+                  - heading "Quick Reference" [level=2] [ref=e1006]
+                  - 'link "Permalink: Quick Reference" [ref=e1007] [cursor=pointer]':
+                    - /url: "#quick-reference"
+                    - img [ref=e1008]
+                - generic [ref=e1010]:
+                  - generic [ref=e1011]:
+                    - text: cargo run -p swink-agent-tui
+                    - generic [ref=e1012]: "# launch the TUI (remote/Ollama defaults)"
+                    - text: cargo run -p swink-agent-tui --features local
+                    - generic [ref=e1013]: "# include bundled local-LLM support"
+                    - text: cargo test --workspace
+                    - generic [ref=e1014]: "# run all tests"
+                  - button "Copy" [ref=e1016] [cursor=pointer]:
+                    - img [ref=e1017]
+                - generic [ref=e1020]:
+                  - 'heading "Example: Build a Custom Agent" [level=2] [ref=e1021]'
+                  - 'link "Permalink: Example: Build a Custom Agent" [ref=e1022] [cursor=pointer]':
+                    - /url: "#example-build-a-custom-agent"
+                    - img [ref=e1023]
+                - paragraph [ref=e1025]: "Wire up an LLM provider, register tools, and launch the interactive TUI — all in one file:"
+                - generic [ref=e1026]:
+                  - generic [ref=e1027]:
+                    - text: "use swink_agent::{AgentOptions, BashTool, ModelConnections, ReadFileTool, WriteFileTool}; use swink_agent_adapters::build_remote_connection_for_model; use swink_agent_local_llm::default_local_connection; use swink_agent_tui::{TuiConfig, launch, restore_terminal, setup_terminal};"
+                    - generic [ref=e1028]: "#[tokio::main]"
+                    - text: "async fn main() -> Result<(), Box<dyn std::error::Error>> { dotenvy::dotenv().ok(); let connections = ModelConnections::new( build_remote_connection_for_model(\"claude-sonnet-4-6\")?, vec![ build_remote_connection_for_model(\"gpt-4.1\")?, default_local_connection()?, ], ); let tools = vec![ BashTool::new().into_tool(), ReadFileTool::new().into_tool(), WriteFileTool::new().into_tool(), ]; let options = AgentOptions::from_connections(\"You are a helpful assistant.\", connections) .with_tools(tools); let mut terminal = setup_terminal()?; let result = launch(TuiConfig::default(), &mut terminal, options).await; restore_terminal()?; result }"
+                  - button "Copy" [ref=e1030] [cursor=pointer]:
+                    - img [ref=e1031]
+                - generic [ref=e1034]:
+                  - heading "More Examples" [level=2] [ref=e1035]
+                  - 'link "Permalink: More Examples" [ref=e1036] [cursor=pointer]':
+                    - /url: "#more-examples"
+                    - img [ref=e1037]
+                - paragraph [ref=e1039]:
+                  - text: Runnable examples are in
+                  - link "SuperSwinkAI/Swink-Agent-Examples" [ref=e1040] [cursor=pointer]:
+                    - /url: https://github.com/SuperSwinkAI/Swink-Agent-Examples
+                  - text: ":"
+                - table [ref=e1042]:
+                  - rowgroup [ref=e1043]:
+                    - row "Example What it demonstrates" [ref=e1044]:
+                      - columnheader "Example" [ref=e1045]
+                      - columnheader "What it demonstrates" [ref=e1046]
+                  - rowgroup [ref=e1047]:
+                    - row "simple_prompt Create an Agent with a mock stream function, send a prompt, print the result" [ref=e1048]:
+                      - cell "simple_prompt" [ref=e1049]:
+                        - code [ref=e1050]: simple_prompt
+                      - cell "Create an Agent with a mock stream function, send a prompt, print the result" [ref=e1051]
+                    - row "with_tools Register BashTool / ReadFileTool / WriteFileTool and wire up the approval callback" [ref=e1052]:
+                      - cell "with_tools" [ref=e1053]:
+                        - code [ref=e1054]: with_tools
+                      - cell "Register BashTool / ReadFileTool / WriteFileTool and wire up the approval callback" [ref=e1055]
+                    - row "custom_adapter Implement the StreamFn trait for a custom provider" [ref=e1056]:
+                      - cell "custom_adapter" [ref=e1057]:
+                        - code [ref=e1058]: custom_adapter
+                      - cell "Implement the StreamFn trait for a custom provider" [ref=e1059]:
+                        - text: Implement the
+                        - code [ref=e1060]: StreamFn
+                        - text: trait for a custom provider
+                    - row "custom_agent Full agent with Anthropic adapter, tools, and interactive TUI" [ref=e1061]:
+                      - cell "custom_agent" [ref=e1062]:
+                        - code [ref=e1063]: custom_agent
+                      - cell "Full agent with Anthropic adapter, tools, and interactive TUI" [ref=e1064]
+                - paragraph [ref=e1065]:
+                  - text: See
+                  - link "docs/getting_started.md" [ref=e1066] [cursor=pointer]:
+                    - /url: /SuperSwinkAI/Swink-Agent/blob/integration/docs/getting_started.md
+                  - text: for setup and configuration. See
+                  - link "docs/architecture/HLD.md" [ref=e1067] [cursor=pointer]:
+                    - /url: /SuperSwinkAI/Swink-Agent/blob/integration/docs/architecture/HLD.md
+                  - text: for system design. See
+                  - link "docs/planning/PRD.md" [ref=e1068] [cursor=pointer]:
+                    - /url: /SuperSwinkAI/Swink-Agent/blob/integration/docs/planning/PRD.md
+                  - text: for product requirements.
+        - generic [ref=e1072]:
+          - generic [ref=e1075]:
+            - heading "About" [level=2] [ref=e1076]
+            - paragraph [ref=e1077]: An extensible, policy-minded agent harness in pure Rust. Any LLM via one trait. Concurrent tools, policy guardrails, session memory, eval harness, and TUI included.
+            - generic [ref=e1078]:
+              - img [ref=e1079]
+              - link "superswinkai.github.io/swink-agents/" [ref=e1082] [cursor=pointer]:
+                - /url: https://superswinkai.github.io/swink-agents/
+            - heading "Topics" [level=3] [ref=e1083]
+            - generic [ref=e1085]:
+              - link "rust" [ref=e1086] [cursor=pointer]:
+                - /url: /topics/rust
+              - link "ai" [ref=e1087] [cursor=pointer]:
+                - /url: /topics/ai
+              - link "rust-library" [ref=e1088] [cursor=pointer]:
+                - /url: /topics/rust-library
+              - link "agents" [ref=e1089] [cursor=pointer]:
+                - /url: /topics/agents
+              - link "rust-crate" [ref=e1090] [cursor=pointer]:
+                - /url: /topics/rust-crate
+              - link "ai-agents" [ref=e1091] [cursor=pointer]:
+                - /url: /topics/ai-agents
+              - link "agentic" [ref=e1092] [cursor=pointer]:
+                - /url: /topics/agentic
+              - link "agentic-ai" [ref=e1093] [cursor=pointer]:
+                - /url: /topics/agentic-ai
+            - heading "Resources" [level=3] [ref=e1094]
+            - link "Readme" [ref=e1096] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+              - img [ref=e1097]
+              - text: Readme
+            - heading "License" [level=3] [ref=e1099]
+            - link "MIT license" [ref=e1101] [cursor=pointer]:
+              - /url: "#MIT-1-ov-file"
+              - img [ref=e1102]
+              - text: MIT license
+            - heading "Code of conduct" [level=3] [ref=e1104]
+            - link "Code of conduct" [ref=e1106] [cursor=pointer]:
+              - /url: "#coc-ov-file"
+              - img [ref=e1107]
+              - text: Code of conduct
+            - heading "Contributing" [level=3] [ref=e1109]
+            - link "Contributing" [ref=e1111] [cursor=pointer]:
+              - /url: "#contributing-ov-file"
+              - img [ref=e1112]
+              - text: Contributing
+            - heading "Security policy" [level=3] [ref=e1114]
+            - link "Security policy" [ref=e1116] [cursor=pointer]:
+              - /url: "#security-ov-file"
+              - img [ref=e1117]
+              - text: Security policy
+            - link "Activity" [ref=e1120] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/activity
+              - img [ref=e1121]
+              - text: Activity
+            - link "Custom properties" [ref=e1124] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/custom-properties
+              - img [ref=e1125]
+              - text: Custom properties
+            - heading "Stars" [level=3] [ref=e1127]
+            - link "0 stars" [ref=e1129] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/stargazers
+              - img [ref=e1130]
+              - strong [ref=e1132]: "0"
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e1133]
+            - link "0 watching" [ref=e1135] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/watchers
+              - img [ref=e1136]
+              - strong [ref=e1138]: "0"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e1139]
+            - link "0 forks" [ref=e1141] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/forks
+              - img [ref=e1142]
+              - strong [ref=e1144]: "0"
+              - text: forks
+            - link "Report repository" [ref=e1146] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FSuperSwinkAI%2FSwink-Agent&report=SuperSwinkAI+%28user%29
+          - generic [ref=e1148]:
+            - heading "Releases" [level=2] [ref=e1149]:
+              - link "Releases" [ref=e1150] [cursor=pointer]:
+                - /url: /SuperSwinkAI/Swink-Agent/releases
+            - link "11 tags" [ref=e1151] [cursor=pointer]:
+              - /url: /SuperSwinkAI/Swink-Agent/tags
+              - img [ref=e1152]
+              - text: 11 tags
+          - generic [ref=e1155]:
+            - heading "Contributors 2" [level=2] [ref=e1156]:
+              - link "Contributors 2" [ref=e1157] [cursor=pointer]:
+                - /url: /SuperSwinkAI/Swink-Agent/graphs/contributors
+                - text: Contributors
+                - generic "2" [ref=e1158]
+            - list [ref=e1159]:
+              - listitem [ref=e1160]:
+                - link "@unseriousAI" [ref=e1161] [cursor=pointer]:
+                  - /url: https://github.com/unseriousAI
+                  - img "@unseriousAI" [ref=e1162]
+                - link "unseriousAI Unserious AI" [ref=e1164] [cursor=pointer]:
+                  - /url: https://github.com/unseriousAI
+                  - strong [ref=e1165]: unseriousAI
+                  - text: Unserious AI
+              - listitem [ref=e1166]:
+                - link "@jwesleye" [ref=e1167] [cursor=pointer]:
+                  - /url: https://github.com/jwesleye
+                  - img "@jwesleye" [ref=e1168]
+                - link "jwesleye Wes Etheredge" [ref=e1170] [cursor=pointer]:
+                  - /url: https://github.com/jwesleye
+                  - strong [ref=e1171]: jwesleye
+                  - text: Wes Etheredge
+          - generic [ref=e1173]:
+            - heading "Languages" [level=2] [ref=e1174]
+            - list [ref=e1179]:
+              - listitem [ref=e1180]:
+                - link "Rust 99.8%" [ref=e1181] [cursor=pointer]:
+                  - /url: /SuperSwinkAI/Swink-Agent/search?l=rust
+                  - img [ref=e1182]
+                  - generic [ref=e1184]: Rust
+                  - generic [ref=e1185]: 99.8%
+              - listitem [ref=e1186]:
+                - generic [ref=e1187]:
+                  - img [ref=e1188]
+                  - generic [ref=e1190]: Other
+                  - generic [ref=e1191]: 0.2%
+  - contentinfo [ref=e1193]:
+    - heading "Footer" [level=2] [ref=e1194]
+    - generic [ref=e1195]:
+      - generic [ref=e1196]:
+        - link "GitHub Homepage" [ref=e1197] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e1198]
+        - generic [ref=e1200]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e1201]:
+        - heading "Footer navigation" [level=3] [ref=e1202]
+        - list "Footer navigation" [ref=e1203]:
+          - listitem [ref=e1204]:
+            - link "Terms" [ref=e1205] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e1206]:
+            - link "Privacy" [ref=e1207] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e1208]:
+            - link "Security" [ref=e1209] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e1210]:
+            - link "Status" [ref=e1211] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e1212]:
+            - link "Community" [ref=e1213] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e1214]:
+            - link "Docs" [ref=e1215] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e1216]:
+            - link "Contact" [ref=e1217] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e1218]:
+            - button "Manage cookies" [ref=e1220] [cursor=pointer]
+          - listitem [ref=e1221]:
+            - button "Do not share my personal information" [ref=e1223] [cursor=pointer]

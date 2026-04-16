@@ -1,12 +1,3 @@
-# Workspace root — provides [patch.crates-io] so examples resolve swink-agent
-# crates from a local sibling checkout of Swink-Agent while 0.7.x is not yet
-# published to crates.io.
-#
-# External contributors: clone https://github.com/SuperSwinkAI/Swink-Agent as a
-# sibling directory (../Swink-Agent) alongside this repo, then `cargo run` as
-# normal.  Once 0.7.x is published to crates.io, the [patch] section below can
-# be removed and this workspace becomes optional.
-
 [workspace]
 members = [
     "by_model/*/*/*",
@@ -14,10 +5,3 @@ members = [
     "usecases/*/*",
 ]
 resolver = "2"
-
-[patch.crates-io]
-swink-agent          = { path = "../Swink-Agent" }
-swink-agent-adapters = { path = "../Swink-Agent/adapters" }
-swink-agent-tui      = { path = "../Swink-Agent/tui" }
-swink-agent-memory   = { path = "../Swink-Agent/memory" }
-swink-agent-policies = { path = "../Swink-Agent/policies" }
