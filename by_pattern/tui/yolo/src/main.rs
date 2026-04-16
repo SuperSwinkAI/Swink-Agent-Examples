@@ -26,7 +26,7 @@ use swink_agent_tui::{ApprovalMode, TuiConfig, launch, restore_terminal, setup_t
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
+    let connection = build_remote_connection_for_model("claude-sonnet-4-6")?;
     let connections = ModelConnections::new(connection, vec![]);
 
     let options = AgentOptions::from_connections(

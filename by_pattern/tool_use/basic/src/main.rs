@@ -72,7 +72,10 @@ struct GetWeatherParams {
 #[tokio::main]
 async fn main() {
     // Step 1a: Create built-in tools.
-    // `builtin_tools()` returns Vec<Arc<dyn AgentTool>> with BashTool, ReadFileTool, WriteFileTool.
+    // `builtin_tools()` returns Vec<Arc<dyn AgentTool>> with BashTool, ReadFileTool,
+    // WriteFileTool, and EditFileTool (added in 0.7.3).
+    // EditFileTool applies surgical find-and-replace edits atomically and supports
+    // stale-read detection via an optional SHA-256 hash of the file as last read.
     let mut tools = builtin_tools();
 
     // Step 1b: Create a custom tool using `FnTool` — no need to implement `AgentTool` manually.
@@ -112,7 +115,9 @@ async fn main() {
     //
     //   .with_approve_tool(selective_approve(|req| Box::pin(async move { ... })))
     let options = AgentOptions::new_simple(
-        "You are a helpful coding assistant with access to shell and file tools.",
+        "You are a helpful coding assistant with access to shell and file tools. \
+         Use edit_file for targeted changes to existing files — it is safer than \
+         overwriting the whole file with write_file.",
         model,
         stream_fn,
     )

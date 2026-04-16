@@ -1,10 +1,10 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents when working with code in this repository.
 
 ## Purpose
 
-This is the examples repository for [Swink-Agent](https://github.com/SuperSwinkAI/Swink-Agent), a pure-Rust library for LLM-powered agentic loops. Each example is a standalone Rust binary (its own `Cargo.toml`) demonstrating a specific pattern, provider, or use case.
+This is the [Swink-Agent-Examples](https://github.com/SuperSwinkAI/Swink-Agent-Examples) repository — standalone examples for [Swink-Agent](https://github.com/SuperSwinkAI/Swink-Agent), a pure-Rust library for LLM-powered agentic loops. Each example is a standalone Rust binary (its own `Cargo.toml`) demonstrating a specific pattern, provider, or use case.
 
 ## Repository layout
 

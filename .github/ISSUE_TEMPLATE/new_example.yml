@@ -1,0 +1,52 @@
+name: New Example Request
+description: Propose a new example for the repo
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before submitting, check open issues and PRs to see if this example has already been proposed.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What pattern or use case does this example demonstrate?
+      description: Describe what a developer would learn from running it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Proposed location
+      description: Where in the repo should it live? e.g. `by_pattern/chain_of_thought/basic` or `usecases/code_review/basic`
+    validations:
+      required: true
+
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Target provider(s)
+      multiple: true
+      options:
+        - Anthropic
+        - OpenAI
+        - Ollama
+        - Google Gemini
+        - Azure OpenAI
+        - AWS Bedrock
+        - Mistral
+        - xAI
+        - Provider-agnostic / mock
+
+  - type: textarea
+    id: sketch
+    attributes:
+      label: Rough code sketch
+      description: Optional — API calls, key types used, rough structure.
+      render: rust
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context

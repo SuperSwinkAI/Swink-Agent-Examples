@@ -1,4 +1,4 @@
-# swink-examples
+# Swink-Agent-Examples
 
 Standalone examples for the [Swink-Agent](https://github.com/SuperSwinkAI/Swink-Agent) framework — a pure-Rust library for LLM-powered agentic loops.
 
@@ -27,13 +27,22 @@ Each example is its own Cargo project — `cd` into the folder and `cargo run`.
 ## Quick start
 
 ```bash
-# Pick an example
-cd by_model/anthropic/haiku/basic
+# 1. Clone this repo and its sibling dependency side-by-side
+git clone https://github.com/SuperSwinkAI/Swink-Agent-Examples.git
+git clone https://github.com/SuperSwinkAI/Swink-Agent.git   # required until 0.7.x is on crates.io
 
-# Set your API key
-export ANTHROPIC_API_KEY="sk-..."
+# Both repos must sit in the same parent directory:
+# parent/
+#   Swink-Agent/
+#   Swink-Agent-Examples/
 
-# Run it
+# 2. Pick an example
+cd Swink-Agent-Examples/by_model/anthropic/haiku/basic
+
+# 3. Set your API key
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# 4. Run it
 cargo run
 ```
 
@@ -41,6 +50,7 @@ cargo run
 
 - **Rust 1.88+** (edition 2024)
 - API keys for whichever provider the example targets (see each example's README)
+- A sibling checkout of [Swink-Agent](https://github.com/SuperSwinkAI/Swink-Agent) (until 0.7.x is published to crates.io)
 
 ## Adding an example
 
