@@ -1,61 +1,17 @@
 //! Example: register tools with an Agent and set up the approval callback.
 //!
-//! Demonstrates how to wire up `BashTool` and `ReadFileTool`, configure an
-//! approval callback via `with_approve_tool_async`, and run a prompt.
+//! Demonstrates how to wire up `BashTool`, `ReadFileTool`, `WriteFileTool`,
+//! and `EditFileTool`, configure an approval callback via
+//! `with_approve_tool_async`, and run prompts that actually invoke tools.
 //!
 //! Also shows how to create a custom tool with [`FnTool`] using closures
 //! instead of implementing the [`AgentTool`] trait manually.
 
-use std::pin::Pin;
-use std::sync::{Arc, Mutex};
-
-use futures::Stream;
-use serde::Deserialize;
-use tokio_util::sync::CancellationToken;
-
 use schemars::JsonSchema;
+use serde::Deserialize;
 use swink_agent::prelude::*;
 use swink_agent::ToolApproval;
-
-// ─── Mock StreamFn ──────────────────────────────────────────────────────────
-
-/// A mock `StreamFn` that yields scripted event sequences.
-struct MockStreamFn {
-    responses: Mutex<Vec<Vec<AssistantMessageEvent>>>,
-}
-
-impl MockStreamFn {
-    fn new(responses: Vec<Vec<AssistantMessageEvent>>) -> Self {
-        Self {
-            responses: Mutex::new(responses),
-        }
-    }
-}
-
-impl StreamFn for MockStreamFn {
-    fn stream<'a>(
-        &'a self,
-        _model: &'a ModelSpec,
-        _context: &'a swink_agent::AgentContext,
-        _options: &'a StreamOptions,
-        _cancellation_token: CancellationToken,
-    ) -> Pin<Box<dyn Stream<Item = AssistantMessageEvent> + Send + 'a>> {
-        let events = {
-            let mut responses = self.responses.lock().unwrap();
-            if responses.is_empty() {
-                vec![AssistantMessageEvent::Error {
-                    stop_reason: StopReason::Error,
-                    error_message: "no more scripted responses".to_string(),
-                    error_kind: None,
-                    usage: None,
-                }]
-            } else {
-                responses.remove(0)
-            }
-        };
-        Box::pin(futures::stream::iter(events))
-    }
-}
+use swink_agent_adapters::build_remote_connection_for_model;
 
 // ─── Custom tool params ─────────────────────────────────────────────────────
 
@@ -63,14 +19,16 @@ impl StreamFn for MockStreamFn {
 #[derive(Deserialize, JsonSchema)]
 #[allow(dead_code)]
 struct GetWeatherParams {
-    /// The city to look up weather for (e.g. "San Francisco").
+    /// The city to look up weather for (e.g. "Austin").
     city: String,
 }
 
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 #[tokio::main]
-async fn main() {
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    dotenvy::dotenv().ok();
+
     // Step 1a: Create built-in tools.
     // `builtin_tools()` returns Vec<Arc<dyn AgentTool>> with BashTool, ReadFileTool,
     // WriteFileTool, and EditFileTool (added in 0.7.3).
@@ -94,20 +52,9 @@ async fn main() {
 
     tools.push(weather);
 
-    // Step 2: Set up a mock stream function (replace with a real adapter).
-    let stream_fn = Arc::new(MockStreamFn::new(vec![
-        AssistantMessageEvent::text_response(
-            "The approval callback here auto-approves silently. In a real CLI, show the tool \
-             name, the exact arguments, and the working directory before asking — users can't \
-             make an informed decision without knowing what the command will actually do.",
-        ),
-        AssistantMessageEvent::text_response(
-            "Swap in a real weather API by changing only the FnTool closure body — nothing \
-             in the agent setup needs to change. That's the whole point of the tool abstraction.",
-        ),
-    ]));
-
-    let model = ModelSpec::new("mock", "mock-model-v1");
+    // Step 2: Connect to a real model so tools are actually invoked.
+    let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
+    let connections = ModelConnections::new(connection, vec![]);
 
     // Step 3: Build options with tools and an approval callback.
     //
@@ -120,33 +67,32 @@ async fn main() {
     // callback with `selective_approve` instead:
     //
     //   .with_approve_tool(selective_approve(|req| Box::pin(async move { ... })))
-    let options = AgentOptions::new_simple(
+    let options = AgentOptions::from_connections(
         "You are a helpful coding assistant with access to shell and file tools. \
          Use edit_file for targeted changes to existing files — it is safer than \
          overwriting the whole file with write_file.",
-        model,
-        stream_fn,
+        connections,
     )
     .with_tools(tools)
     .with_approve_tool_async(|req| async move {
-        // In a real application you would prompt the user here.
         println!(
-            "Approval requested for tool '{}' with args: {}",
+            "  [approval] tool='{}' args={}",
             req.tool_name, req.arguments
         );
-        // Auto-approve for this example.
         ToolApproval::Approved
     });
 
-    // Step 4: Create the agent and run a prompt.
+    // Step 4: Create the agent and run prompts that actually invoke tools.
     let mut agent = Agent::new(options);
 
     for prompt in [
-        "The approval callback auto-approves everything silently. What information should a real CLI show the user before asking them to approve a bash command?",
-        "The get_weather tool is hardcoded to return '72°F and sunny'. How would I swap in a real weather API without touching the agent setup code?",
+        "Use bash to count how many .toml files are in the current directory.",
+        "What's the weather like in Austin right now?",
     ] {
         println!(">>> {prompt}");
-        let result = agent.prompt_text(prompt).await.expect("prompt failed");
+        let result = agent.prompt_text(prompt).await?;
         println!("Assistant: {}\n", result.assistant_text());
     }
+
+    Ok(())
 }
