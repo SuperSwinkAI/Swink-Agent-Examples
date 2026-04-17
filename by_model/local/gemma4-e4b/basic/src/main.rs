@@ -20,15 +20,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let connections = ModelConnections::new(connection, vec![]);
     let options = AgentOptions::from_connections(
-        "You are a helpful assistant running entirely on-device.",
+        "You are a helpful assistant running entirely on-device. Keep all responses under 3 sentences.",
         connections,
     );
 
     let mut agent = Agent::new(options);
 
     for prompt in [
-        "In one sentence, what is the capital of France?",
-        "What is the population of that city?",
+        "You're the 4B variant. Where does the extra capacity over the 2B actually show up in day-to-day output?",
+        "What should a developer benchmark before deciding between you and the 2B for a laptop deployment?",
     ] {
         println!(">>> {prompt}");
         let result = agent.prompt_text(prompt).await?;

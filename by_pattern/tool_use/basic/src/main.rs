@@ -97,10 +97,13 @@ async fn main() {
     // Step 2: Set up a mock stream function (replace with a real adapter).
     let stream_fn = Arc::new(MockStreamFn::new(vec![
         AssistantMessageEvent::text_response(
-            "I would use the bash tool to list files, but this is a mock.",
+            "The approval callback here auto-approves silently. In a real CLI, show the tool \
+             name, the exact arguments, and the working directory before asking — users can't \
+             make an informed decision without knowing what the command will actually do.",
         ),
         AssistantMessageEvent::text_response(
-            "I would use get_weather to check the weather, but this is a mock.",
+            "Swap in a real weather API by changing only the FnTool closure body — nothing \
+             in the agent setup needs to change. That's the whole point of the tool abstraction.",
         ),
     ]));
 
@@ -139,8 +142,8 @@ async fn main() {
     let mut agent = Agent::new(options);
 
     for prompt in [
-        "List the files in the current directory.",
-        "What is the weather in San Francisco?",
+        "The approval callback auto-approves everything silently. What information should a real CLI show the user before asking them to approve a bash command?",
+        "The get_weather tool is hardcoded to return '72°F and sunny'. How would I swap in a real weather API without touching the agent setup code?",
     ] {
         println!(">>> {prompt}");
         let result = agent.prompt_text(prompt).await.expect("prompt failed");

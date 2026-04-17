@@ -11,7 +11,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut agent = Agent::new(options);
 
-    for prompt in ["What is Rust?", "Name 3 of its key features."] {
+    for prompt in [
+        "You're Mistral Large running via the Mistral API — not Anthropic. What practical differences would a developer notice integrating you vs. Claude for a European B2B SaaS product?",
+        "That B2B company is subject to GDPR and wants data processed exclusively on EU servers. Does that change which Mistral deployment tier or API endpoint they should use?",
+    ] {
         println!(">>> {prompt}");
         let result = agent.prompt_text(prompt).await?;
         for msg in &result.messages {

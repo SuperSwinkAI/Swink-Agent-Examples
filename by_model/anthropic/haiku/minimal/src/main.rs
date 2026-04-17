@@ -25,7 +25,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut agent = Agent::new(options);
 
-    for prompt in ["What is Rust?", "Name 3 of its key features."] {
+    for prompt in [
+        "We're passing your model ID as a runtime string instead of a compile-time constant. What operational benefit does that give a deployment team managing multiple LLM providers?",
+        "Give me a concrete Rust struct — with serde derives — that would let a team configure model ID, provider, and base URL from a TOML file.",
+    ] {
         println!(">>> {prompt}");
         let result = agent.prompt_text(prompt).await?;
         for msg in &result.messages {

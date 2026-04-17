@@ -17,11 +17,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let options = AgentOptions::from_connections("You are a helpful assistant.", connections);
 
     let mut agent = Agent::new(options);
-    let result = agent.prompt_text("What is Rust?").await?;
 
-    for msg in &result.messages {
-        if let AgentMessage::Llm(LlmMessage::Assistant(a)) = msg {
-            println!("{}", ContentBlock::extract_text(&a.content));
+    for prompt in [
+        "You're running locally via Ollama — no data leaves this machine. What privacy-sensitive use cases does that unlock that a cloud API can't offer?",
+        "A startup building a code-review tool is deciding between running you locally vs. calling a cloud API. Walk through the tradeoffs on latency, cost, and maintenance burden.",
+    ] {
+        println!(">>> {prompt}");
+        let result = agent.prompt_text(prompt).await?;
+        for msg in &result.messages {
+            if let AgentMessage::Llm(LlmMessage::Assistant(a)) = msg {
+                println!("{}\n", ContentBlock::extract_text(&a.content));
+            }
         }
     }
     Ok(())

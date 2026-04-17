@@ -2,14 +2,17 @@ use swink_agent::{Agent, AgentMessage, AgentOptions, ContentBlock, LlmMessage, M
 use swink_agent_adapters::build_remote_connection_for_model;
 
 const SAMPLE_TEXT: &str = "\
-Rust is a multi-paradigm, general-purpose programming language that emphasizes performance, \
-type safety, and concurrency. It enforces memory safety without a garbage collector by using \
-a system of ownership with a set of rules that the compiler checks at compile time. Rust was \
-originally designed by Graydon Hoare at Mozilla Research, with contributions from Dave Herman, \
-Brendan Eich, and others. The designers refined the language while writing the Servo \
-experimental browser engine and the Rust compiler itself. Rust has been adopted by major \
-technology companies for systems programming, and it has topped Stack Overflow's annual \
-survey as the most admired programming language every year since 2016.";
+Large language models are increasingly deployed as autonomous agents that plan and execute \
+multi-step tasks, yet they exhibit a well-documented failure mode: they confidently produce \
+plausible-sounding but factually incorrect outputs — a phenomenon researchers call hallucination. \
+Unlike retrieval-augmented systems that ground responses in retrieved documents, pure generation \
+models have no mechanism to distinguish between remembered training data and confabulation. \
+Recent work on tool-use and verification loops attempts to close this gap by giving models \
+access to search, code execution, and external APIs, forcing claims to be checked rather than \
+assumed. Critics argue that this merely shifts the problem: models can now hallucinate tool \
+invocations or misinterpret tool results, introducing new failure modes at the integration \
+layer. The open question is whether grounding alone is sufficient for safety-critical \
+applications, or whether a fundamentally different approach to confidence calibration is needed.";
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -25,8 +28,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut agent = Agent::new(options);
 
     let prompts = [
-        format!("Summarize the following text in 2-3 sentences:\n\n{SAMPLE_TEXT}"),
-        "Now give me just a single-sentence summary.".to_string(),
+        format!("Read the following passage and identify the top 3 technical claims. For each, note whether it's broadly accepted, actively debated, or contested:\n\n{SAMPLE_TEXT}"),
+        "Now distill the core tension in that passage into a single sentence a non-technical engineering manager could read in a board meeting.".to_string(),
     ];
 
     for prompt in &prompts {

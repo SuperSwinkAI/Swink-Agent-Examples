@@ -44,8 +44,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     registry.register("writer", Agent::new(writer_options));
 
     for user_message in [
-        "Write me a haiku about Rust programming.",
-        "What year was Rust first released?",
+        "My async Rust service is seeing high tail latency under load — write me a short poem capturing the existential dread of debugging a tokio runtime with 200 spawned tasks.",
+        "What's the actual release date of Rust 1.0 stable, and which version introduced async/await syntax?",
     ] {
         println!("\n>>> {user_message}");
         let mut current = "triage".to_string();

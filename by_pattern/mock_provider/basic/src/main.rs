@@ -59,8 +59,14 @@ impl StreamFn for MockStreamFn {
 async fn main() {
     // Step 1: Create a mock stream function with a canned response.
     let stream_fn = std::sync::Arc::new(MockStreamFn::new(vec![
-        AssistantMessageEvent::text_response("Hello! I'm a mock LLM response."),
-        AssistantMessageEvent::text_response("Sure! Rust is fast, safe, and concurrent."),
+        AssistantMessageEvent::text_response(
+            "To cover the empty-queue path: script a test where you exhaust all responses \
+             then verify the agent surfaces the error instead of panicking.",
+        ),
+        AssistantMessageEvent::text_response(
+            "For rate-limit retry testing: add an Error event with error_kind set to \
+             RateLimit, then assert your retry wrapper fires before the next scripted response.",
+        ),
     ]));
 
     // Step 2: Define the model specification.
@@ -73,7 +79,10 @@ async fn main() {
     let mut agent = Agent::new(options);
 
     // Step 5: Send prompts and print results.
-    for prompt in ["What is Rust?", "Name 3 key features."] {
+    for prompt in [
+        "I've got a MockStreamFn with scripted responses. What test cases should I add to validate that the agent handles an empty response queue gracefully?",
+        "My production StreamFn occasionally returns rate-limit errors. How do I script that in the mock to exercise my retry logic?",
+    ] {
         println!(">>> {prompt}");
         let result = agent.prompt_text(prompt).await.expect("prompt failed");
         println!("Assistant: {}", result.assistant_text());

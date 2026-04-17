@@ -88,7 +88,10 @@ async fn main() {
     let mut agent = Agent::new(options);
 
     // Step 3: Send prompts and print results.
-    for prompt in ["Hello, world!", "What is Rust?"] {
+    for prompt in [
+        "This DummyStreamFn just echoes messages. What's the minimum I'd need to add to make it call a real streaming HTTP API like Anthropic's instead?",
+        "If the remote API returns tool_use content blocks in the stream, which AssistantMessageEvent variants would I emit, and in what order relative to the text events?",
+    ] {
         println!(">>> {prompt}");
         let result = agent.prompt_text(prompt).await.expect("prompt failed");
         println!("Response: {}", result.assistant_text());

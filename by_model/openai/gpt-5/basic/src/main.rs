@@ -11,7 +11,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut agent = Agent::new(options);
 
-    for prompt in ["What is Rust?", "Name 3 of its key features."] {
+    for prompt in [
+        "You're GPT-5 running via the OpenAI API. What genuinely new agentic capabilities do you have that GPT-4o lacked — be specific, skip the marketing?",
+        "A team already using Claude Sonnet for reasoning asks when they should route a subtask to you instead. What's your honest answer?",
+    ] {
         println!(">>> {prompt}");
         let result = agent.prompt_text(prompt).await?;
         for msg in &result.messages {

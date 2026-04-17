@@ -27,8 +27,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut agent = Agent::new(options);
 
     for prompt in [
-        "In one sentence, what is the capital of France?",
-        "What is the population of that city?",
+        "No network, no cloud — you're running fully on-device. What's one thing you can do that a cloud API fundamentally can't?",
+        "Name the single biggest limitation a developer should plan around when shipping you in a product.",
     ] {
         println!(">>> {prompt}");
         let result = agent.prompt_text(prompt).await?;
