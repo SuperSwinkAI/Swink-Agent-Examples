@@ -2978,20 +2978,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "research-deep-research"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "dotenvy",
- "schemars",
- "serde",
- "swink-agent",
- "swink-agent-adapters",
- "swink-agent-tui",
- "tokio",
-]
-
-[[package]]
 name = "ring"
 version = "0.17.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3459,7 +3445,6 @@ version = "0.7.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a4a1237d61ae7cf6cdf3939c63dffed50a313f3ca0b0be6310106d47f41e0915"
 dependencies = [
- "bytes",
  "chrono",
  "futures",
  "jsonschema",
@@ -3978,12 +3963,12 @@ checksum = "756daf9b1013ebe47a8776667b466417e2d4c5679d441c26230efd9ef78692db"
 name = "tool-use-basic"
 version = "0.1.0"
 dependencies = [
- "futures",
+ "dotenvy",
  "schemars",
  "serde",
  "swink-agent",
+ "swink-agent-adapters",
  "tokio",
- "tokio-util",
 ]
 
 [[package]]
