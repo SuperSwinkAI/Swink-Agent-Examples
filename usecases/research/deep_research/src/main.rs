@@ -5,7 +5,7 @@
 //!
 //! 1. `orchestrate_research` — breaks the topic into sub-questions.
 //! 2. `research_question`    — researches one question and saves findings
-//!                             as `research/qN.md` via `SaveArtifactTool`.
+//!                             as `research/qN.md` in the shared artifact store.
 //! 3. `synthesize_and_save`  — loads all research artifacts, synthesizes a
 //!                             report, and saves it to the file path the user
 //!                             (or agent) specifies.
@@ -35,7 +35,7 @@ use serde::Deserialize;
 use tokio::sync::Mutex;
 
 use swink_agent::{
-    Agent, AgentOptions, ApprovalMode, FnTool, IntoTool, ModelConnections, SaveArtifactTool,
+    Agent, AgentOptions, ApprovalMode, FnTool, IntoTool, ModelConnections,
     artifact::{
         ArtifactData, ArtifactError, ArtifactMeta, ArtifactStore, ArtifactVersion,
         validate_artifact_name,
@@ -256,29 +256,42 @@ fn make_research_question_tool(
                 None => return swink_agent::AgentToolResult::error("missing artifact_name"),
             };
 
+            // No tools — single-turn prompt, guaranteed text response.
+            // Rust saves to the artifact store directly.
             let options = AgentOptions::from_connections(
                 "You are a research specialist. When given a question, research it thoroughly \
-                 using your knowledge and save your complete, detailed findings using \
-                 save_artifact. Structure findings with: a summary, key points, supporting \
-                 evidence or examples, and implications.",
+                 using your knowledge. Structure your findings with: a summary, key points, \
+                 supporting evidence or examples, and implications. Output the complete \
+                 findings as Markdown and nothing else.",
                 ModelConnections::new(conn, vec![]),
-            )
-            .with_tools(vec![SaveArtifactTool::new(store).into_tool()])
-            .with_state_entry("session_id", SESSION_ID);
+            );
 
             let mut agent = Agent::new(options);
-            match agent
-                .prompt_text(format!(
-                    "Research the following question thoroughly and save your complete findings \
-                     as artifact '{artifact_name}' with content_type 'text/markdown'.\n\n\
-                     Question: {question}"
-                ))
+            let findings = match agent
+                .prompt_text(format!("Research this question thoroughly:\n\n{question}"))
                 .await
             {
+                Ok(result) => result.assistant_text(),
+                Err(e) => return swink_agent::AgentToolResult::error(format!("researcher error: {e}")),
+            };
+
+            if findings.trim().is_empty() {
+                return swink_agent::AgentToolResult::error(format!(
+                    "Researcher returned empty findings for '{artifact_name}'."
+                ));
+            }
+
+            let data = swink_agent::artifact::ArtifactData {
+                content: findings.into_bytes(),
+                content_type: "text/markdown".to_string(),
+                metadata: std::collections::HashMap::new(),
+            };
+
+            match store.save(SESSION_ID, &artifact_name, data).await {
                 Ok(_) => swink_agent::AgentToolResult::text(format!(
                     "Research complete. Findings saved to artifact '{artifact_name}'."
                 )),
-                Err(e) => swink_agent::AgentToolResult::error(format!("researcher error: {e}")),
+                Err(e) => swink_agent::AgentToolResult::error(format!("store save error: {e}")),
             }
         }
     })
