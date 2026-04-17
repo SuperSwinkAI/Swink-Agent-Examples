@@ -32,12 +32,16 @@ struct TurnLimitPolicy {
 
 impl TurnLimitPolicy {
     fn new() -> Self {
-        Self { count: AtomicU32::new(0) }
+        Self {
+            count: AtomicU32::new(0),
+        }
     }
 }
 
 impl PostTurnPolicy for TurnLimitPolicy {
-    fn name(&self) -> &str { "turn_limit" }
+    fn name(&self) -> &str {
+        "turn_limit"
+    }
     fn evaluate(&self, _ctx: &PolicyContext<'_>, _turn: &TurnPolicyContext<'_>) -> PolicyVerdict {
         let n = self.count.fetch_add(1, Ordering::SeqCst) + 1;
         if n >= MAX_TURNS {
@@ -76,7 +80,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Extract web tools directly to avoid the `web.` namespace prefix that
     // `with_plugin()` adds — Anthropic's API rejects dots in tool names.
     let web_plugin = WebPlugin::from_config(
-        WebPlugin::builder().with_max_content_length(50_000).build(),
+        WebPlugin::builder()
+            .with_max_content_length(500_000)
+            .build(),
     )?;
     let mut tools = builtin_tools();
     // Only add search and fetch — extract and screenshot require Playwright.
@@ -105,13 +111,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         AgentEvent::BeforeLlmCall { messages, .. } => {
             println!("  [thinking] ({} messages)...", messages.len());
         }
-        AgentEvent::ToolExecutionStart { name, arguments, .. } => {
+        AgentEvent::ToolExecutionStart {
+            name, arguments, ..
+        } => {
             // For write_file show the path; for search show the query; others just name.
             if name == "write_file" {
-                let path = arguments.get("path").and_then(|v| v.as_str()).unwrap_or("?");
+                let path = arguments
+                    .get("path")
+                    .and_then(|v| v.as_str())
+                    .unwrap_or("?");
                 println!("  [tool] write_file → {path}");
             } else if name == "search" {
-                let q = arguments.get("query").and_then(|v| v.as_str()).unwrap_or("?");
+                let q = arguments
+                    .get("query")
+                    .and_then(|v| v.as_str())
+                    .unwrap_or("?");
                 println!("  [tool] search: {q}");
             } else if name == "fetch" {
                 let url = arguments.get("url").and_then(|v| v.as_str()).unwrap_or("?");
@@ -120,7 +134,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 println!("  [tool] {name}");
             }
         }
-        AgentEvent::ToolExecutionEnd { name, is_error, result, .. } => {
+        AgentEvent::ToolExecutionEnd {
+            name,
+            is_error,
+            result,
+            ..
+        } => {
             if is_error {
                 let msg = swink_agent::ContentBlock::extract_text(&result.content);
                 println!("  [tool] {name} failed: {msg}");
@@ -128,11 +147,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 println!("  [tool] write_file ✓");
             }
         }
-        AgentEvent::MessageUpdate { delta } => {
-            if let swink_agent::AssistantMessageDelta::Text { delta: text, .. } = delta {
-                print!("{text}");
-                let _ = std::io::Write::flush(&mut std::io::stdout());
-            }
+        AgentEvent::MessageUpdate {
+            delta: swink_agent::AssistantMessageDelta::Text { delta: text, .. },
+        } => {
+            print!("{text}");
+            let _ = std::io::Write::flush(&mut std::io::stdout());
         }
         AgentEvent::MessageEnd { .. } => {
             println!();

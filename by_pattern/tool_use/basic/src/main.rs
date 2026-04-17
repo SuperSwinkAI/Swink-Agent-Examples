@@ -9,15 +9,14 @@
 
 use schemars::JsonSchema;
 use serde::Deserialize;
-use swink_agent::prelude::*;
 use swink_agent::ToolApproval;
+use swink_agent::prelude::*;
 use swink_agent_adapters::build_remote_connection_for_model;
 
 // ─── Custom tool params ─────────────────────────────────────────────────────
 
 /// Parameters for the `get_weather` custom tool.
 #[derive(Deserialize, JsonSchema)]
-#[allow(dead_code)]
 struct GetWeatherParams {
     /// The city to look up weather for (e.g. "Austin").
     city: String,
@@ -37,16 +36,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut tools = builtin_tools();
 
     // Step 1b: Create a custom tool using `FnTool` — no need to implement `AgentTool` manually.
+    // `with_execute_typed::<T, _, _>` derives the schema from `T` and deserializes
+    // incoming JSON into `T` before the closure runs. Invalid JSON returns
+    // `AgentToolResult::error("invalid parameters: ...")` automatically — no
+    // `with_schema_for` or manual `params["…"]` lookups needed.
     let weather = FnTool::new(
         "get_weather",
         "Weather",
         "Get the current weather for a city.",
     )
-    .with_schema_for::<GetWeatherParams>()
-    .with_execute_simple(|params, _cancel| async move {
-        let city = params["city"].as_str().unwrap_or("unknown");
+    .with_execute_typed::<GetWeatherParams, _, _>(|params, _cancel| async move {
         // In a real application this would call a weather API.
-        AgentToolResult::text(format!("72°F and sunny in {city}"))
+        AgentToolResult::text(format!("72°F and sunny in {}", params.city))
     })
     .into_tool();
 

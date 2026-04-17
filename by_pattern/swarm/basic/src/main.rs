@@ -54,7 +54,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         loop {
             let agent_ref = registry
                 .get(&current)
-                .unwrap_or_else(|| panic!("agent '{current}' not registered"));
+                .ok_or_else(|| format!("agent '{current}' not registered"))?;
             let mut agent = agent_ref.lock().await;
 
             let result = agent

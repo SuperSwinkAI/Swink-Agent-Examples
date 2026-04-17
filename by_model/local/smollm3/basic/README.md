@@ -43,3 +43,18 @@ Enable Metal (macOS) or CUDA acceleration:
 cargo run --features metal
 cargo run --features cuda
 ```
+
+### Note on Metal coverage
+
+`--features metal` compiles and loads the Metal backend, but SmolLM3's
+architecture uses a fused Gated Delta Net attention variant that does not yet
+have Metal kernels in the bundled llama.cpp. Runtime logs will show the KV
+cache allocated on CPU:
+
+```text
+llama_kv_cache:        CPU KV buffer size =   576.00 MiB
+```
+
+This is expected — the model still runs end-to-end, just without KV-cache
+acceleration on Metal. The Gemma 4 examples under `by_model/local/gemma4-*`
+are fully Metal-accelerated if you need that.

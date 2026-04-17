@@ -13,10 +13,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .ok_or("gemma4_e4b not found in catalog")?;
     let model_spec = preset.model_spec();
     let model = LocalModel::from_preset(ModelPreset::Gemma4E4B);
-    let connection = ModelConnection::new(
-        model_spec,
-        Arc::new(LocalStreamFn::new(Arc::new(model))),
-    );
+    let connection =
+        ModelConnection::new(model_spec, Arc::new(LocalStreamFn::new(Arc::new(model))));
 
     let connections = ModelConnections::new(connection, vec![]);
     let options = AgentOptions::from_connections(

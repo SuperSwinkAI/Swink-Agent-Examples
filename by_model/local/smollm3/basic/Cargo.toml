@@ -10,6 +10,6 @@ metal = ["swink-agent-local-llm/metal"]
 cuda = ["swink-agent-local-llm/cuda"]
 
 [dependencies]
-swink-agent = "0"
-swink-agent-local-llm = "0"
+swink-agent = "0.7"
+swink-agent-local-llm = "0.7"
 tokio = { version = "1", features = ["full"] }

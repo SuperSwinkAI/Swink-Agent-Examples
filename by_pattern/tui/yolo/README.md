@@ -28,3 +28,18 @@ cargo run
 | `Ctrl+Z` | Abort running generation |
 | `Esc` | Cancel / close overlay |
 | `↑ / ↓` | Scroll conversation |
+
+## Smoke test
+
+Because the whole point of this example is that approvals are bypassed, the
+smoke test needs to exercise a tool call that would normally prompt and
+confirm that it *doesn't*.
+
+1. `cargo run` — chat pane renders.
+2. Type `create a file called hello.txt with the contents "hi" in the current
+   directory, then list the directory with bash`. Press `Enter`.
+3. The agent should call `write_file` and `bash` back-to-back with **no
+   approval modal** appearing between them. If a modal pops, the
+   `ApprovalMode::Bypassed` wiring regressed (see upstream #565 for history).
+4. Verify `hello.txt` exists in the working directory after quitting (`Ctrl+C`
+   / `:q`).
