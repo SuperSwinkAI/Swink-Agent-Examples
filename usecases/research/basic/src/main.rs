@@ -15,7 +15,9 @@
 //! - `ANTHROPIC_API_KEY` in environment or `.env` file
 
 use dotenvy::dotenv;
-use swink_agent::{Agent, AgentOptions, ModelConnections, Plugin, ToolApproval, builtin_tools};
+use swink_agent::{
+    Agent, AgentEvent, AgentOptions, ModelConnections, Plugin, ToolApproval, builtin_tools,
+};
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_plugin_web::WebPlugin;
 
@@ -63,10 +65,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         ModelConnections::new(connection, vec![]),
     )
     .with_tools(tools)
-    .with_approve_tool_async(|req| async move {
-        println!("  [tool] {}", req.tool_name);
-        ToolApproval::Approved
-    });
+    .with_event_forwarder(|event| match event {
+        AgentEvent::BeforeLlmCall { messages, .. } => {
+            println!("  [thinking] ({} messages so far)...", messages.len());
+        }
+        AgentEvent::ToolExecutionStart { name, .. } => {
+            println!("  [tool] {name}");
+        }
+        AgentEvent::ToolExecutionEnd { name, is_error, .. } => {
+            if is_error {
+                println!("  [tool] {name} — error");
+            }
+        }
+        _ => {}
+    })
+    .with_approve_tool_async(|_req| async move { ToolApproval::Approved });
 
     let mut agent = Agent::new(options);
 
