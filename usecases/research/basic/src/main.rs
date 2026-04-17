@@ -76,7 +76,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Extract web tools directly to avoid the `web.` namespace prefix that
     // `with_plugin()` adds — Anthropic's API rejects dots in tool names.
     let web_plugin = WebPlugin::from_config(
-        WebPlugin::builder().with_max_content_length(100_000).build(),
+        WebPlugin::builder().with_max_content_length(50_000).build(),
     )?;
     let mut tools = builtin_tools();
     // Only add search and fetch — extract and screenshot require Playwright.
@@ -90,13 +90,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let connection = build_remote_connection_for_model(MODEL)?;
     let options = AgentOptions::from_connections(
         "You are a research assistant. Follow these steps exactly:\n\
-         1. Run 2–3 web searches on the topic.\n\
-         2. Fetch the 2–3 most relevant URLs. If a fetch fails, skip it — do NOT retry.\n\
-         3. Using whatever content you successfully fetched, write a comprehensive \
-            Markdown report with: an executive summary, key findings with source \
-            citations, and a conclusion.\n\
-         4. Call write_file ONCE with the complete report. Do not loop back to search \
-            or fetch after this step. Writing the file is your final action.",
+         1. Run one web search on the topic.\n\
+         2. Pick the single most relevant URL from the results and fetch it. \
+            If it fails, try one alternative — then stop trying.\n\
+         3. Write a comprehensive Markdown report from that source: \
+            executive summary, key findings with a citation, and a conclusion.\n\
+         4. Call write_file ONCE with the complete report. \
+            That is your final action — do not search or fetch again.",
         ModelConnections::new(connection, vec![]),
     )
     .with_tools(tools)
