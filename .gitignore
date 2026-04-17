@@ -20,6 +20,9 @@ debug/
 .DS_Store
 Thumbs.db
 
+# Claude Code
+.claude/
+
 # IDE
 .idea/
 .vscode/
