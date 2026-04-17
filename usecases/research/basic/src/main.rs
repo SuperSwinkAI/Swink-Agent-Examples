@@ -72,9 +72,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         AgentEvent::ToolExecutionStart { name, .. } => {
             println!("  [tool] {name}");
         }
-        AgentEvent::ToolExecutionEnd { name, is_error, .. } => {
+        AgentEvent::ToolExecutionEnd { name, is_error, result, .. } => {
             if is_error {
-                println!("  [tool] {name} — error");
+                let msg = swink_agent::ContentBlock::extract_text(&result.content);
+                println!("  [tool] {name} — error: {msg}");
             }
         }
         _ => {}
