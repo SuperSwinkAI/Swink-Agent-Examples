@@ -14,12 +14,40 @@
 //!
 //! - `ANTHROPIC_API_KEY` in environment or `.env` file
 
+use std::sync::atomic::{AtomicU32, Ordering};
+
 use dotenvy::dotenv;
 use swink_agent::{
-    Agent, AgentEvent, AgentOptions, ApprovalMode, ModelConnections, Plugin, builtin_tools,
+    Agent, AgentEvent, AgentOptions, ApprovalMode, ModelConnections, Plugin, PolicyContext,
+    PolicyVerdict, PostTurnPolicy, TurnPolicyContext, builtin_tools,
 };
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_plugin_web::WebPlugin;
+
+const MAX_TURNS: u32 = 12;
+
+struct TurnLimitPolicy {
+    count: AtomicU32,
+}
+
+impl TurnLimitPolicy {
+    fn new() -> Self {
+        Self { count: AtomicU32::new(0) }
+    }
+}
+
+impl PostTurnPolicy for TurnLimitPolicy {
+    fn name(&self) -> &str { "turn_limit" }
+    fn evaluate(&self, _ctx: &PolicyContext<'_>, _turn: &TurnPolicyContext<'_>) -> PolicyVerdict {
+        let n = self.count.fetch_add(1, Ordering::SeqCst) + 1;
+        if n >= MAX_TURNS {
+            eprintln!("  [limit] max turns ({MAX_TURNS}) reached — stopping");
+            PolicyVerdict::Stop(format!("turn limit {MAX_TURNS} reached"))
+        } else {
+            PolicyVerdict::Continue
+        }
+    }
+}
 
 const MODEL: &str = "claude-sonnet-4-6";
 
@@ -53,18 +81,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let connection = build_remote_connection_for_model(MODEL)?;
     let options = AgentOptions::from_connections(
-        "You are a research assistant. When given a topic:\n\
-         1. Use search to find relevant sources (2–4 searches).\n\
-         2. Use fetch on the most promising URLs to read their content.\n\
-         3. Synthesize findings into a well-structured Markdown report with:\n\
-            - An executive summary\n\
-            - Key findings (with source citations as inline links)\n\
-            - A conclusion\n\
-         4. Write the COMPLETE report to the file path given in the prompt \
-            using write_file. Do not truncate or summarise — write everything.",
+        "You are a research assistant. Follow these steps exactly:\n\
+         1. Run 2–3 web searches on the topic.\n\
+         2. Fetch the 3–4 most relevant URLs. If a fetch fails, skip it — do NOT retry.\n\
+         3. Using whatever content you successfully fetched, write a comprehensive \
+            Markdown report with: an executive summary, key findings with source \
+            citations, and a conclusion.\n\
+         4. Call write_file ONCE with the complete report. Do not loop back to search \
+            or fetch after this step. Writing the file is your final action.",
         ModelConnections::new(connection, vec![]),
     )
     .with_tools(tools)
+    .with_post_turn_policy(TurnLimitPolicy::new())
     .with_event_forwarder(|event| match event {
         AgentEvent::BeforeLlmCall { messages, .. } => {
             println!("  [thinking] ({} messages so far)...", messages.len());
