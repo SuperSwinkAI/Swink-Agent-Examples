@@ -75,7 +75,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Extract web tools directly to avoid the `web.` namespace prefix that
     // `with_plugin()` adds — Anthropic's API rejects dots in tool names.
-    let web_plugin = WebPlugin::new()?;
+    let web_plugin = WebPlugin::from_config(
+        WebPlugin::builder().with_max_content_length(500_000).build(),
+    )?;
     let mut tools = builtin_tools();
     tools.extend(web_plugin.tools());
 
