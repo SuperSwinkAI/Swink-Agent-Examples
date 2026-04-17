@@ -301,10 +301,16 @@ fn make_synthesize_tool(
         let conn = connection.clone();
         let store = Arc::clone(&store);
         async move {
-            let report_path = match params["report_path"].as_str() {
-                Some(p) => p.to_string(),
+            let report_name = match params["report_path"].as_str() {
+                Some(p) => std::path::Path::new(p)
+                    .file_name()
+                    .and_then(|n| n.to_str())
+                    .unwrap_or(p)
+                    .to_string(),
                 None => return swink_agent::AgentToolResult::error("missing report_path"),
             };
+            let home = std::env::var("HOME").unwrap_or_else(|_| ".".to_string());
+            let report_path = format!("{home}/{report_name}");
 
             // The synthesizer loads all research artifacts, writes the report,
             // then writes it to disk directly via write_file.
