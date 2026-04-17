@@ -79,7 +79,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         WebPlugin::builder().with_max_content_length(500_000).build(),
     )?;
     let mut tools = builtin_tools();
-    tools.extend(web_plugin.tools());
+    // Only add search and fetch — extract and screenshot require Playwright.
+    tools.extend(
+        web_plugin
+            .tools()
+            .into_iter()
+            .filter(|t| matches!(t.name(), "search" | "fetch")),
+    );
 
     let connection = build_remote_connection_for_model(MODEL)?;
     let options = AgentOptions::from_connections(
