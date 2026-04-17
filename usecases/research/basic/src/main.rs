@@ -76,7 +76,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Extract web tools directly to avoid the `web.` namespace prefix that
     // `with_plugin()` adds — Anthropic's API rejects dots in tool names.
     let web_plugin = WebPlugin::from_config(
-        WebPlugin::builder().with_max_content_length(500_000).build(),
+        WebPlugin::builder().with_max_content_length(100_000).build(),
     )?;
     let mut tools = builtin_tools();
     // Only add search and fetch — extract and screenshot require Playwright.
@@ -91,7 +91,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let options = AgentOptions::from_connections(
         "You are a research assistant. Follow these steps exactly:\n\
          1. Run 2–3 web searches on the topic.\n\
-         2. Fetch the 3–4 most relevant URLs. If a fetch fails, skip it — do NOT retry.\n\
+         2. Fetch the 2–3 most relevant URLs. If a fetch fails, skip it — do NOT retry.\n\
          3. Using whatever content you successfully fetched, write a comprehensive \
             Markdown report with: an executive summary, key findings with source \
             citations, and a conclusion.\n\
