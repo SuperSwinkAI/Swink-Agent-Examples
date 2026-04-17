@@ -36,7 +36,6 @@ use tokio::sync::Mutex;
 
 use swink_agent::{
     Agent, AgentOptions, ApprovalMode, FnTool, IntoTool, ModelConnections, SaveArtifactTool,
-    artifact_tools,
     artifact::{
         ArtifactData, ArtifactError, ArtifactMeta, ArtifactStore, ArtifactVersion,
         validate_artifact_name,
@@ -312,29 +311,48 @@ fn make_synthesize_tool(
             let home = std::env::var("HOME").unwrap_or_else(|_| ".".to_string());
             let report_path = format!("{home}/{report_name}");
 
-            // The synthesizer loads all research artifacts and returns the report
-            // as its text response — Rust writes it to disk directly.
-            let tools = artifact_tools(Arc::clone(&store));
+            // Load all research artifacts directly in Rust — no tool calls needed.
+            // This gives the synthesizer a clean single-turn prompt with all content
+            // inline, guaranteeing a text response (no tool-result ending the turn).
+            let artifact_metas = match store.list(SESSION_ID).await {
+                Ok(m) => m,
+                Err(e) => {
+                    return swink_agent::AgentToolResult::error(format!(
+                        "artifact store list error: {e}"
+                    ))
+                }
+            };
 
+            if artifact_metas.is_empty() {
+                return swink_agent::AgentToolResult::error(
+                    "No research artifacts found. Run research_question steps first.",
+                );
+            }
+
+            let mut research_content = String::new();
+            for meta in &artifact_metas {
+                if let Ok(Some((data, _ver))) = store.load(SESSION_ID, &meta.name).await {
+                    let text = String::from_utf8_lossy(&data.content);
+                    research_content
+                        .push_str(&format!("\n\n## Artifact: {}\n\n{text}", meta.name));
+                }
+            }
+
+            // Single-turn, no-tools agent — assistant_text() is always populated.
             let options = AgentOptions::from_connections(
-                "You are a research synthesizer. Follow these steps in order:\n\
-                 1. Call list_artifacts to see all available research.\n\
-                 2. Call load_artifact for each research artifact (load them all).\n\
-                 3. Write a comprehensive, well-structured Markdown report integrating \
-                    all findings. The report must include: an executive summary, detailed \
-                    findings per sub-question, a synthesis section, and a conclusion.\n\
-                 4. Output the COMPLETE report as your final response — do not truncate it.",
+                "You are a research synthesizer. Write a comprehensive, well-structured \
+                 Markdown report from the research provided. Include: an executive summary, \
+                 detailed findings per sub-question, a synthesis section, and a conclusion. \
+                 Output the complete report and nothing else.",
                 ModelConnections::new(conn, vec![]),
-            )
-            .with_tools(tools)
-            .with_state_entry("session_id", SESSION_ID)
-            .with_approval_mode(ApprovalMode::Bypassed);
+            );
 
             let mut agent = Agent::new(options);
             let synthesis_text = match agent
-                .prompt_text(
-                    "Load all research artifacts, then output the complete synthesized report.",
-                )
+                .prompt_text(format!(
+                    "Here is the collected research:\n{research_content}\n\n\
+                     Write the complete synthesized report now."
+                ))
                 .await
             {
                 Ok(result) => result.assistant_text(),
@@ -343,22 +361,21 @@ fn make_synthesize_tool(
                 }
             };
 
-            // Write whatever the agent produced directly to disk.
-            if !synthesis_text.trim().is_empty() {
-                return match std::fs::write(&report_path, &synthesis_text) {
-                    Ok(()) => swink_agent::AgentToolResult::text(format!(
-                        "Report saved to `{report_path}` ({} bytes).",
-                        synthesis_text.len()
-                    )),
-                    Err(e) => swink_agent::AgentToolResult::error(format!(
-                        "Could not write '{report_path}': {e}"
-                    )),
-                };
+            if synthesis_text.trim().is_empty() {
+                return swink_agent::AgentToolResult::error(
+                    "Synthesizer returned an empty response.",
+                );
             }
 
-            swink_agent::AgentToolResult::error(
-                "Synthesizer returned an empty response. Try running synthesize_and_save again.",
-            )
+            match std::fs::write(&report_path, &synthesis_text) {
+                Ok(()) => swink_agent::AgentToolResult::text(format!(
+                    "Report saved to `{report_path}` ({} bytes).",
+                    synthesis_text.len()
+                )),
+                Err(e) => swink_agent::AgentToolResult::error(format!(
+                    "Could not write '{report_path}': {e}"
+                )),
+            }
         }
     })
 }
