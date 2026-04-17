@@ -103,16 +103,39 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .with_post_turn_policy(TurnLimitPolicy::new())
     .with_event_forwarder(|event| match event {
         AgentEvent::BeforeLlmCall { messages, .. } => {
-            println!("  [thinking] ({} messages so far)...", messages.len());
+            println!("  [thinking] ({} messages)...", messages.len());
         }
-        AgentEvent::ToolExecutionStart { name, .. } => {
-            println!("  [tool] {name}");
+        AgentEvent::ToolExecutionStart { name, arguments, .. } => {
+            // For write_file show the path; for search show the query; others just name.
+            if name == "write_file" {
+                let path = arguments.get("path").and_then(|v| v.as_str()).unwrap_or("?");
+                println!("  [tool] write_file → {path}");
+            } else if name == "search" {
+                let q = arguments.get("query").and_then(|v| v.as_str()).unwrap_or("?");
+                println!("  [tool] search: {q}");
+            } else if name == "fetch" {
+                let url = arguments.get("url").and_then(|v| v.as_str()).unwrap_or("?");
+                println!("  [tool] fetch: {url}");
+            } else {
+                println!("  [tool] {name}");
+            }
         }
         AgentEvent::ToolExecutionEnd { name, is_error, result, .. } => {
             if is_error {
                 let msg = swink_agent::ContentBlock::extract_text(&result.content);
-                println!("  [tool] {name} — error: {msg}");
+                println!("  [tool] {name} failed: {msg}");
+            } else if name == "write_file" {
+                println!("  [tool] write_file ✓");
             }
+        }
+        AgentEvent::MessageUpdate { delta } => {
+            if let swink_agent::AssistantMessageDelta::Text { delta: text, .. } = delta {
+                print!("{text}");
+                let _ = std::io::Write::flush(&mut std::io::stdout());
+            }
+        }
+        AgentEvent::MessageEnd { .. } => {
+            println!();
         }
         _ => {}
     })
@@ -130,6 +153,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         ))
         .await?;
 
-    println!("{}", result.assistant_text());
+    if result.error.is_some() {
+        eprintln!("  [error] {:?}", result.error);
+    }
     Ok(())
 }
