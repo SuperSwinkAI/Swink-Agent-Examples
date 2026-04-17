@@ -16,7 +16,7 @@
 
 use dotenvy::dotenv;
 use swink_agent::{
-    Agent, AgentEvent, AgentOptions, ModelConnections, Plugin, ToolApproval, builtin_tools,
+    Agent, AgentEvent, AgentOptions, ApprovalMode, ModelConnections, Plugin, builtin_tools,
 };
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_plugin_web::WebPlugin;
@@ -80,7 +80,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         _ => {}
     })
-    .with_approve_tool_async(|_req| async move { ToolApproval::Approved });
+    .with_approval_mode(ApprovalMode::Bypassed);
 
     let mut agent = Agent::new(options);
 
