@@ -36,7 +36,7 @@ use tokio::sync::Mutex;
 
 use swink_agent::{
     Agent, AgentOptions, ApprovalMode, FnTool, IntoTool, ModelConnections, SaveArtifactTool,
-    artifact_tools,
+    artifact_tools, builtin_tools,
     artifact::{
         ArtifactData, ArtifactError, ArtifactMeta, ArtifactStore, ArtifactVersion,
         validate_artifact_name,
@@ -306,54 +306,38 @@ fn make_synthesize_tool(
                 None => return swink_agent::AgentToolResult::error("missing report_path"),
             };
 
-            // Run the synthesizer agent — it uses list/load/save artifact tools
-            // to gather all research and produce report/final.md.
+            // The synthesizer loads all research artifacts, writes the report,
+            // then writes it to disk directly via write_file.
+            let mut tools = builtin_tools();
+            tools.extend(artifact_tools(Arc::clone(&store)));
+
             let options = AgentOptions::from_connections(
-                "You are a research synthesizer. Follow these steps:\n\
+                "You are a research synthesizer. Follow these steps in order:\n\
                  1. Call list_artifacts to see all available research.\n\
                  2. Call load_artifact for each research artifact.\n\
                  3. Write a comprehensive, well-structured report integrating all findings.\n\
-                 4. Save the report as artifact 'report/final.md' with content_type \
-                    'text/markdown'.\n\
+                 4. Save the report as artifact 'report/final.md' with content_type 'text/markdown'.\n\
+                 5. Write the report to disk at the path specified in the prompt using write_file.\n\
                  The report must have: an executive summary, detailed findings per \
                  sub-question, a synthesis section, and a conclusion.",
                 ModelConnections::new(conn, vec![]),
             )
-            .with_tools(artifact_tools(Arc::clone(&store)))
+            .with_tools(tools)
             .with_state_entry("session_id", SESSION_ID);
 
             let mut agent = Agent::new(options);
-            let prompt_result = agent
-                .prompt_text(
-                    "Use the artifact tools to load all research findings, then synthesize \
-                     and save a final integrated report as 'report/final.md'."
-                        .to_string(),
-                )
-                .await;
-
-            if let Err(e) = prompt_result {
-                return swink_agent::AgentToolResult::error(format!("synthesizer error: {e}"));
-            }
-
-            // Load the synthesized report from the artifact store and write to disk.
-            match store.load(SESSION_ID, "report/final.md").await {
-                Ok(Some((data, version))) => {
-                    let content = String::from_utf8_lossy(&data.content).into_owned();
-                    match std::fs::write(&report_path, &content) {
-                        Ok(()) => swink_agent::AgentToolResult::text(format!(
-                            "Report saved to `{report_path}` ({} bytes, artifact v{}).",
-                            version.size, version.version
-                        )),
-                        Err(e) => swink_agent::AgentToolResult::error(format!(
-                            "Could not write file '{report_path}': {e}"
-                        )),
-                    }
-                }
-                Ok(None) => swink_agent::AgentToolResult::error(
-                    "Synthesizer did not produce 'report/final.md'. \
-                     Try running synthesize_and_save again.",
-                ),
-                Err(e) => swink_agent::AgentToolResult::error(format!("artifact store error: {e}")),
+            match agent
+                .prompt_text(format!(
+                    "Load all research artifacts, synthesize a final integrated report, \
+                     save it as artifact 'report/final.md', then write it to disk at '{report_path}' \
+                     using write_file."
+                ))
+                .await
+            {
+                Ok(_) => swink_agent::AgentToolResult::text(format!(
+                    "Report saved to `{report_path}`."
+                )),
+                Err(e) => swink_agent::AgentToolResult::error(format!("synthesizer error: {e}")),
             }
         }
     })
