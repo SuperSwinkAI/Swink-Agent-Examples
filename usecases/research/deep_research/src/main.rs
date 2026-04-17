@@ -323,7 +323,8 @@ fn make_synthesize_tool(
                 ModelConnections::new(conn, vec![]),
             )
             .with_tools(tools)
-            .with_state_entry("session_id", SESSION_ID);
+            .with_state_entry("session_id", SESSION_ID)
+            .with_approval_mode(ApprovalMode::Bypassed);
 
             let mut agent = Agent::new(options);
             match agent
