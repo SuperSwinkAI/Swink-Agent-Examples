@@ -1,0 +1,12 @@
+[package]
+name = "openai-compat-multi"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+publish = false
+
+[dependencies]
+swink-agent = "0.7"
+swink-agent-adapters = { version = "0.7", features = ["openai", "azure", "xai"] }
+tokio = { version = "1", features = ["full"] }
+dotenvy = "0.15"

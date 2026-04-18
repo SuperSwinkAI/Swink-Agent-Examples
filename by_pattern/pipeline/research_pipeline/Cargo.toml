@@ -1,0 +1,14 @@
+[package]
+name = "pipeline-research"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+publish = false
+
+[dependencies]
+swink-agent = "0.7"
+swink-agent-adapters = { version = "0.7", features = ["anthropic"] }
+swink-agent-patterns = "0.7"
+tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
+dotenvy = "0.15"

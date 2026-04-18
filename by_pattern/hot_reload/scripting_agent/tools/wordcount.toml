@@ -1,0 +1,11 @@
+name = "wordcount"
+description = "Count the number of words in a string"
+command = "echo {text} | wc -w"
+
+[parameters_schema]
+type = "object"
+required = ["text"]
+
+[parameters_schema.properties.text]
+type = "string"
+description = "The text to count words in"

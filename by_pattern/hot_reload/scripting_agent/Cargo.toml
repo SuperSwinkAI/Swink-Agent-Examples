@@ -1,0 +1,14 @@
+[package]
+name = "hot-reload-scripting-agent"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+publish = false
+
+[dependencies]
+swink-agent = { version = "0.7", features = ["hot-reload"] }
+swink-agent-adapters = { version = "0.7", features = ["anthropic"] }
+swink-agent-policies = { version = "0.7", features = ["sandbox"] }
+tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
+dotenvy = "0.15"
