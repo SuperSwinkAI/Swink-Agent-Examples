@@ -62,60 +62,6 @@ impl MetricsCollector for PrintMetrics {
     }
 }
 
-// ─── TiktokenCounter ─────────────────────────────────────────────────────────
-
-struct TiktokenCounter(tiktoken_rs::CoreBPE);
-
-impl TokenCounter for TiktokenCounter {
-    fn count_tokens(&self, message: &AgentMessage) -> usize {
-        // Extract all text from the message and count tokens.
-        match message {
-            AgentMessage::Llm(llm_msg) => {
-                let text: String = match llm_msg {
-                    LlmMessage::User(m) => m
-                        .content
-                        .iter()
-                        .filter_map(|b| {
-                            if let ContentBlock::Text { text } = b {
-                                Some(text.as_str())
-                            } else {
-                                None
-                            }
-                        })
-                        .collect::<Vec<_>>()
-                        .join(" "),
-                    LlmMessage::Assistant(m) => m
-                        .content
-                        .iter()
-                        .filter_map(|b| {
-                            if let ContentBlock::Text { text } = b {
-                                Some(text.as_str())
-                            } else {
-                                None
-                            }
-                        })
-                        .collect::<Vec<_>>()
-                        .join(" "),
-                    LlmMessage::ToolResult(m) => m
-                        .content
-                        .iter()
-                        .filter_map(|b| {
-                            if let ContentBlock::Text { text } = b {
-                                Some(text.as_str())
-                            } else {
-                                None
-                            }
-                        })
-                        .collect::<Vec<_>>()
-                        .join(" "),
-                };
-                self.0.encode_with_special_tokens(&text).len()
-            }
-            AgentMessage::Custom(_) => 100,
-        }
-    }
-}
-
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 #[tokio::main]
@@ -145,7 +91,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .with_metrics_collector(PrintMetrics {
         turn_count: AtomicU32::new(0),
     })
-    .with_token_counter(TiktokenCounter(tiktoken_rs::cl100k_base()?));
+    .with_token_counter(TiktokenCounter::cl100k()?);
 
     let mut agent = Agent::new(options);
 

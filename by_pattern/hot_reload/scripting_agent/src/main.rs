@@ -20,7 +20,6 @@
 use std::time::Duration;
 
 use swink_agent::hot_reload::ToolWatcher;
-use swink_agent::ApprovalMode;
 use swink_agent::prelude::*;
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_policies::SandboxPolicy;

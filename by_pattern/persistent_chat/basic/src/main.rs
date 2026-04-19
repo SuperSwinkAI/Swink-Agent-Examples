@@ -55,15 +55,12 @@ impl InlineCheckpointStore {
 }
 
 impl CheckpointStore for InlineCheckpointStore {
-    fn save_checkpoint(&self, checkpoint: &Checkpoint) -> CheckpointFuture<'_, ()> {
-        // Clone data out of the reference before entering the async block so
-        // the future does not borrow `checkpoint` across the await point.
-        let cp = checkpoint.clone();
+    fn save_checkpoint(&self, checkpoint: Checkpoint) -> CheckpointFuture<'_, ()> {
         Box::pin(async move {
             *self
                 .checkpoint
                 .lock()
-                .map_err(|e| io::Error::other(e.to_string()))? = Some(cp);
+                .map_err(|e| io::Error::other(e.to_string()))? = Some(checkpoint);
             Ok(())
         })
     }

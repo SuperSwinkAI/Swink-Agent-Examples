@@ -14,7 +14,7 @@
 use std::sync::Arc;
 
 use swink_agent::prelude::*;
-use swink_agent::{ApprovalMode, MetricsFuture, ToolMiddleware, TurnMetrics};
+use swink_agent::{MetricsFuture, TurnMetrics};
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_policies::{
     AuditLogger, BudgetPolicy, ContentFilter, JsonlAuditSink, LoopDetectionPolicy, MaxTurnsPolicy,
@@ -53,7 +53,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "Customer Lookup",
         "Look up a customer record by ID.",
     )
-    .with_execute_simple(|args, _cancel| async move {
+    .with_execute_async(|args, _cancel| async move {
         // Returns data with a fake SSN to exercise PiiRedactor.
         let id = args
             .get("id")

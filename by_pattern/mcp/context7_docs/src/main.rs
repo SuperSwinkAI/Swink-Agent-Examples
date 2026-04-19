@@ -4,7 +4,6 @@
 //! tool_prefix), ToolDenyListPolicy, and AuditLogger.
 
 use swink_agent::prelude::*;
-use swink_agent::ApprovalMode;
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_mcp::{McpManager, McpServerConfig, McpTransport};
 use swink_agent_policies::{AuditLogger, JsonlAuditSink, ToolDenyListPolicy};
@@ -25,6 +24,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         transport: McpTransport::Sse {
             url: "https://mcp.context7.com/mcp".into(),
             bearer_token: Some(context7_token),
+            headers: Default::default(),
         },
         // All tools exposed as ctx7_<original_name>
         tool_prefix: Some("ctx7".into()),

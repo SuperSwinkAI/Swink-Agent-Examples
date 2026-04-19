@@ -6,9 +6,9 @@ rust-version = "1.88"
 publish = false
 
 [dependencies]
-swink-agent = "0.7"
-swink-agent-adapters = { version = "0.7", features = ["anthropic"] }
-swink-agent-memory = "0.7"
+swink-agent = "0.8"
+swink-agent-adapters = { version = "0.8", features = ["anthropic"] }
+swink-agent-memory = "0.8"
 tokio = { version = "1", features = ["full"] }
 dotenvy = "0.15"
 serde_json = "1"

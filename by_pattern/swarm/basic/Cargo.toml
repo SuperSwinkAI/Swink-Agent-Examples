@@ -6,7 +6,7 @@ rust-version = "1.88"
 publish = false
 
 [dependencies]
-swink-agent = { version = "0.7", features = ["transfer"] }
-swink-agent-adapters = { version = "0.7", features = ["anthropic"] }
+swink-agent = { version = "0.8", features = ["transfer"] }
+swink-agent-adapters = { version = "0.8", features = ["anthropic"] }
 tokio = { version = "1", features = ["full"] }
 dotenvy = "0.15"
