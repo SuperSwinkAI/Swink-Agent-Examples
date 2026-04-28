@@ -7,8 +7,10 @@ publish = false
 
 [dependencies]
 swink-agent = "0.9"
-swink-agent-adapters = { version = "0.9", features = ["anthropic", "openai"] }
+swink-agent-adapters = { version = "0.9", features = ["anthropic"] }
+futures = "0.3"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
 tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
 dotenvy = "0.15"
