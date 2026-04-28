@@ -6,7 +6,7 @@ rust-version = "1.88"
 publish = false
 
 [dependencies]
-swink-agent = "0.8"
+swink-agent = "0.9"
 tokio = { version = "1", features = ["full"] }
 tokio-util = "0.7"
 futures = "0.3"

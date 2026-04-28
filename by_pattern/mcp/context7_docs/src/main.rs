@@ -24,12 +24,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         transport: McpTransport::Sse {
             url: "https://mcp.context7.com/mcp".into(),
             bearer_token: Some(context7_token),
+            bearer_auth: None,
             headers: Default::default(),
         },
-        // All tools exposed as ctx7_<original_name>
         tool_prefix: Some("ctx7".into()),
         tool_filter: None,
         requires_approval: false,
+        connect_timeout_ms: None,
+        discovery_timeout_ms: None,
     }]);
     mcp.connect_all().await?;
     let mcp_tools = mcp.tools();

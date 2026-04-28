@@ -6,8 +6,8 @@ rust-version = "1.88"
 publish = false
 
 [dependencies]
-swink-agent = "0.8"
-swink-agent-adapters = { version = "0.8", features = ["anthropic"] }
-swink-agent-tui = { version = "0.8", features = ["cli"] }
+swink-agent = "0.9"
+swink-agent-adapters = { version = "0.9", features = ["anthropic"] }
+swink-agent-tui = { version = "0.9", features = ["cli"] }
 tokio = { version = "1", features = ["full"] }
 dotenvy = "0.15"

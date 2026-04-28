@@ -17,8 +17,6 @@
 //!
 //! - `ANTHROPIC_API_KEY`
 
-use std::time::Duration;
-
 use swink_agent::prelude::*;
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_eval::{
@@ -64,9 +62,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             expected_response: Some(ResponseCriteria::Contains {
                 substring: "4".into(),
             }),
+            expected_assertion: None,
+            expected_interactions: None,
+            few_shot_examples: vec![],
             budget: None,
             evaluators: vec![],
             metadata: serde_json::Value::Null,
+            attachments: vec![],
+            session_id: None,
+            expected_environment_state: None,
+            expected_tool_intent: None,
+            semantic_tool_selection: false,
+            state_capture: None,
         },
         // Case 2: Response must mention a key concept.
         EvalCase {
@@ -79,9 +86,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             expected_response: Some(ResponseCriteria::Contains {
                 substring: "owner".into(),
             }),
+            expected_assertion: None,
+            expected_interactions: None,
+            few_shot_examples: vec![],
             budget: None,
             evaluators: vec![],
             metadata: serde_json::Value::Null,
+            attachments: vec![],
+            session_id: None,
+            expected_environment_state: None,
+            expected_tool_intent: None,
+            semantic_tool_selection: false,
+            state_capture: None,
         },
         // Case 3: Budget-constrained case.
         EvalCase {
@@ -92,14 +108,23 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             user_messages: vec!["Name one planet in our solar system.".into()],
             expected_trajectory: None,
             expected_response: None,
+            expected_assertion: None,
+            expected_interactions: None,
+            few_shot_examples: vec![],
             budget: Some(BudgetConstraints {
                 max_turns: Some(3),
                 max_cost: Some(0.10),
-                max_tokens: Some(10_000),
-                max_duration: Some(Duration::from_secs(60)),
+                max_input: Some(10_000),
+                max_output: None,
             }),
             evaluators: vec![],
             metadata: serde_json::Value::Null,
+            attachments: vec![],
+            session_id: None,
+            expected_environment_state: None,
+            expected_tool_intent: None,
+            semantic_tool_selection: false,
+            state_capture: None,
         },
     ];
 

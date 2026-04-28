@@ -6,10 +6,10 @@ rust-version = "1.88"
 publish = false
 
 [dependencies]
-swink-agent = "0.8"
-swink-agent-adapters = { version = "0.8", features = ["anthropic"] }
-swink-agent-eval = "0.8"
-swink-agent-policies = { version = "0.8", features = ["audit"] }
+swink-agent = "0.9"
+swink-agent-adapters = { version = "0.9", features = ["anthropic"] }
+swink-agent-eval = "0.9"
+swink-agent-policies = { version = "0.9", features = ["audit"] }
 tokio = { version = "1", features = ["full"] }
 tokio-util = "0.7"
 dotenvy = "0.15"
