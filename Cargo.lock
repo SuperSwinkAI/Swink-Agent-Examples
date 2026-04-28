@@ -2474,9 +2474,11 @@ name = "model-fallback-basic"
 version = "0.1.0"
 dependencies = [
  "dotenvy",
+ "futures",
  "swink-agent",
  "swink-agent-adapters",
  "tokio",
+ "tokio-util",
  "tracing",
  "tracing-subscriber",
 ]
