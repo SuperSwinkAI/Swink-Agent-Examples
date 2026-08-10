@@ -34,8 +34,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let tools_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tools");
     println!("[watcher] Watching: {}", tools_dir.display());
 
-    let watcher = ToolWatcher::new(&tools_dir)
-        .map_err(|e| format!("ToolWatcher::new failed: {e}"))?;
+    let watcher =
+        ToolWatcher::new(&tools_dir).map_err(|e| format!("ToolWatcher::new failed: {e}"))?;
     let mut update_rx = watcher.start(ct.clone()).await;
 
     // Step 2: Wait briefly for the initial scan.
@@ -116,9 +116,7 @@ description = "The name of the person to greet"
             "[hot-reload] Tools updated: {} tool(s)",
             updated_tools.len()
         );
-        println!(
-            "[hot-reload] In a real app you would re-create the agent with updated_tools."
-        );
+        println!("[hot-reload] In a real app you would re-create the agent with updated_tools.");
     }
 
     // Wait for background task to finish.

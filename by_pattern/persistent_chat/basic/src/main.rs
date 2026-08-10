@@ -30,8 +30,8 @@ use std::sync::Mutex;
 
 use swink_agent::{
     Agent, AgentEvent, AgentMessage, AgentOptions, Checkpoint, CheckpointFuture, CheckpointStore,
-    ContentBlock, LlmMessage, ModelConnections, SlidingWindowTransformer, SteeringMode,
-    UserMessage, DEFAULT_PLAN_MODE_ADDENDUM,
+    ContentBlock, DEFAULT_PLAN_MODE_ADDENDUM, LlmMessage, ModelConnections,
+    SlidingWindowTransformer, SteeringMode, UserMessage,
 };
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_memory::{JsonlSessionStore, SessionMeta, SessionStore, now_utc};
@@ -109,11 +109,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // ── Session setup ────────────────────────────────────────────────────────
     // Resume an existing session via env var, or create a new one.
-    let session_id = std::env::var("SWINK_SESSION_ID")
-        .unwrap_or_else(|_| JsonlSessionStore::new_session_id());
+    let session_id =
+        std::env::var("SWINK_SESSION_ID").unwrap_or_else(|_| JsonlSessionStore::new_session_id());
 
-    let sessions_dir = JsonlSessionStore::default_dir()
-        .ok_or("could not determine config directory")?;
+    let sessions_dir =
+        JsonlSessionStore::default_dir().ok_or("could not determine config directory")?;
     let store = JsonlSessionStore::new(sessions_dir)?;
 
     // Load previous messages if this session already exists.
@@ -124,14 +124,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
             println!("Starting new session: {session_id}");
-            let meta = SessionMeta {
-                id: session_id.clone(),
-                title: "Persistent chat example".into(),
-                created_at: now_utc(),
-                updated_at: now_utc(),
-                version: 1,
-                sequence: 0,
-            };
+            let meta = SessionMeta::new(
+                session_id.clone(),
+                "Persistent chat example",
+                now_utc(),
+                now_utc(),
+            );
             (meta, Vec::new())
         }
         Err(e) => return Err(e.into()),
@@ -157,11 +155,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .with_checkpoint_store(InlineCheckpointStore::new())
     // Watch for state changes and steering.
     .with_event_forwarder(|event| {
-        if let AgentEvent::StateChanged { delta } = event {
-            if !delta.is_empty() {
-                let keys: Vec<&str> = delta.changes.keys().map(String::as_str).collect();
-                println!("[state-changed] keys: {keys:?}");
-            }
+        if let AgentEvent::StateChanged { delta } = event
+            && !delta.is_empty()
+        {
+            let keys: Vec<&str> = delta.changes.keys().map(String::as_str).collect();
+            println!("[state-changed] keys: {keys:?}");
         }
     });
 
@@ -184,13 +182,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         // After the second prompt, steer the agent with an additional directive.
         if i == 2 {
-            let steering_msg = AgentMessage::Llm(LlmMessage::User(UserMessage {
-                content: vec![ContentBlock::Text {
+            let steering_msg = AgentMessage::Llm(LlmMessage::User(
+                UserMessage::new(vec![ContentBlock::Text {
                     text: "Please keep your summary under 50 words.".to_string(),
-                }],
-                timestamp: 0,
-                cache_hint: None,
-            }));
+                }])
+                .with_timestamp(0),
+            ));
             agent.steer(steering_msg);
             println!("[steering] injected: keep summary under 50 words");
         }

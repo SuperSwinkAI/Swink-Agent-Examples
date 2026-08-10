@@ -98,10 +98,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     to = %to_model.model_id,
                     "Model failover triggered"
                 );
-                println!(
-                    "[FALLOVER] {} → {}",
-                    from_model.model_id, to_model.model_id
-                );
+                println!("[FALLOVER] {} → {}", from_model.model_id, to_model.model_id);
             }
         });
 

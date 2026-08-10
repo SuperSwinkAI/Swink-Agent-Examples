@@ -14,29 +14,31 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // ── 1. Read API keys ─────────────────────────────────────────────────────
 
-    let context7_token = std::env::var("CONTEXT7_API_KEY")
-        .map_err(|_| "CONTEXT7_API_KEY not set")?;
+    let context7_token =
+        std::env::var("CONTEXT7_API_KEY").map_err(|_| "CONTEXT7_API_KEY not set")?;
 
     // ── 2. Connect to Context7 via MCP/SSE ──────────────────────────────────
 
-    let mut mcp = McpManager::new(vec![McpServerConfig {
-        name: "context7".into(),
-        transport: McpTransport::Sse {
-            url: "https://mcp.context7.com/mcp".into(),
-            bearer_token: Some(context7_token),
-            bearer_auth: None,
-            headers: Default::default(),
-        },
-        tool_prefix: Some("ctx7".into()),
-        tool_filter: None,
-        requires_approval: false,
-        connect_timeout_ms: None,
-        discovery_timeout_ms: None,
-    }]);
+    let mut mcp = McpManager::new(vec![
+        McpServerConfig::new(
+            "context7",
+            McpTransport::StreamableHttp {
+                url: "https://mcp.context7.com/mcp".into(),
+                bearer_token: Some(context7_token),
+                bearer_auth: None,
+                headers: Default::default(),
+            },
+        )
+        .with_tool_prefix("ctx7")
+        .with_requires_approval(false),
+    ]);
     mcp.connect_all().await?;
     let mcp_tools = mcp.tools();
 
-    println!("Connected to Context7 — {} tool(s) discovered", mcp_tools.len());
+    println!(
+        "Connected to Context7 — {} tool(s) discovered",
+        mcp_tools.len()
+    );
 
     // ── 3. Build model connection ────────────────────────────────────────────
 

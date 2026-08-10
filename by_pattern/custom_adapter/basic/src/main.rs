@@ -59,14 +59,10 @@ impl StreamFn for DummyStreamFn {
             AssistantMessageEvent::TextEnd { content_index: 0 },
             AssistantMessageEvent::Done {
                 stop_reason: StopReason::Stop,
-                usage: Usage {
-                    input: 10,
-                    output: 5,
-                    cache_read: 0,
-                    cache_write: 0,
-                    total: 15,
-                    ..Default::default()
-                },
+                usage: Usage::default()
+                    .with_input(10)
+                    .with_output(5)
+                    .with_total(15),
                 cost: Cost::default(),
             },
         ];

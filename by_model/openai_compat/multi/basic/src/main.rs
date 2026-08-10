@@ -16,7 +16,9 @@ use swink_agent::{
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    let backend = std::env::args().nth(1).unwrap_or_else(|| "lmstudio".to_string());
+    let backend = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "lmstudio".to_string());
     println!("Backend: {backend}");
 
     let connection: ModelConnection = match backend.as_str() {
@@ -43,8 +45,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             let base_url = std::env::var("LM_STUDIO_BASE_URL")
                 .unwrap_or_else(|_| "http://localhost:1234/v1".to_string());
-            let model_name = std::env::var("LM_STUDIO_MODEL")
-                .unwrap_or_else(|_| "local-model".to_string());
+            let model_name =
+                std::env::var("LM_STUDIO_MODEL").unwrap_or_else(|_| "local-model".to_string());
             let stream_fn = OpenAiStreamFn::new(base_url, "lm-studio");
             let spec = ModelSpec::new("openai", model_name);
             ModelConnection::new(spec, Arc::new(stream_fn))

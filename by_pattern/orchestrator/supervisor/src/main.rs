@@ -19,9 +19,7 @@
 //! retains ownership of all agents and spawns them on demand; callers interact
 //! through `OrchestratedHandle`, not through a shared registry.
 
-use swink_agent::{
-    AgentOptions, AgentOrchestrator, DefaultSupervisor, ModelConnections,
-};
+use swink_agent::{AgentOptions, AgentOrchestrator, DefaultSupervisor, ModelConnections};
 use swink_agent_adapters::build_remote_connection_for_model;
 
 #[tokio::main]

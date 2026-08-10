@@ -73,10 +73,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap_or_else(|_| "http://localhost:4317".into());
     println!("[otel] Sending traces to: {endpoint}");
 
-    let otel_layer = init_otel_layer(OtelInitConfig {
-        service_name: "swink-otel-example".into(),
-        endpoint: Some(endpoint),
-    });
+    let otel_layer =
+        init_otel_layer(OtelInitConfig::new("swink-otel-example").with_endpoint(endpoint))
+            .expect("otel init");
     tracing_subscriber::registry().with(otel_layer).init();
 
     // Step 2: Build connection.
@@ -84,14 +83,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let connections = ModelConnections::new(connection, vec![]);
 
     // Step 3: Build agent with metrics collector and tiktoken counter.
-    let options = AgentOptions::from_connections(
-        "You are a concise and helpful assistant.",
-        connections,
-    )
-    .with_metrics_collector(PrintMetrics {
-        turn_count: AtomicU32::new(0),
-    })
-    .with_token_counter(TiktokenCounter::cl100k()?);
+    let options =
+        AgentOptions::from_connections("You are a concise and helpful assistant.", connections)
+            .with_metrics_collector(PrintMetrics {
+                turn_count: AtomicU32::new(0),
+            })
+            .with_token_counter(TiktokenCounter::cl100k()?);
 
     let mut agent = Agent::new(options);
 

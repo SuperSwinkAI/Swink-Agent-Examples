@@ -68,20 +68,16 @@ fn fetch_weather_tool() -> Arc<dyn swink_agent::AgentTool> {
 }
 
 fn fetch_news_tool() -> Arc<dyn swink_agent::AgentTool> {
-    FnTool::new(
-        "fetch_news",
-        "News",
-        "Fetch the top headlines for a topic.",
-    )
-    .with_execute_typed::<TopicParams, _, _>(|params, _cancel| async move {
-        sleep(Duration::from_millis(500)).await;
-        AgentToolResult::text(format!(
-            "Top {} headlines: (1) Rust 2.0 roadmap published. \
+    FnTool::new("fetch_news", "News", "Fetch the top headlines for a topic.")
+        .with_execute_typed::<TopicParams, _, _>(|params, _cancel| async move {
+            sleep(Duration::from_millis(500)).await;
+            AgentToolResult::text(format!(
+                "Top {} headlines: (1) Rust 2.0 roadmap published. \
              (2) AI chip shortage eases. (3) Open-source LLM beats GPT-4 on benchmarks.",
-            params.topic
-        ))
-    })
-    .into_tool()
+                params.topic
+            ))
+        })
+        .into_tool()
 }
 
 fn fetch_stock_tool() -> Arc<dyn swink_agent::AgentTool> {

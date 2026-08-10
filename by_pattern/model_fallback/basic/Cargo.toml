@@ -6,8 +6,8 @@ rust-version = "1.88"
 publish = false
 
 [dependencies]
-swink-agent = "0.9"
-swink-agent-adapters = { version = "0.9", features = ["anthropic"] }
+swink-agent = "0.12.2"
+swink-agent-adapters = { version = "0.12.2", features = ["anthropic"] }
 futures = "0.3"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }

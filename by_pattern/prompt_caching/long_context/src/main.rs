@@ -19,8 +19,8 @@
 //!
 //! - `ANTHROPIC_API_KEY`
 
-use swink_agent::CacheConfig;
 use swink_agent::AgentEvent;
+use swink_agent::CacheConfig;
 use swink_agent::prelude::*;
 use swink_agent_adapters::build_remote_connection_for_model;
 
@@ -118,7 +118,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             4,
         ))
         .with_event_forwarder(|event| {
-            if let AgentEvent::CacheAction { hint, prefix_tokens } = event {
+            if let AgentEvent::CacheAction {
+                hint,
+                prefix_tokens,
+            } = event
+            {
                 println!("[cache] action={hint:?} prefix_tokens={prefix_tokens}");
             }
         });

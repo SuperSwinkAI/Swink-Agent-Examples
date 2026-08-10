@@ -44,6 +44,7 @@ impl StreamFn for MockStreamFn {
                     error_message: "no more scripted responses".to_string(),
                     error_kind: None,
                     usage: None,
+                    retry_after: None,
                 }]
             } else {
                 responses.remove(0)

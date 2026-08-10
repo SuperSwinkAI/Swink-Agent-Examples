@@ -55,10 +55,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .with_execute_async(|args, _cancel| async move {
         // Returns data with a fake SSN to exercise PiiRedactor.
-        let id = args
-            .get("id")
-            .and_then(|v| v.as_str())
-            .unwrap_or("unknown");
+        let id = args.get("id").and_then(|v| v.as_str()).unwrap_or("unknown");
         AgentToolResult::text(format!(
             "Customer: John Doe, SSN: 555-22-4444, balance: ${id}00"
         ))
@@ -100,7 +97,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .with_tools(vec![logged_tool])
     .with_approval_mode(ApprovalMode::Bypassed)
     // PreTurn policies
-    .with_pre_turn_policy(BudgetPolicy::new().max_cost(1.0))
+    .with_pre_turn_policy(BudgetPolicy::new().with_max_cost(1.0))
     .with_pre_turn_policy(MaxTurnsPolicy::new(10))
     .with_pre_turn_policy(PromptInjectionGuard::new())
     // PostTurn policies

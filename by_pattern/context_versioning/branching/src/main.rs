@@ -123,10 +123,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         );
 
         // Load and print the summary for each version.
-        if let Some(version) = store.load_version(meta.version) {
-            if let Some(summary) = &version.summary {
-                println!("    summary: {summary}");
-            }
+        if let Some(version) = store.load_version(meta.version)
+            && let Some(summary) = &version.summary
+        {
+            println!("    summary: {summary}");
         }
     }
 

@@ -4,7 +4,7 @@
 //!  1. **outline** — generates a 5-point outline for the given topic
 //!  2. **draft**   — writes a 3-paragraph summary from the outline
 //!  3. **critic**  — reviews the draft; loops until output starts with
-//!                   "APPROVED" or the iteration cap (2) is hit
+//!     "APPROVED" or the iteration cap (2) is hit
 //!
 //! Run:
 //!   cargo run -- "the benefits of Rust's type system for systems programming"
@@ -73,17 +73,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Sequential pipeline: outline → draft.
     // Steps reference registered agent names; output from each step is passed
     // as input to the next.
-    let main_pipeline = Pipeline::sequential_with_context(
-        "research",
-        vec!["outline".into(), "draft".into()],
-    );
+    let main_pipeline =
+        Pipeline::sequential_with_context("research", vec!["outline".into(), "draft".into()]);
 
     // Loop pipeline: critic reviews the draft, exiting when the output
     // contains "APPROVED" (case-sensitive prefix) or after 2 iterations.
     let review_loop = Pipeline::loop_with_max(
         "review",
         "critic",
-        ExitCondition::output_contains("APPROVED").map_err(|e| e)?,
+        ExitCondition::output_contains("APPROVED")?,
         2,
     );
 
@@ -108,9 +106,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     for step in &draft_output.steps {
         println!(
             "[{}] {:?} ({} input tokens)",
-            step.agent_name,
-            step.duration,
-            step.usage.input,
+            step.agent_name, step.duration, step.usage.input,
         );
     }
 
