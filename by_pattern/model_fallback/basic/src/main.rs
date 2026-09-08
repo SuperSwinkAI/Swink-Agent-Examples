@@ -69,7 +69,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Primary: always throttled.
     let primary_conn = ModelConnection::new(
-        ModelSpec::new("openai", "gpt-5"),
+        ModelSpec::new("openai", "gpt-5.6-sol"),
         Arc::new(ThrottledStreamFn) as Arc<dyn StreamFn>,
     );
     let connections = ModelConnections::new(primary_conn, vec![]);

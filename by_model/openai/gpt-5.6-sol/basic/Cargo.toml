@@ -1,5 +1,5 @@
 [package]
-name = "openai-gpt5-basic"
+name = "openai-gpt56-sol-basic"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.95"

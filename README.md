@@ -7,7 +7,7 @@ Standalone examples for the [Swink-Agent](https://github.com/SuperSwinkAI/Swink-
 ```
 by_model/                    provider & model-specific examples
   anthropic/haiku/           Claude Haiku (basic + minimal)
-  openai/gpt-5/              OpenAI GPT-5
+  openai/gpt-5.6-sol/        OpenAI GPT-5.6 Sol
   mistral/mistral-large/     Mistral Large
   ollama/llama3/             Ollama (local, no API key)
   local/{gemma4-e2b,         On-device inference via llama.cpp (GGUF)
