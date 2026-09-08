@@ -14,7 +14,7 @@ Two-path example for running Claude on AWS Bedrock via Swink-Agent. The default 
 
 - AWS account with Bedrock model access enabled for `us.anthropic.claude-haiku-4-5-20251001-v1:0`
 - `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` env vars (plus optional `AWS_SESSION_TOKEN`)
-- Rust 1.88+
+- Rust 1.95+
 
 ## Configuration
 

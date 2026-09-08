@@ -13,9 +13,9 @@
 
 | Crate | Version | Notes |
 |---|---|---|
-| `swink-agent` | `0.7` | `Agent`, `AgentOptions`, `ModelConnections` |
-| `swink-agent-adapters` | `0.7` (feature `anthropic`) | `build_remote_connection_for_model` |
-| `swink-agent-patterns` | `0.7` | `Pipeline`, `SimpleAgentFactory`, `PipelineRegistry`, `PipelineExecutor`, `ExitCondition` |
+| `swink-agent` | `0.13.1` | `Agent`, `AgentOptions`, `ModelConnections` |
+| `swink-agent-adapters` | `0.13.1` (feature `anthropic`) | `build_remote_connection_for_model` |
+| `swink-agent-patterns` | `0.13.1` | `Pipeline`, `SimpleAgentFactory`, `PipelineRegistry`, `PipelineExecutor`, `ExitCondition` |
 | `tokio-util` | `0.7` | `CancellationToken` |
 
 ## Configuration surface

@@ -4,9 +4,9 @@
 //! auto-approved. The agent never pauses to ask permission. Use this when you
 //! trust the model and want maximum autonomy; avoid it on sensitive machines.
 //!
-//! `ApprovalMode::Bypassed` on `AgentOptions` is the single source of truth in
-//! 0.7.2+: `launch()` propagates it to both the agent dispatch loop and the
-//! TUI state, so no manual sync is needed.
+//! `ApprovalMode::Bypassed` on `AgentOptions` is the single source of truth:
+//! `launch()` propagates it to both the agent dispatch loop and the TUI state,
+//! so no manual sync is needed.
 //!
 //! # Run
 //!

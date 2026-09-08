@@ -2,7 +2,7 @@
 name = "local-gemma4-e2b-basic"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.88"
+rust-version = "1.95"
 publish = false
 
 [features]
@@ -10,6 +10,6 @@ metal = ["swink-agent-local-llm/metal"]
 cuda = ["swink-agent-local-llm/cuda"]
 
 [dependencies]
-swink-agent = "0.12.2"
-swink-agent-local-llm = { version = "0.12.2", features = ["gemma4"] }
+swink-agent = "0.13.1"
+swink-agent-local-llm = { version = "0.13.1", features = ["gemma4"] }
 tokio = { version = "1", features = ["full"] }

@@ -14,7 +14,7 @@ Shows how to wire three different OpenAI-compatible backends into Swink-Agent us
 | Crate | Feature | Why |
 |---|---|---|
 | `swink-agent` | (default) | Core agent primitives |
-| `swink-agent-adapters` | `openai` | `OpenAiStreamFn` for LM Studio (and generic OpenAI-compat servers) |
+| `swink-agent-adapters` | `openai` | `OpenAiStreamFn::new_chat_completions` for LM Studio (and generic OpenAI-compat servers) |
 | `swink-agent-adapters` | `azure` | `AzureStreamFn`, `AzureAuth` |
 | `swink-agent-adapters` | `xai` | `XAiStreamFn` |
 | `tokio` | `full` | Async runtime |
@@ -36,7 +36,7 @@ Credentials for unused backends are never read, so it is safe to run the lmstudi
 
 - **Add another backend**: add a new match arm, construct its `StreamFn` and `ModelSpec`, assign a `ModelConnection`, then the rest of the code is unchanged.
 - **Change the Azure model**: update `"gpt-4o"` in the `ModelSpec::new("azure", ...)` call.
-- **Use API key auth for LM Studio**: change `OpenAiStreamFn::new(base_url, "lm-studio")` to `OpenAiStreamFn::new(base_url, api_key_string)`.
+- **Use API key auth for LM Studio**: change `OpenAiStreamFn::new_chat_completions(base_url, "lm-studio")` to `OpenAiStreamFn::new_chat_completions(base_url, api_key_string)`. Do not switch to `OpenAiStreamFn::new` — that constructor is the Responses API and 404s on LM Studio.
 - **Change the prompt**: edit the `let prompt = "..."` line — it is shared across all backends.
 
 ## Testing guidance

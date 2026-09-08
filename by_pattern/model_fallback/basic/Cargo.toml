@@ -2,12 +2,12 @@
 name = "model-fallback-basic"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.88"
+rust-version = "1.95"
 publish = false
 
 [dependencies]
-swink-agent = "0.12.2"
-swink-agent-adapters = { version = "0.12.2", features = ["anthropic"] }
+swink-agent = "0.13.1"
+swink-agent-adapters = { version = "0.13.1", features = ["anthropic"] }
 futures = "0.3"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }

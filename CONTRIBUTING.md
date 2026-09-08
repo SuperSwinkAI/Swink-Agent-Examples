@@ -33,7 +33,7 @@ If you spam the tracker with agent-generated issues or PRs, your GitHub account 
 
 ## Prerequisites
 
-- **Rust 1.88+** (MSRV). Install via [rustup](https://rustup.rs).
+- **Rust 1.95+** (MSRV). Install via [rustup](https://rustup.rs).
 - Add required toolchain components:
   ```bash
   rustup component add clippy rustfmt
@@ -83,7 +83,7 @@ Concise, imperative-mood subject lines:
 ```
 Add by_pattern/chain_of_thought/basic example
 Fix by_model/openai/gpt-4o/basic compile error on Windows
-Update tui/yolo to swink-agent 0.7.4
+Update tui/yolo to swink-agent 0.13.1
 ```
 
 No ticket numbers in commit messages — link issues in the PR description.
@@ -95,7 +95,7 @@ No ticket numbers in commit messages — link issues in the PR description.
 | New example | `example/<path>` | `example/by_pattern/rag-basic` |
 | Bug fix | `fix/<short-description>` | `fix/tui-basic-windows-build` |
 | Docs | `docs/<short-description>` | `docs/improve-swarm-readme` |
-| Chore | `chore/<short-description>` | `chore/bump-swink-agent-0.7.4` |
+| Chore | `chore/<short-description>` | `chore/bump-swink-agent-0.13.1` |
 
 Branch off `main`. One example or concern per PR.
 

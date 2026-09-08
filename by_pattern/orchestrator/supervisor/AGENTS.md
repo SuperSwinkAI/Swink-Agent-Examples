@@ -13,8 +13,8 @@ Demonstrates hierarchical multi-agent orchestration with automatic fault recover
 
 | Crate | Version | Notes |
 |---|---|---|
-| `swink-agent` | `0.7` | `AgentOrchestrator`, `DefaultSupervisor`, `AgentOptions`, `ModelConnections` |
-| `swink-agent-adapters` | `0.7` (feature `anthropic`) | `build_remote_connection_for_model` |
+| `swink-agent` | `0.13.1` | `AgentOrchestrator`, `DefaultSupervisor`, `AgentOptions`, `ModelConnections` |
+| `swink-agent-adapters` | `0.13.1` (feature `anthropic`) | `build_remote_connection_for_model` |
 
 ## Configuration surface
 

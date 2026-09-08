@@ -12,7 +12,7 @@
 
 ## Prerequisites
 
-- Rust 1.88+
+- Rust 1.95+
 - An Anthropic API key
 
 ## Configuration (`.env`)

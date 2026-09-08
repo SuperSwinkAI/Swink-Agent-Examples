@@ -2,14 +2,14 @@
 name = "eval-harness-basic"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.88"
+rust-version = "1.95"
 publish = false
 
 [dependencies]
-swink-agent = "0.12.2"
-swink-agent-adapters = { version = "0.12.2", features = ["anthropic"] }
-swink-agent-eval = "0.12.2"
-swink-agent-policies = { version = "0.12.2", features = ["audit"] }
+swink-agent = "0.13.1"
+swink-agent-adapters = { version = "0.13.1", features = ["anthropic"] }
+swink-agent-eval = "0.13.1"
+swink-agent-policies = { version = "0.13.1", features = ["audit"] }
 tokio = { version = "1", features = ["full"] }
 tokio-util = "0.7"
 dotenvy = "0.15"

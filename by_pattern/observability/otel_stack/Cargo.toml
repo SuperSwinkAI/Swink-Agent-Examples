@@ -2,12 +2,12 @@
 name = "observability-otel-stack"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.88"
+rust-version = "1.95"
 publish = false
 
 [dependencies]
-swink-agent = { version = "0.12.2", features = ["otel", "tiktoken"] }
-swink-agent-adapters = { version = "0.12.2", features = ["anthropic"] }
+swink-agent = { version = "0.13.1", features = ["otel", "tiktoken"] }
+swink-agent-adapters = { version = "0.13.1", features = ["anthropic"] }
 tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
 tokio = { version = "1", features = ["full"] }
 dotenvy = "0.15"

@@ -4,7 +4,7 @@ Single binary that can talk to three different OpenAI-compatible backends — LM
 
 ## What it demonstrates
 
-- `OpenAiStreamFn::new(base_url, auth)` — generic OpenAI-compatible HTTP client (used for LM Studio)
+- `OpenAiStreamFn::new_chat_completions(base_url, auth)` — Chat Completions client for OpenAI-compatible servers (LM Studio, llama.cpp, vLLM). `OpenAiStreamFn::new` is the Responses API and 404s on these endpoints.
 - `AzureStreamFn::new(base_url, AzureAuth::ApiKey(key))` — Azure OpenAI endpoint
 - `XAiStreamFn::new(base_url, api_key)` — xAI (Grok) API
 - `ModelSpec::new(provider, model_id)` + `ModelConnection::new(spec, Arc::new(stream_fn))`
@@ -17,7 +17,7 @@ Single binary that can talk to three different OpenAI-compatible backends — LM
   - LM Studio running locally (default, no API key needed)
   - Azure OpenAI deployment with endpoint and key
   - xAI API key for Grok
-- Rust 1.88+
+- Rust 1.95+
 
 ## Configuration
 

@@ -47,17 +47,17 @@ The upstream library is on crates.io as `swink-agent`. Source at [SuperSwinkAI/S
 name = "my-example"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.88"
+rust-version = "1.95"
 publish = false
 
 [dependencies]
-swink-agent = "0.7"
-swink-agent-adapters = { version = "0.7", features = ["anthropic"] }
+swink-agent = "0.13.1"
+swink-agent-adapters = { version = "0.13.1", features = ["anthropic"] }
 tokio = { version = "1", features = ["full"] }
 dotenvy = "0.15"
 ```
 
-Pin deps to `"0.7"` (not `"0"`). Always include `dotenvy = "0.15"` and call `dotenvy::dotenv().ok();` as the first line of `main`.
+Pin deps to `"0.13.1"` (not `"0"` / `"0.13"`). Always include `dotenvy = "0.15"` and call `dotenvy::dotenv().ok();` as the first line of `main`.
 
 **Core API patterns:**
 - `Agent::new(options)` → configure with `AgentOptions`
@@ -67,9 +67,9 @@ Pin deps to `"0.7"` (not `"0"`). Always include `dotenvy = "0.15"` and call `dot
 - `AgentTool` / `FnTool` / `IntoTool` — tool registration
 - `builtin_tools()` — returns `[BashTool, ReadFileTool, WriteFileTool, EditFileTool]` (requires `builtin-tools` feature, on by default)
 - Policies register individually via `AgentOptions::with_pre_turn_policy(p)`, `with_post_turn_policy(p)`, `with_pre_dispatch_policy(p)`, `with_post_loop_policy(p)` — there is **no** `with_policies(vec![...])` method
-- `ToolMiddleware` wraps an `AgentTool` and is itself an `AgentTool` — pass via `with_tools()`; **not in prelude**, import explicitly
+- `ToolMiddleware` wraps an `AgentTool` and is itself an `AgentTool` — pass via `with_tools()`; in `swink_agent::prelude`
 - `StreamMiddleware` wraps a `StreamFn` and is itself a `StreamFn` — use in `ModelConnection::new`
-- `ApprovalMode` — **not in prelude**, import explicitly: `use swink_agent::ApprovalMode;`
+- `ApprovalMode` is in `swink_agent::prelude` (also re-exported from `swink_agent_tui`)
 - Error type: always `Box<dyn std::error::Error>`, never `anyhow`
 
 ## Commands
@@ -96,11 +96,11 @@ cd <example-dir> && cargo clippy -- -D warnings
 
 ## Conventions
 
-- **MSRV**: Rust 1.88, edition 2024
+- **MSRV**: Rust 1.95, edition 2024
 - Each example must be self-contained — no shared lib crate across examples
 - Each example must have both a `README.md` and an `AGENTS.md` (see per-example file sections above)
 - `by_model/` paths are three levels deep: `<provider>/<model>/<name>/`; `by_pattern/` and `usecases/` are two levels
-- Pin `swink-agent` deps to `"0.7"`, not `"0"`
+- Pin `swink-agent` deps to `"0.13.1"`, not `"0"` / `"0.13"`
 - Prefer `build_remote_connection_for_model(model_id)` for remote providers — it reads the provider's credential env var automatically
 - Use `OllamaStreamFn::new(base_url)` + `ModelConnection::new(ModelSpec::new("local", model), stream_fn)` for Ollama (local provider, not in remote catalog)
 - Use `tokio` as the async runtime; never spawn threads around agent calls
@@ -112,11 +112,11 @@ cd <example-dir> && cargo clippy -- -D warnings
 ## Known API gotchas (discovered authoring these examples)
 
 - **No `with_policies` method** — register each policy individually via `with_pre_turn_policy` / `with_post_turn_policy` / `with_pre_dispatch_policy` / `with_post_loop_policy`
-- **`ToolMiddleware` and `ApprovalMode` are not in `swink_agent::prelude`** — import explicitly (issues [#652](https://github.com/SuperSwinkAI/Swink-Agent/issues/652), [#655](https://github.com/SuperSwinkAI/Swink-Agent/issues/655))
-- **`tiktoken` feature ships no wrapper** — implement `TokenCounter` locally if you need tiktoken (issue [#651](https://github.com/SuperSwinkAI/Swink-Agent/issues/651))
-- **`FnTool` has no async execute variant** — use `with_execute_simple` for sync closures; implement `AgentTool` manually for async (issue [#653](https://github.com/SuperSwinkAI/Swink-Agent/issues/653))
-- **`McpTransport::Sse` is bearer-token only** — no arbitrary header auth (issue [#654](https://github.com/SuperSwinkAI/Swink-Agent/issues/654))
+- **`OpenAiStreamFn::new` is the Responses API** (`/v1/responses`). OpenAI-compatible servers (LM Studio, llama.cpp, vLLM, Groq, Together) 404 on that path — use `OpenAiStreamFn::new_chat_completions`. Config-driven hosts pick via `OPENAI_API=responses` (default) or `chat_completions`
+- **`FnTool` async execute** — `with_execute_typed` / `with_execute_async` take async closures; `with_execute_simple` is the sync path. Implement `AgentTool` only when you need custom dispatch
+- **`McpTransport::StreamableHttp`** — SSE was renamed in 0.12; the variant now takes `url`, `bearer_token`, `bearer_auth`, and `headers`
 - **`ScriptTool` TOML schema uses `[parameters_schema]`** — not `[parameters.properties]` (issue [#656](https://github.com/SuperSwinkAI/Swink-Agent/issues/656))
+- **`tiktoken` feature** — `TiktokenCounter` is in the prelude when the `tiktoken` feature is on; implement `TokenCounter` only if you need a different encoding
 
 ## Provider adapter features
 
@@ -125,7 +125,8 @@ When writing an example for a specific provider, enable only that adapter's feat
 | Provider | Feature flag | StreamFn type |
 |---|---|---|
 | Anthropic | `anthropic` | `AnthropicStreamFn` |
-| OpenAI | `openai` | `OpenAiStreamFn` |
+| OpenAI | `openai` | `OpenAiStreamFn` (`::new` = Responses; `::new_chat_completions` for compat) |
+| Codex | `codex` | `CodexStreamFn` (ChatGPT subscription / Responses shell) |
 | Ollama | `ollama` | `OllamaStreamFn` |
 | Google Gemini | `gemini` | `GeminiStreamFn` |
 | Azure OpenAI | `azure` | `AzureStreamFn` |

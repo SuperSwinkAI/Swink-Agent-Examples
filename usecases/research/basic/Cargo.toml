@@ -2,12 +2,12 @@
 name = "research-basic"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.88"
+rust-version = "1.95"
 publish = false
 
 [dependencies]
-swink-agent = { version = "0.12.2", features = ["plugins"] }
-swink-agent-adapters = { version = "0.12.2", features = ["anthropic"] }
-swink-agent-plugin-web = "0.12.2"
+swink-agent = { version = "0.13.1", features = ["plugins"] }
+swink-agent-adapters = { version = "0.13.1", features = ["anthropic"] }
+swink-agent-plugin-web = "0.13.1"
 tokio = { version = "1", features = ["full"] }
 dotenvy = "0.15"

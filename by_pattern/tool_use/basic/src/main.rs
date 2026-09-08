@@ -30,7 +30,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Step 1a: Create built-in tools.
     // `builtin_tools()` returns Vec<Arc<dyn AgentTool>> with BashTool, ReadFileTool,
-    // WriteFileTool, and EditFileTool (added in 0.7.3).
+    // WriteFileTool, and EditFileTool.
     // EditFileTool applies surgical find-and-replace edits atomically and supports
     // stale-read detection via an optional SHA-256 hash of the file as last read.
     let mut tools = builtin_tools();

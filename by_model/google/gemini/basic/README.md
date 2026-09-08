@@ -14,7 +14,7 @@ Minimal two-turn example that sends two prompts to Google Gemini Flash using the
 ## Prerequisites
 
 - `GEMINI_API_KEY` — Google AI Studio API key
-- Rust 1.88+
+- Rust 1.95+
 
 ## Configuration
 

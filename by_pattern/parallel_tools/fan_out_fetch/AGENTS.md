@@ -13,8 +13,8 @@ Shows how `ToolExecutionPolicy` controls whether an agent's tool calls run seque
 
 | Crate | Version | Notes |
 |---|---|---|
-| `swink-agent` | `0.7` | `Agent`, `AgentOptions`, `FnTool`, `ToolExecutionPolicy`, `ModelConnections` |
-| `swink-agent-adapters` | `0.7` (feature `anthropic`) | `build_remote_connection_for_model` |
+| `swink-agent` | `0.13.1` | `Agent`, `AgentOptions`, `FnTool`, `ToolExecutionPolicy`, `ModelConnections` |
+| `swink-agent-adapters` | `0.13.1` (feature `anthropic`) | `build_remote_connection_for_model` |
 | `schemars` | `1` | `JsonSchema` derive for tool parameter structs |
 | `serde` | `1` | `Deserialize` derive for tool parameter structs |
 

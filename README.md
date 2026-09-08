@@ -68,7 +68,7 @@ cargo run
 
 ## Prerequisites
 
-- **Rust 1.88+** (edition 2024)
+- **Rust 1.95+** (edition 2024)
 - API keys for whichever provider the example targets (see each example's README)
 
 ## Adding an example
@@ -77,7 +77,7 @@ cargo run
    - `by_model/` paths must be three levels deep: `<provider>/<model>/<name>/`.
    - `by_pattern/` and `usecases/` paths must be two levels deep: `<pattern>/<name>/`.
 2. `cargo init` inside it.
-3. Add `swink-agent = "0.7"` and any needed crates to `Cargo.toml`. Set `edition = "2024"`, `rust-version = "1.88"`, `publish = false`.
+3. Add `swink-agent = "0.13.1"` and any needed crates to `Cargo.toml`. Set `edition = "2024"`, `rust-version = "1.95"`, `publish = false`.
 4. Write `README.md` covering: what it demonstrates, prerequisites, configuration (`.env` lines), how to run, testing, and notes.
 5. Write `AGENTS.md` covering: scope, key files, dependencies and features, configuration surface, how to modify safely, testing guidance.
 6. Verify it compiles: `cargo check` from the example directory, then `cargo check --workspace` from the repo root.
