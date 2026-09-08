@@ -2,6 +2,11 @@
 target/
 debug/
 
+# Nested lockfiles: this is a workspace; Cargo uses the root Cargo.lock
+by_model/**/Cargo.lock
+by_pattern/**/Cargo.lock
+usecases/**/Cargo.lock
+
 # Rustfmt backup files
 **/*.rs.bk
 
