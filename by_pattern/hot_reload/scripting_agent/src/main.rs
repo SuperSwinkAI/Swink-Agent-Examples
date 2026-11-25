@@ -29,7 +29,6 @@ use tokio_util::sync::CancellationToken;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    // Step 1: Start the ToolWatcher on ./tools.
     let ct = CancellationToken::new();
     let tools_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tools");
     println!("[watcher] Watching: {}", tools_dir.display());
@@ -38,10 +37,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         ToolWatcher::new(&tools_dir).map_err(|e| format!("ToolWatcher::new failed: {e}"))?;
     let mut update_rx = watcher.start(ct.clone()).await;
 
-    // Step 2: Wait briefly for the initial scan.
     tokio::time::sleep(Duration::from_millis(200)).await;
 
-    // Step 3: Receive the initial tool list.
     let initial_tools = update_rx
         .recv()
         .await
@@ -54,11 +51,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("[watcher]   - {}: {}", tool.name(), tool.description());
     }
 
-    // Step 4: Build connection and agent.
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
     let connections = ModelConnections::new(connection, vec![]);
 
-    // Sandbox: restrict file access to the tools directory.
     let sandbox = SandboxPolicy::new(&tools_dir);
 
     let options = AgentOptions::from_connections(
@@ -72,20 +67,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut agent = Agent::new(options);
 
-    // Step 5: Run the prompt.
     let prompt = "Greet the user named 'Alice' and then count the words in 'the quick brown fox'.";
     println!("\n>>> {prompt}");
     let result = agent.prompt_text(prompt).await?;
     println!("Assistant: {}", result.assistant_text());
 
-    // Step 6: Demonstrate hot-reload by spawning a background task that
-    //         modifies greet.toml after 1 second and then prints the update.
     let tools_dir_clone = tools_dir.clone();
     let ct_clone = ct.clone();
     tokio::spawn(async move {
         tokio::time::sleep(Duration::from_secs(1)).await;
 
-        // Overwrite greet.toml with a slightly different command.
         let updated_toml = r#"name = "greet"
 description = "Greet a person by name (updated)"
 command = "echo 'Hey there, {name}! Hot-reload worked!'"
@@ -105,12 +96,10 @@ description = "The name of the person to greet"
             println!("[hot-reload] Wrote updated greet.toml");
         }
 
-        // Wait for ToolWatcher to detect and emit the update.
         tokio::time::sleep(Duration::from_millis(800)).await;
         ct_clone.cancel();
     });
 
-    // Wait for the hot-reload notification.
     if let Some(updated_tools) = update_rx.recv().await {
         println!(
             "[hot-reload] Tools updated: {} tool(s)",
@@ -119,7 +108,6 @@ description = "The name of the person to greet"
         println!("[hot-reload] In a real app you would re-create the agent with updated_tools.");
     }
 
-    // Wait for background task to finish.
     tokio::time::sleep(Duration::from_millis(200)).await;
 
     Ok(())

@@ -1,22 +1,8 @@
-//! Example: YOLO agent — TUI with all tools and zero approval prompts.
-//!
-//! "You Only Live Once" — every tool call (bash, file read, file write) is
-//! auto-approved. The agent never pauses to ask permission. Use this when you
-//! trust the model and want maximum autonomy; avoid it on sensitive machines.
-//!
-//! `ApprovalMode::Bypassed` on `AgentOptions` is the single source of truth:
-//! `launch()` propagates it to both the agent dispatch loop and the TUI state,
-//! so no manual sync is needed.
-//!
-//! # Run
-//!
-//! ```text
-//! cargo run
-//! ```
-//!
-//! # Requires
-//!
-//! - `ANTHROPIC_API_KEY` in environment or `.env` file
+//! TUI with ApprovalMode::Bypassed: every bash and file-tool call is
+//! auto-approved. Avoid sensitive machines. launch() applies the mode to
+//! both agent dispatch and TUI state.
+//! Run: cargo run
+//! Requires: ANTHROPIC_API_KEY in the environment or .env
 
 use swink_agent::{AgentOptions, ModelConnections};
 use swink_agent_adapters::build_remote_connection_for_model;

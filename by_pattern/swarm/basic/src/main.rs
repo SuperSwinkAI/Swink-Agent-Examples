@@ -12,10 +12,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
 
-    // Shared registry — must be Arc so TransferToAgentTool can hold a reference.
     let registry = Arc::new(AgentRegistry::new());
 
-    // --- Triage agent: gets a TransferToAgentTool so it can hand off to specialists ---
     let transfer_tool = TransferToAgentTool::new(Arc::clone(&registry)).into_tool();
     let triage_conn = ModelConnections::new(connection.clone(), vec![]);
     let triage_options = AgentOptions::from_connections(
@@ -25,14 +23,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .with_tools(vec![transfer_tool]);
 
-    // --- Researcher agent ---
     let researcher_conn = ModelConnections::new(connection.clone(), vec![]);
     let researcher_options = AgentOptions::from_connections(
         "You are a research specialist. Answer factual questions concisely and accurately.",
         researcher_conn,
     );
 
-    // --- Writer agent ---
     let writer_conn = ModelConnections::new(connection.clone(), vec![]);
     let writer_options = AgentOptions::from_connections(
         "You are a creative writing specialist. Help with creative tasks like stories and poems.",

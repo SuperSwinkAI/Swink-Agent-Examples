@@ -26,8 +26,6 @@ use swink_agent_eval::{
 use swink_agent_policies::{AuditLogger, JsonlAuditSink};
 use tokio_util::sync::CancellationToken;
 
-// ─── ExampleFactory ──────────────────────────────────────────────────────────
-
 struct ExampleFactory {
     connection: ModelConnection,
 }
@@ -43,15 +41,11 @@ impl AgentFactory for ExampleFactory {
     }
 }
 
-// ─── Main ────────────────────────────────────────────────────────────────────
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    // Build the eval cases.
     let cases = vec![
-        // Case 1: Basic arithmetic response check.
         EvalCase::new(
             "case-1-arithmetic",
             "Basic arithmetic",
@@ -62,7 +56,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with_expected_response(ResponseCriteria::Contains {
             substring: "4".into(),
         }),
-        // Case 2: Response must mention a key concept.
         EvalCase::new(
             "case-2-rust-ownership",
             "Rust ownership concept",
@@ -73,7 +66,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with_expected_response(ResponseCriteria::Contains {
             substring: "owner".into(),
         }),
-        // Case 3: Budget-constrained case.
         EvalCase::new(
             "case-3-budget",
             "Budget-constrained response",
@@ -92,11 +84,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let eval_set = EvalSet::new("basic-eval-set", "Basic Eval Set", cases)
         .with_description("Three representative eval cases");
 
-    // Build the factory.
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
     let factory = ExampleFactory { connection };
 
-    // Run the eval set.
     let runner = EvalRunner::with_defaults();
     println!(
         "Running eval set '{}' ({} cases)...",
@@ -106,7 +96,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let result = runner.run_set(&eval_set, &factory).await?;
 
-    // Print results.
     println!(
         "\nResults: {}/{} passed",
         result.summary.passed, result.summary.total_cases
@@ -123,7 +112,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    // Write full results as JSON.
     let json = serde_json::to_string_pretty(&result)?;
     std::fs::write("/tmp/eval-results.json", &json)?;
     println!("\nFull results written to /tmp/eval-results.json");

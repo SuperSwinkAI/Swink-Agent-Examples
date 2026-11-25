@@ -64,7 +64,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         std::process::exit(1);
     });
 
-    // Build a filesystem-safe slug for the output filename.
     let slug = query
         .to_lowercase()
         .chars()
@@ -77,15 +76,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let home = std::env::var("HOME").unwrap_or_else(|_| ".".to_string());
     let report_path = format!("{home}/research-{slug}.md");
 
-    // Extract web tools directly to avoid the `web.` namespace prefix that
-    // `with_plugin()` adds — Anthropic's API rejects dots in tool names.
     let web_plugin = WebPlugin::from_config(
         WebPlugin::builder()
             .with_max_content_length(500_000)
             .build(),
     )?;
     let mut tools = builtin_tools();
-    // Only add search and fetch — extract and screenshot require Playwright.
     tools.extend(
         web_plugin
             .tools()
@@ -114,7 +110,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         AgentEvent::ToolExecutionStart {
             name, arguments, ..
         } => {
-            // For write_file show the path; for search show the query; others just name.
             if name == "write_file" {
                 let path = arguments
                     .get("path")

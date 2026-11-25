@@ -40,16 +40,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             ModelConnection::new(spec, Arc::new(stream_fn))
         }
         _ => {
-            // "lmstudio" or any unrecognised value falls back to LM Studio
             use swink_agent_adapters::OpenAiStreamFn;
 
             let base_url = std::env::var("LM_STUDIO_BASE_URL")
                 .unwrap_or_else(|_| "http://localhost:1234/v1".to_string());
             let model_name =
                 std::env::var("LM_STUDIO_MODEL").unwrap_or_else(|_| "local-model".to_string());
-            // LM Studio (and llama.cpp / vLLM / Groq / Together) speak Chat
-            // Completions. `OpenAiStreamFn::new` is the Responses API and 404s
-            // on these servers — use `new_chat_completions` for compat endpoints.
             let stream_fn = OpenAiStreamFn::new_chat_completions(base_url, "lm-studio");
             let spec = ModelSpec::new("openai", model_name);
             ModelConnection::new(spec, Arc::new(stream_fn))

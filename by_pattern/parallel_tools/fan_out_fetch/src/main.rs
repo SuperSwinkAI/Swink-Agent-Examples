@@ -23,8 +23,6 @@ use swink_agent::{
 use swink_agent_adapters::build_remote_connection_for_model;
 use tokio::time::{Duration, sleep};
 
-// ── Tool parameter types ────────────────────────────────────────────────────
-
 #[derive(Deserialize, JsonSchema)]
 struct CityParams {
     /// The city to fetch weather for (e.g. "London").
@@ -48,8 +46,6 @@ struct PairParams {
     /// The currency pair (e.g. "EUR/USD").
     pair: String,
 }
-
-// ── Tool builders ───────────────────────────────────────────────────────────
 
 fn fetch_weather_tool() -> Arc<dyn swink_agent::AgentTool> {
     FnTool::new(
@@ -109,8 +105,6 @@ fn fetch_exchange_tool() -> Arc<dyn swink_agent::AgentTool> {
     .into_tool()
 }
 
-// ── Mode parsing ────────────────────────────────────────────────────────────
-
 #[derive(Debug, Clone, Copy)]
 enum Mode {
     Sequential,
@@ -131,8 +125,6 @@ fn parse_mode(args: &[String]) -> Mode {
         _ => Mode::Concurrent,
     }
 }
-
-// ── Run agent with a given policy ───────────────────────────────────────────
 
 async fn run_with_policy(
     connection: ModelConnection,
@@ -169,8 +161,6 @@ async fn run_with_policy(
     Ok(())
 }
 
-// ── Main ────────────────────────────────────────────────────────────────────
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
@@ -185,13 +175,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let policy = match mode {
         Mode::Sequential => ToolExecutionPolicy::Sequential,
         Mode::Concurrent => ToolExecutionPolicy::Concurrent,
-        Mode::Priority => {
-            // fetch_weather gets priority 10; all other tools get priority 5.
-            // Tools within the same priority group still execute concurrently.
-            ToolExecutionPolicy::Priority(Arc::new(|call| {
-                if call.name == "fetch_weather" { 10 } else { 5 }
-            }))
-        }
+        Mode::Priority => ToolExecutionPolicy::Priority(Arc::new(|call| {
+            if call.name == "fetch_weather" { 10 } else { 5 }
+        })),
     };
 
     let label = format!("{mode:?}");
