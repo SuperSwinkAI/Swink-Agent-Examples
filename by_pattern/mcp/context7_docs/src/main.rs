@@ -12,12 +12,8 @@ use swink_agent_policies::{AuditLogger, JsonlAuditSink, ToolDenyListPolicy};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    // ── 1. Read API keys ─────────────────────────────────────────────────────
-
     let context7_token =
         std::env::var("CONTEXT7_API_KEY").map_err(|_| "CONTEXT7_API_KEY not set")?;
-
-    // ── 2. Connect to Context7 via MCP/SSE ──────────────────────────────────
 
     let mut mcp = McpManager::new(vec![
         McpServerConfig::new(
@@ -40,21 +36,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         mcp_tools.len()
     );
 
-    // ── 3. Build model connection ────────────────────────────────────────────
-
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
     let connections = ModelConnections::new(connection, vec![]);
 
-    // ── 4. Policies ──────────────────────────────────────────────────────────
-
-    // Deny a nonexistent tool to demonstrate the deny-list pattern without
-    // actually blocking any real Context7 tools.
     let deny_list = ToolDenyListPolicy::new(["ctx7_nonexistent_tool"]);
 
     let audit_path = "/tmp/context7-audit.jsonl";
     let audit_logger = AuditLogger::new(JsonlAuditSink::new(audit_path));
-
-    // ── 5. Build agent options ───────────────────────────────────────────────
 
     let system_prompt = "You are a documentation assistant. \
         Use the ctx7 tools to look up current library documentation. \
@@ -65,8 +53,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with_approval_mode(ApprovalMode::Bypassed)
         .with_pre_dispatch_policy(deny_list)
         .with_post_turn_policy(audit_logger);
-
-    // ── 6. Run ──────────────────────────────────────────────────────────────
 
     let prompt = std::env::args()
         .nth(1)

@@ -1,31 +1,8 @@
-//! Example: Model fallback chain.
-//!
-//! Demonstrates:
-//! - `ModelFallback` — ordered list of backup models tried when the primary fails
-//! - `AgentEvent::ModelFallback` — event emitted on failover
-//! - Tracing integration to log the failover warning
-//! - A mock primary that returns a throttle error to trigger fallback
-//!
-//! WARNING: `ModelFallback` masks errors from the primary model. Use it only
-//! when you have a trustworthy secondary you are willing to pay for. Add
-//! monitoring on the `ModelFallback` event so you know when it fires.
-//!
-//! ## When to use
-//! - Multi-provider redundancy (e.g. primary provider outage)
-//! - Rate-limit escape valve with a slower/cheaper secondary
-//!
-//! ## When NOT to use
-//! - When you need hard failure on any error
-//!
-//! # Run
-//!
-//! ```text
-//! cargo run -p model-fallback-basic
-//! ```
-//!
-//! # Requires
-//!
-//! - `ANTHROPIC_API_KEY` (used for the fallback model)
+//! Model fallback with an ordered backup list, failover events, and tracing.
+//! A mock primary returns a throttle error. Fallback masks primary errors;
+//! configure a trusted secondary and monitor ModelFallback events.
+//! Run: cargo run -p model-fallback-basic
+//! Requires: ANTHROPIC_API_KEY for the fallback model
 
 use std::pin::Pin;
 use std::sync::Arc;
@@ -36,8 +13,6 @@ use tokio_util::sync::CancellationToken;
 use swink_agent::prelude::*;
 use swink_agent_adapters::AnthropicStreamFn;
 use tracing_subscriber::EnvFilter;
-
-// ─── Throttled primary ──────────────────────────────────────────────────────
 
 /// A `StreamFn` that always returns a throttle error, simulating a provider
 /// that is rate-limiting or overloaded.
@@ -57,8 +32,6 @@ impl StreamFn for ThrottledStreamFn {
     }
 }
 
-// ─── Main ───────────────────────────────────────────────────────────────────
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
@@ -67,14 +40,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with_env_filter(EnvFilter::from_default_env().add_directive("warn".parse()?))
         .init();
 
-    // Primary: always throttled.
     let primary_conn = ModelConnection::new(
         ModelSpec::new("openai", "gpt-5.6-sol"),
         Arc::new(ThrottledStreamFn) as Arc<dyn StreamFn>,
     );
     let connections = ModelConnections::new(primary_conn, vec![]);
 
-    // Fallback: real Anthropic connection.
     let fallback_key = std::env::var("ANTHROPIC_API_KEY")
         .map_err(|_| "ANTHROPIC_API_KEY environment variable not set")?;
     let fallback_stream = AnthropicStreamFn::new("https://api.anthropic.com", fallback_key);

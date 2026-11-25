@@ -29,8 +29,6 @@ use swink_agent_adapters::build_remote_connection_for_model;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
 
-// ─── PrintMetrics ────────────────────────────────────────────────────────────
-
 struct PrintMetrics {
     turn_count: AtomicU32,
 }
@@ -62,13 +60,10 @@ impl MetricsCollector for PrintMetrics {
     }
 }
 
-// ─── Main ────────────────────────────────────────────────────────────────────
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    // Step 1: Initialize OTel tracing layer.
     let endpoint = std::env::var("OTEL_EXPORTER_OTLP_ENDPOINT")
         .unwrap_or_else(|_| "http://localhost:4317".into());
     println!("[otel] Sending traces to: {endpoint}");
@@ -78,11 +73,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .expect("otel init");
     tracing_subscriber::registry().with(otel_layer).init();
 
-    // Step 2: Build connection.
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
     let connections = ModelConnections::new(connection, vec![]);
 
-    // Step 3: Build agent with metrics collector and tiktoken counter.
     let options =
         AgentOptions::from_connections("You are a concise and helpful assistant.", connections)
             .with_metrics_collector(PrintMetrics {
@@ -92,7 +85,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut agent = Agent::new(options);
 
-    // Step 4: Run 3 prompts, metrics are printed automatically after each turn.
     let prompts = [
         "What is the capital of France?",
         "Name three famous Impressionist painters.",

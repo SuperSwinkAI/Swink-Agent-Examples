@@ -21,8 +21,6 @@ use swink_agent_policies::{
     PiiRedactor, PromptInjectionGuard,
 };
 
-// ─── Custom metrics collector ────────────────────────────────────────────────
-
 struct PrintMetrics;
 
 impl MetricsCollector for PrintMetrics {
@@ -40,13 +38,9 @@ impl MetricsCollector for PrintMetrics {
     }
 }
 
-// ─── Main ────────────────────────────────────────────────────────────────────
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
-
-    // ── 1. Build a simple customer lookup tool ───────────────────────────────
 
     let raw_tool = FnTool::new(
         "lookup_customer",
@@ -54,15 +48,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "Look up a customer record by ID.",
     )
     .with_execute_async(|args, _cancel| async move {
-        // Returns data with a fake SSN to exercise PiiRedactor.
         let id = args.get("id").and_then(|v| v.as_str()).unwrap_or("unknown");
         AgentToolResult::text(format!(
             "Customer: John Doe, SSN: 555-22-4444, balance: ${id}00"
         ))
     })
     .into_tool();
-
-    // ── 2. Wrap the tool with logging middleware ──────────────────────────────
 
     let logged_tool = Arc::new(ToolMiddleware::with_logging(
         raw_tool,
@@ -75,17 +66,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         },
     ));
 
-    // ── 3. Build model connection ────────────────────────────────────────────
-
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
     let connections = ModelConnections::new(connection, vec![]);
-
-    // ── 4. Compose all policies ───────────────────────────────────────────────
-    //
-    // Trait placements:
-    //   PreTurnPolicy:  BudgetPolicy, MaxTurnsPolicy, PromptInjectionGuard
-    //   PostTurnPolicy: PromptInjectionGuard (also), PiiRedactor, ContentFilter,
-    //                   LoopDetectionPolicy, AuditLogger
 
     let audit_path = "/tmp/guardrails-audit.jsonl";
 
@@ -96,20 +78,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .with_tools(vec![logged_tool])
     .with_approval_mode(ApprovalMode::Bypassed)
-    // PreTurn policies
     .with_pre_turn_policy(BudgetPolicy::new().with_max_cost(1.0))
     .with_pre_turn_policy(MaxTurnsPolicy::new(10))
     .with_pre_turn_policy(PromptInjectionGuard::new())
-    // PostTurn policies
     .with_post_turn_policy(PromptInjectionGuard::new())
     .with_post_turn_policy(PiiRedactor::new())
     .with_post_turn_policy(ContentFilter::new().with_keyword("password"))
     .with_post_turn_policy(LoopDetectionPolicy::new(3))
     .with_post_turn_policy(AuditLogger::new(JsonlAuditSink::new(audit_path)))
-    // Metrics
     .with_metrics_collector(PrintMetrics);
-
-    // ── 5. Run prompts ───────────────────────────────────────────────────────
 
     let mut agent = Agent::new(options);
 

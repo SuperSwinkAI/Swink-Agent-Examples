@@ -36,12 +36,7 @@ use swink_agent::{
 use swink_agent_adapters::build_remote_connection_for_model;
 use swink_agent_memory::{JsonlSessionStore, SessionMeta, SessionStore, now_utc};
 
-// ─── Inline CheckpointStore ──────────────────────────────────────────────────
-
-/// Minimal in-memory checkpoint store.
-///
-/// Holds at most one checkpoint at a time. Sufficient for this example —
-/// production code would use a file- or database-backed implementation.
+/// In-memory store holding at most one checkpoint.
 struct InlineCheckpointStore {
     checkpoint: Mutex<Option<Checkpoint>>,
 }
@@ -101,14 +96,10 @@ impl CheckpointStore for InlineCheckpointStore {
     }
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
 
-    // ── Session setup ────────────────────────────────────────────────────────
-    // Resume an existing session via env var, or create a new one.
     let session_id =
         std::env::var("SWINK_SESSION_ID").unwrap_or_else(|_| JsonlSessionStore::new_session_id());
 
@@ -116,7 +107,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         JsonlSessionStore::default_dir().ok_or("could not determine config directory")?;
     let store = JsonlSessionStore::new(sessions_dir)?;
 
-    // Load previous messages if this session already exists.
     let (session_meta, prior_messages) = match store.load(&session_id, None) {
         Ok(pair) => {
             println!("Resuming session: {session_id}");
@@ -135,7 +125,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         Err(e) => return Err(e.into()),
     };
 
-    // ── Agent setup ──────────────────────────────────────────────────────────
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
     let connections = ModelConnections::new(connection, vec![]);
 
@@ -143,17 +132,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "You are a helpful assistant participating in a persistent multi-turn conversation.",
         connections,
     )
-    // SlidingWindowTransformer keeps the context within budget.
     .with_transform_context(SlidingWindowTransformer::new(100_000, 50_000, 2))
-    // Drain all steering messages in a single pass.
     .with_steering_mode(SteeringMode::All)
-    // Append the default plan-mode addendum.
     .with_plan_mode_addendum(DEFAULT_PLAN_MODE_ADDENDUM)
-    // Pre-seed session state to identify this example run.
     .with_state_entry("example", "persistent_chat")
-    // Attach the inline checkpoint store.
     .with_checkpoint_store(InlineCheckpointStore::new())
-    // Watch for state changes and steering.
     .with_event_forwarder(|event| {
         if let AgentEvent::StateChanged { delta } = event
             && !delta.is_empty()
@@ -165,12 +148,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut agent = Agent::new(options);
 
-    // Restore prior conversation history if we have one.
     if !prior_messages.is_empty() {
         agent.append_messages(prior_messages);
     }
 
-    // ── Prompts ──────────────────────────────────────────────────────────────
     let prompts = [
         "What is the difference between Rust's ownership model and garbage collection?",
         "Can you give a brief code example showing ownership transfer?",
@@ -180,7 +161,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     for (i, prompt) in prompts.iter().enumerate() {
         println!("\n>>> {prompt}");
 
-        // After the second prompt, steer the agent with an additional directive.
         if i == 2 {
             let steering_msg = AgentMessage::Llm(LlmMessage::User(
                 UserMessage::new(vec![ContentBlock::Text {
@@ -201,8 +181,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    // ── Persist transcript ───────────────────────────────────────────────────
-    // `save` takes `&[AgentMessage]`, so we borrow directly from agent state.
     store.save(&session_id, &session_meta, &agent.state().messages)?;
     println!("\nSession saved. Resume with:");
     println!("  SWINK_SESSION_ID={session_id} cargo run -p persistent-chat-basic");

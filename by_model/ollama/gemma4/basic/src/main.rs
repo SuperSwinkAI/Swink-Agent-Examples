@@ -8,8 +8,6 @@ use swink_agent_adapters::OllamaStreamFn;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Ollama runs locally — no API key needed, just `ollama serve`.
-    // Pull the model first: `ollama pull gemma4:31b`
     let stream_fn = Arc::new(OllamaStreamFn::new("http://localhost:11434"));
     let model = ModelSpec::new("local", "gemma4:31b");
     let connection = ModelConnection::new(model, stream_fn);

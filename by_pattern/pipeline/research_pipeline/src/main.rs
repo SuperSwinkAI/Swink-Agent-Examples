@@ -30,9 +30,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
 
-    // ── Agent factory ──────────────────────────────────────────────────────────
-    // Register builder functions by name. The pipeline executor calls these
-    // to create a fresh agent for each step.
     let mut factory = SimpleAgentFactory::new();
 
     factory.register("outline", {
@@ -69,15 +66,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    // ── Pipeline definitions ───────────────────────────────────────────────────
-    // Sequential pipeline: outline → draft.
-    // Steps reference registered agent names; output from each step is passed
-    // as input to the next.
     let main_pipeline =
         Pipeline::sequential_with_context("research", vec!["outline".into(), "draft".into()]);
 
-    // Loop pipeline: critic reviews the draft, exiting when the output
-    // contains "APPROVED" (case-sensitive prefix) or after 2 iterations.
     let review_loop = Pipeline::loop_with_max(
         "review",
         "critic",
@@ -85,16 +76,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         2,
     );
 
-    // ── Registry ───────────────────────────────────────────────────────────────
     let registry = Arc::new(PipelineRegistry::new());
     registry.register(main_pipeline.clone());
     registry.register(review_loop.clone());
 
-    // ── Execution ──────────────────────────────────────────────────────────────
     let executor = PipelineExecutor::new(Arc::new(factory), Arc::clone(&registry));
     let ct = CancellationToken::new();
 
-    // Stage 1 + 2: outline and draft
     println!("Running outline → draft pipeline…");
     let draft_output = executor
         .run(main_pipeline.id(), topic.clone(), ct.clone())
@@ -110,7 +98,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         );
     }
 
-    // Stage 3: critic review loop
     println!("\nRunning critic review loop…");
     let review_output = executor
         .run(

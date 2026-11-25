@@ -24,8 +24,6 @@ use swink_agent::CacheConfig;
 use swink_agent::prelude::*;
 use swink_agent_adapters::build_remote_connection_for_model;
 
-// ─── Large system prompt (~500 words) ────────────────────────────────────────
-
 const SYSTEM_PROMPT: &str = "\
 You are an expert Rust programming tutor. Below is a comprehensive reference \
 on core Rust concepts that you should use to answer all questions precisely.
@@ -101,8 +99,6 @@ accepts any type that supports comparison.
 
 Answer all questions using the material above. Be precise and concise.";
 
-// ─── Main ────────────────────────────────────────────────────────────────────
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenvy::dotenv().ok();
@@ -110,7 +106,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let connection = build_remote_connection_for_model("claude-haiku-4-5-20251001")?;
     let connections = ModelConnections::new(connection, vec![]);
 
-    // Enable prompt caching: TTL 5 min, min 1 024 tokens, refresh every 4 turns.
     let options = AgentOptions::from_connections(SYSTEM_PROMPT, connections)
         .with_cache_config(CacheConfig::new(
             std::time::Duration::from_secs(300),
